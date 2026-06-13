@@ -138,12 +138,29 @@
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
        <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Explora lecciones, realiza experimentos y practica con nuestro tutor inteligente.</p>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Explora lecciones, realiza experimentos y practica con nuestro tutor de IA. 🧪✨</p>
        <div class="flex flex-wrap gap-3">
-        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📝 Comenzar a Aprender</button>
+        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📝 Comenzar</button>
        </div>
       </div>
-     </div><!-- Quick Access Cards -->
+     </div>
+     <!-- Welcome Video -->
+     <div class="bg-white rounded-3xl shadow-xl p-8 overflow-hidden">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">🎥 Video de Bienvenida</h3>
+      <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border-2 border-secondary/20">
+       <iframe 
+         width="100%" 
+         height="100%" 
+         src="https://www.youtube.com/embed/CsfsgpoAbjw" 
+         title="Video de Bienvenida - Laboratorio de Inglés Químico"
+         frameborder="0" 
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+         allowfullscreen="">
+       </iframe>
+      </div>
+      <p class="text-gray-600 text-sm comic-font mt-4">Mira este video para conocer más sobre nuestro laboratorio virtual y cómo aprender inglés mientras dominas la química industrial. 🌟</p>
+     </div>
+     <!-- Quick Access Cards -->
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -284,7 +301,7 @@
       </div><!-- Interactive Practice -->
       <div class="mt-6 bg-gradient-to-r from-purple/10 to-pink/10 rounded-2xl p-6 border-2 border-purple-200">
        <h3 class="text-xl font-bold text-purple mb-4">🎮 Práctica Rápida - ¡Completa el espacio!</h3>
-       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Regenerar</button>
+       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Generar Nuevas Preguntas</button>
       </div>
      </div>
     </section><!-- NUMBERS SECTION -->
@@ -510,7 +527,7 @@
         <div class="flex justify-between items-center p-4 bg-gray-200">
          <h3 class="font-bold text-gray-800">Reproductor de Video</h3><button onclick="closeVideoModal()" class="p-2 hover:bg-gray-300 rounded-lg"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe></div>
        </div>
       </div>
      </div>
@@ -534,7 +551,7 @@
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Escribe tu pregunta aquí... 💬" class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font" />
+       <input id="chat-input" type="text" placeholder="Escribe tu pregunta aquí... 💬" class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font">
        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
      </div>
@@ -701,7 +718,7 @@
     {q: 'How do you say 100 in English?', options: ['One thousand', 'Ten', 'One hundred', 'Twelve'], correct: 2},
   ];
   const hardQuizBank = [
-    {q: 'Translate: "The industrial process requires a catalyst to increase the reaction rate."', options: ['El proceso industrial requiere un catalizador para aumentar la velocidad de reacción', 'El proceso requiere una reacción', 'Aumentar el pH del laboratorio', 'Ninguna de las anteriores'], correct: 0},
+    {q: 'Translate: "The industrial process requires a catalyst to increase the reaction rate."', options: ['El proceso industrial requiere un catalizador para aumentar la velocidad de reacción', 'El laboratorio necesita más estudiantes', 'Debemos comprar equipos nuevos', 'La reacción produce mucho calor'], correct: 0},
     {q: 'What does "exothermic" mean?', options: ['Absorbs heat', 'Releases heat', 'No change', 'Freezes'], correct: 1},
     {q: 'Complete: "The beaker ___ filled with sulfuric acid."', options: ['are', 'am', 'is', 'were being'], correct: 2},
     {q: '"Filtration" is used to separate:', options: ['Gases', 'Liquids from solids', 'Colors', 'Sounds'], correct: 1},
@@ -733,7 +750,7 @@
         <p class="text-sm text-orange font-bold mb-2">Question ${quizCurrent + 1} of ${quizTotal}</p>
         <h3 class="text-xl font-bold text-gray-800 mb-4">${q.q}</h3>
         <div class="space-y-2">
-          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-orange/20 rounded-xl hover:border-orange transition-all disabled:opacity-50">${o}</button>`).join('')}
+          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-orange/20 rounded-xl hover:border-orange/50 transition-all font-medium">${o}</button>`).join('')}
         </div>
       </div>`;
   }
@@ -808,13 +825,13 @@
 
   // Chat System
   const chatResponses = {
-    'verb to be': "El verbo 'to be' tiene tres formas: AM (I), IS (he/she/it), ARE (you/we/they). Ejemplo: 'The acid IS corrosive.' (El ácido ES corrosivo.) 'We ARE in the lab.' (Estamos en el lab.) ¡Practicalo en la sección de Verbo To Be! 📚",
-    'acid': "Un ÁCIDO es una sustancia con pH < 7. En inglés decimos: 'Hydrochloric acid is a strong acid used in industrial cleaning.' (El ácido clorhídrico es un ácido fuerte usado en limpieza industrial.) 🔴",
-    'base': "Una BASE (también llamada alcalino) tiene pH > 7. Ejemplo: 'Sodium hydroxide is a strong base used in soap making.' (El hidróxido de sodio es una base fuerte usada en la fabricación de jabón.) 🔵",
+    'verb to be': "El verbo 'to be' tiene tres formas: AM (I), IS (he/she/it), ARE (you/we/they). Ejemplo: 'The acid IS corrosive.' (El ácido ES corrosivo.) 'We ARE in the lab.' (Estamos en el lab.) 🧪",
+    'acid': "Un ÁCIDO es una sustancia con pH < 7. En inglés decimos: 'Hydrochloric acid is a strong acid used in industrial cleaning.' (El ácido clorhídrico es un ácido fuerte usado en limpieza industrial.) 💧",
+    'base': "Una BASE (también llamada alcalino) tiene pH > 7. Ejemplo: 'Sodium hydroxide is a strong base used in soap making.' (El hidróxido de sodio es una base fuerte usada en la fabricación de jabón.) ✨",
     'lab': "LABORATORIO (o 'lab' para abreviar) es donde trabajan los químicos. Equipo común en el laboratorio: beaker, flask, test tube, burner, pipette, y funnel. 🔬",
-    'numbers': "¡En química, los números son cruciales! Decimos: 'Add TWO HUNDRED milliliters' (Agrega DOSCIENTOS mililitros), 'Heat to SEVENTY-FIVE degrees' (Calienta a SETENTA Y CINCO grados). Practica en la sección de Números. 🔢",
+    'numbers': "¡En química, los números son cruciales! Decimos: 'Add TWO HUNDRED milliliters' (Agrega DOSCIENTOS mililitros), 'Heat to SEVENTY-FIVE degrees' (Calienta a SETENTA Y CINCO grados). Practica contando en inglés 🔢",
     'hola': "¡Hola! 👋 Soy tu Tutor de Inglés para Química. Pregúntame sobre gramática, vocabulario o conceptos químicos. Por ejemplo: '¿Qué es un ácido?' o '¿Cómo uso el verbo to be?'",
-    'ayuda': "Puedo ayudarte con: 📝 Gramática (verbo to be, presente), 🔢 Números, 🧪 Vocabulario de química, 🔬 Nombres de equipo de laboratorio, y 🏭 Procesos industriales. ¿Qué te interesa aprender?",
+    'ayuda': "Puedo ayudarte con: 📝 Gramática (verbo to be, presente), 🔢 Números, 🧪 Vocabulario de química, 🔬 Nombres de equipo de laboratorio, y 🏭 Procesos industriales. ¿Qué te interesa aprender?"
   };
 
   function sendChatMessage(e) {
@@ -829,7 +846,7 @@
     input.value = '';
     
     setTimeout(() => {
-      let response = "That's a great question! 🤔 In industrial chemistry, we use English for international communication. Here are some tips:\n\n• Practice reading chemical labels in English\n• Learn common lab equipment names\n• Study numbers for measurements\n\nKeep practicing! 💪";
+      let response = "That's a great question! 🤔 In industrial chemistry, we use English for international communication. Here are some tips:\n\n• Practice reading chemical labels in English\n• Learn the names of common laboratory equipment\n• Try to describe chemical reactions in English\n\nKeep practicing! 📚✨";
       
       const lowerMsg = msg.toLowerCase();
       for (const [key, val] of Object.entries(chatResponses)) {
