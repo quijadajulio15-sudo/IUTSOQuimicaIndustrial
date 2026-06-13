@@ -102,14 +102,14 @@
       </div><button onclick="toggleSidebar()" class="p-2 rounded-full hover:bg-gray-100"><i data-lucide="x" class="w-5 h-5"></i></button>
      </div>
      <ul class="space-y-2">
-      <li><button onclick="navigateTo('home')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink/10 text-left transition-all"><sp[...]
-      <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transit[...]
-      <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transitio[...]
-      <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transitio[...]
-      <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-al[...]
-      <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transit[...]
-      <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all[...]
-      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-[...]
+      <li><button onclick="navigateTo('home')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink/10 text-left transition-all"><span class="text-xl">🏠</span> <span>Inicio</span></button></li>
+      <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">📝</span> <span>Verbo To Be</span></button></li>
+      <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transition-all"><span class="text-xl">🔢</span> <span>Números</span></button></li>
+      <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><span class="text-xl">🧬</span> <span>Vocabulario</span></button></li>
+      <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><span class="text-xl">🔬</span> <span>Lab Virtual</span></button></li>
+      <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transition-all"><span class="text-xl">✏️</span> <span>Ejercicios</span></button></li>
+      <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><span class="text-xl">🎬</span> <span>Videos</span></button></li>
+      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">🤖</span> <span>Chat</span></button></li>
      </ul>
     </div>
    </nav><!-- Top Navigation Bar -->
@@ -125,7 +125,7 @@
      <div class="flex items-center gap-2">
       <div id="score-display" class="hidden md:flex items-center gap-1 bg-white/20 rounded-full px-3 py-1">
        <span class="text-xl">⭐</span> <span id="score-text" class="text-white font-bold">0</span>
-      </div><button onclick="navigateTo('chat')" class="p-2 bg-white/20 rounded-xl hover:bg-white/30 transition-all pulse-glow"> <i data-lucide="message-circle" class="w-6 h-6 text-white"></i> </butto[...]
+      </div><button onclick="navigateTo('chat')" class="p-2 bg-white/20 rounded-xl hover:bg-white/30 transition-all pulse-glow"> <i data-lucide="message-circle" class="w-6 h-6 text-white"></i> </button>
      </div>
     </div>
    </header><!-- Main Content -->
@@ -137,30 +137,13 @@
       <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full"></div>
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
-       <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!<[...]
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Explora lecciones, realiza experimentos y practica con nu[...]
+       <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Explora lecciones, realiza experimentos y practica con nuestro tutor inteligente.</p>
        <div class="flex flex-wrap gap-3">
-        <button onclick="navigateTo('chat')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📝 Comenzar</button>
+        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📝 Comenzar a Aprender</button>
        </div>
       </div>
-     </div>
-     <!-- Welcome Video -->
-     <div class="bg-white rounded-3xl shadow-xl p-8 overflow-hidden">
-      <h3 class="text-2xl font-bold text-gray-800 mb-4">🎥 Video de Bienvenida</h3>
-      <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border-2 border-secondary/20">
-       <iframe 
-         width="100%" 
-         height="100%" 
-         src="https://www.youtube.com/embed/iAP9AF6DCu4" 
-         title="Video de Bienvenida - Laboratorio de Inglés Químico"
-         frameborder="0" 
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-         allowfullscreen="">
-       </iframe>
-      </div>
-      <p class="text-gray-600 text-sm comic-font mt-4">Mira este video para conocer más sobre nuestro laboratorio virtual y cómo aprender inglés mientras dominas la química industrial. 🌟</p>
-     </div>
-     <!-- Quick Access Cards -->
+     </div><!-- Quick Access Cards -->
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -301,7 +284,7 @@
       </div><!-- Interactive Practice -->
       <div class="mt-6 bg-gradient-to-r from-purple/10 to-pink/10 rounded-2xl p-6 border-2 border-purple-200">
        <h3 class="text-xl font-bold text-purple mb-4">🎮 Práctica Rápida - ¡Completa el espacio!</h3>
-       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hove[...]
+       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Regenerar</button>
       </div>
      </div>
     </section><!-- NUMBERS SECTION -->
@@ -329,7 +312,7 @@
       <div class="mt-6 bg-gradient-to-r from-accent/10 to-orange/10 rounded-2xl p-6 border-2 border-yellow-200">
        <h3 class="text-xl font-bold text-orange mb-4">🎯 Juego de Coincidencia de Números</h3>
        <p class="text-gray-600 mb-4 comic-font">¡Haz clic en la palabra en inglés correcta para cada número!</p>
-       <div id="number-game" class="space-y-3"></div><button onclick="generateNumberGame()" class="mt-4 px-5 py-2 bg-gradient-to-r from-orange to-amber-500 text-white rounded-xl font-bold hover:s[...]
+       <div id="number-game" class="space-y-3"></div><button onclick="generateNumberGame()" class="mt-4 px-5 py-2 bg-gradient-to-r from-orange to-amber-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Nuevo Juego</button>
       </div>
      </div>
     </section><!-- VOCABULARY SECTION -->
@@ -412,10 +395,10 @@
        <h3 class="text-xl font-bold text-purple mb-4">🧪 Experimento 1: Prueba de pH</h3>
        <p class="comic-font text-gray-600 mb-4">Selecciona una sustancia y observa su nivel de pH. ¡Describe el resultado en inglés!</p>
        <div class="flex flex-wrap gap-3 mb-4">
-        <button onclick="testPH('lemon', 2, '¡El jugo de limón es un ácido fuerte!')" class="px-4 py-2 bg-yellow-400 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🍋 J[...]
+        <button onclick="testPH('lemon', 2, '¡El jugo de limón es un ácido fuerte!')" class="px-4 py-2 bg-yellow-400 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🍋 Jugo de Limón</button>
         <button onclick="testPH('soap', 13, '¡El jabón es una base fuerte!')" class="px-4 py-2 bg-blue-400 rounded-xl font-bold hover:scale-105 transition-all text-white">🧼 Jabón</button>
         <button onclick="testPH('water', 7, '¡El agua es neutra!')" class="px-4 py-2 bg-cyan-400 rounded-xl font-bold hover:scale-105 transition-all text-white">💧 Agua</button>
-        <button onclick="testPH('milk', 6, '¡La leche es ligeramente ácida!')" class="px-4 py-2 bg-yellow-200 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🥛 Leche</bu[...]
+        <button onclick="testPH('milk', 6, '¡La leche es ligeramente ácida!')" class="px-4 py-2 bg-yellow-200 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🥛 Leche</button>
        </div>
        <div id="ph-result" class="bg-white rounded-xl p-4 border-2 border-gray-200 min-h-[80px] flex items-center justify-center">
         <p class="text-gray-400 comic-font">👆 ¡Selecciona una sustancia para probar!</p>
@@ -459,7 +442,7 @@
          </select>
         </div>
        </div>
-       <button onclick="mixSubstances()" class="mt-4 px-6 py-3 bg-gradient-to-r from-mint to-green-500 text-white rounded-xl font-bold hover:scale-105 transition-all shadow-lg">🔬 ¡Mezclar!</b[...]
+       <button onclick="mixSubstances()" class="mt-4 px-6 py-3 bg-gradient-to-r from-mint to-green-500 text-white rounded-xl font-bold hover:scale-105 transition-all shadow-lg">🔬 ¡Mezclar!</button>
        <div id="mix-result" class="mt-4 bg-white rounded-xl p-4 border-2 border-gray-200 min-h-[80px] hidden"></div>
       </div>
      </div>
@@ -527,7 +510,7 @@
         <div class="flex justify-between items-center p-4 bg-gray-200">
          <h3 class="font-bold text-gray-800">Reproductor de Video</h3><button onclick="closeVideoModal()" class="p-2 hover:bg-gray-300 rounded-lg"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-pic[...]
+        <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
        </div>
       </div>
      </div>
@@ -551,8 +534,8 @@
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Escribe tu pregunta aquí... 💬" class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic[...]
-       <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i[...]
+       <input id="chat-input" type="text" placeholder="Escribe tu pregunta aquí... 💬" class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font" />
+       <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
      </div>
     </section>
@@ -616,7 +599,7 @@
     const container = document.getElementById('tobe-practice');
     container.innerHTML = selected.map((q, i) => `
       <div class="flex flex-wrap items-center gap-2 bg-white rounded-xl p-3 shadow-sm">
-        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold foc[...]
+        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold focus:border-purple focus:outline-none" />')}</span>
         <button onclick="checkToBe(${i},'${q.answer}')" class="px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">Check ✓</button>
         <span id="tobe-result-${i}" class="text-sm font-bold"></span>
       </div>
@@ -652,7 +635,7 @@
       const options = [q.word, ...nums.filter(n => n.word !== q.word).sort(() => Math.random() - 0.5).slice(0,2).map(n => n.word)].sort(() => Math.random() - 0.5);
       return `<div class="bg-white rounded-xl p-4 shadow-sm flex flex-wrap items-center gap-3">
         <span class="text-3xl font-bold text-orange w-16">${q.num}</span>
-        ${options.map(o => `<button onclick="checkNumber(this,'${o}','${q.word}')" class="quiz-option px-4 py-2 bg-orange/10 border-2 border-orange/30 rounded-xl font-medium">${o}</button>`).join[...]
+        ${options.map(o => `<button onclick="checkNumber(this,'${o}','${q.word}')" class="quiz-option px-4 py-2 bg-orange/10 border-2 border-orange/30 rounded-xl font-medium">${o}</button>`).join('')}
       </div>`;
     }).join('');
   }
@@ -688,11 +671,11 @@
     const reactions = {
       'acid+base': {result: '💧 Salt + Water (NaCl + H₂O)', desc: 'This is a NEUTRALIZATION reaction! An acid and a base produce salt and water.', color: 'from-green-100 to-blue-100'},
       'acid+water': {result: '🧪 Diluted Acid', desc: 'Adding water to acid creates a DILUTED SOLUTION. Always add acid to water, never water to acid!', color: 'from-blue-100 to-cyan-100'},
-      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'fro[...]
+      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'from-red-100 to-orange-100'},
       'iron+oxygen': {result: '🟤 Iron Oxide (Rust)', desc: 'This is an OXIDATION reaction! Iron combines with oxygen to form rust (Fe₂O₃).', color: 'from-amber-100 to-red-100'},
     };
     const key = a + '+' + b;
-    const reaction = reactions[key] || {result: '🔬 No visible reaction', desc: 'These substances do not react under normal conditions. Try a different combination!', color: 'from-gray-100 to-g[...]
+    const reaction = reactions[key] || {result: '🔬 No visible reaction', desc: 'These substances do not react under normal conditions. Try a different combination!', color: 'from-gray-100 to-gray-200'};
     const resultDiv = document.getElementById('mix-result');
     resultDiv.classList.remove('hidden');
     resultDiv.innerHTML = `<div class="bg-gradient-to-r ${reaction.color} rounded-xl p-4 bounce-in">
@@ -718,7 +701,7 @@
     {q: 'How do you say 100 in English?', options: ['One thousand', 'Ten', 'One hundred', 'Twelve'], correct: 2},
   ];
   const hardQuizBank = [
-    {q: 'Translate: "The industrial process requires a catalyst to increase the reaction rate."', options: ['El proceso industrial requiere un catalizador para aumentar la velocidad de reacción'[...]
+    {q: 'Translate: "The industrial process requires a catalyst to increase the reaction rate."', options: ['El proceso industrial requiere un catalizador para aumentar la velocidad de reacción', 'El proceso requiere una reacción', 'Aumentar el pH del laboratorio', 'Ninguna de las anteriores'], correct: 0},
     {q: 'What does "exothermic" mean?', options: ['Absorbs heat', 'Releases heat', 'No change', 'Freezes'], correct: 1},
     {q: 'Complete: "The beaker ___ filled with sulfuric acid."', options: ['are', 'am', 'is', 'were being'], correct: 2},
     {q: '"Filtration" is used to separate:', options: ['Gases', 'Liquids from solids', 'Colors', 'Sounds'], correct: 1},
@@ -750,7 +733,7 @@
         <p class="text-sm text-orange font-bold mb-2">Question ${quizCurrent + 1} of ${quizTotal}</p>
         <h3 class="text-xl font-bold text-gray-800 mb-4">${q.q}</h3>
         <div class="space-y-2">
-          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-whi[...]
+          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-orange/20 rounded-xl hover:border-orange transition-all disabled:opacity-50">${o}</button>`).join('')}
         </div>
       </div>`;
   }
@@ -823,7 +806,17 @@
     }
   });
 
-  // Chat System - Improved version that responds to any question
+  // Chat System
+  const chatResponses = {
+    'verb to be': "El verbo 'to be' tiene tres formas: AM (I), IS (he/she/it), ARE (you/we/they). Ejemplo: 'The acid IS corrosive.' (El ácido ES corrosivo.) 'We ARE in the lab.' (Estamos en el lab.) ¡Practicalo en la sección de Verbo To Be! 📚",
+    'acid': "Un ÁCIDO es una sustancia con pH < 7. En inglés decimos: 'Hydrochloric acid is a strong acid used in industrial cleaning.' (El ácido clorhídrico es un ácido fuerte usado en limpieza industrial.) 🔴",
+    'base': "Una BASE (también llamada alcalino) tiene pH > 7. Ejemplo: 'Sodium hydroxide is a strong base used in soap making.' (El hidróxido de sodio es una base fuerte usada en la fabricación de jabón.) 🔵",
+    'lab': "LABORATORIO (o 'lab' para abreviar) es donde trabajan los químicos. Equipo común en el laboratorio: beaker, flask, test tube, burner, pipette, y funnel. 🔬",
+    'numbers': "¡En química, los números son cruciales! Decimos: 'Add TWO HUNDRED milliliters' (Agrega DOSCIENTOS mililitros), 'Heat to SEVENTY-FIVE degrees' (Calienta a SETENTA Y CINCO grados). Practica en la sección de Números. 🔢",
+    'hola': "¡Hola! 👋 Soy tu Tutor de Inglés para Química. Pregúntame sobre gramática, vocabulario o conceptos químicos. Por ejemplo: '¿Qué es un ácido?' o '¿Cómo uso el verbo to be?'",
+    'ayuda': "Puedo ayudarte con: 📝 Gramática (verbo to be, presente), 🔢 Números, 🧪 Vocabulario de química, 🔬 Nombres de equipo de laboratorio, y 🏭 Procesos industriales. ¿Qué te interesa aprender?",
+  };
+
   function sendChatMessage(e) {
     e.preventDefault();
     const input = document.getElementById('chat-input');
@@ -836,39 +829,11 @@
     input.value = '';
     
     setTimeout(() => {
-      let response = "";
-      const lowerMsg = msg.toLowerCase();
+      let response = "That's a great question! 🤔 In industrial chemistry, we use English for international communication. Here are some tips:\n\n• Practice reading chemical labels in English\n• Learn common lab equipment names\n• Study numbers for measurements\n\nKeep practicing! 💪";
       
-      // Keywords detection for specific responses
-      if (lowerMsg.includes('verb to be') || lowerMsg.includes('verbo to be')) {
-        response = "El verbo 'to be' tiene tres formas: AM (I), IS (he/she/it), ARE (you/we/they). Ejemplo: 'The acid IS corrosive.' (El ácido ES corrosivo.) 'We ARE in the lab.' (Estamos en el lab.)";
-      } else if (lowerMsg.includes('acid') || lowerMsg.includes('ácido')) {
-        response = "Un ÁCIDO es una sustancia con pH < 7. En inglés decimos: 'Hydrochloric acid is a strong acid used in industrial cleaning.' (El ácido clorhídrico es un ácido fuerte usado en limpieza industrial.)";
-      } else if (lowerMsg.includes('base') || lowerMsg.includes('base')) {
-        response = "Una BASE (también llamada alcalino) tiene pH > 7. Ejemplo: 'Sodium hydroxide is a strong base used in soap making.' (El hidróxido de sodio es una base fuerte usada en la fabricación de jabón.)";
-      } else if (lowerMsg.includes('laboratory') || lowerMsg.includes('laboratorio')) {
-        response = "LABORATORIO (o 'lab' para abreviar) es donde trabajan los químicos. Equipo común: beaker, flask, test tube, burner, pipette, funnel, etc. 🔬";
-      } else if (lowerMsg.includes('number') || lowerMsg.includes('número')) {
-        response = "¡En química, los números son cruciales! Decimos: 'Add TWO HUNDRED milliliters' (Agrega DOSCIENTOS mililitros), 'Heat to SEVENTY-FIVE degrees' (Calienta a SETENTA Y CINCO grados).";
-      } else if (lowerMsg.includes('reaction') || lowerMsg.includes('reacción')) {
-        response = "Una REACCIÓN QUÍMICA es un proceso donde sustancias (reactivos) se transforman en nuevas sustancias (productos) con propiedades diferentes. En inglés: 'A chemical reaction occurs...' 🔬";
-      } else if (lowerMsg.includes('distillation') || lowerMsg.includes('destilación')) {
-        response = "DESTILACIÓN es un proceso de separación usado para separar mezclas por diferencias en puntos de ebullición. Muy usado en refinación de petróleo. 'Distillation is used to...'";
-      } else if (lowerMsg.includes('ph')) {
-        response = "El pH mide la acidez o basicidad de una sustancia en una escala de 0 a 14. pH < 7 es ÁCIDO, pH = 7 es NEUTRO, pH > 7 es BASE. En inglés: 'The pH scale measures acidity and basicity.'";
-      } else if (lowerMsg.includes('hola') || lowerMsg.includes('hello')) {
-        response = "¡Hola! 👋 Soy tu Tutor de Inglés para Química Industrial. Puedo ayudarte con gramática, vocabulario, procesos químicos y más. ¿Qué quieres aprender hoy?";
-      } else if (lowerMsg.includes('ayuda') || lowerMsg.includes('help')) {
-        response = "Puedo ayudarte con: 📝 Gramática en inglés (verbo to be, presente, etc.), 🔢 Números, 🧪 Vocabulario de química, 🔬 Equipos de laboratorio, y 🏭 Procesos industriales. ¿Cuál tema te interesa?";
-      } else if (lowerMsg.includes('cómo') || lowerMsg.includes('como')) {
-        response = "En química industrial, es importante seguir estos pasos: 1️⃣ Entender la teoría base, 2️⃣ Conocer los reactivos y productos, 3️⃣ Dominar la terminología en inglés, 4️⃣ Practicar con ejemplos reales. ¿Sobre qué proceso específico tienes una pregunta?";
-      } else if (lowerMsg.includes('qué') || lowerMsg.includes('que es')) {
-        response = "Excelente pregunta. Para entenderlo mejor en inglés y en química industrial: 1️⃣ Define el concepto en inglés, 2️⃣ Busca ejemplos prácticos, 3️⃣ Relaciona con procesos industriales reales. Pregúntame sobre un término específico y te lo explico. 📚";
-      } else if (lowerMsg.includes('english') || lowerMsg.includes('inglés') || lowerMsg.includes('grammar') || lowerMsg.includes('gramática')) {
-        response = "La gramática y vocabulario en inglés son fundamentales en química industrial. Aquí van consejos: 🎯 Practica pronunciación de términos químicos, 📖 Lee artículos científicos en inglés, 🗣️ Aprende phrasal verbs comunes en laboratorios. ¿Qué aspecto específico quieres mejorar?";
-      } else {
-        // Default dynamic response
-        response = "¡Esa es una excelente pregunta sobre química industrial e inglés! 🤔 Aquí hay algunos puntos clave:\n\n✅ Es importante entender la terminología en inglés\n✅ Los procesos químicos se comunican internacionalmente en inglés\n✅ Practica leyendo manuales técnicos y etiquetas de seguridad en inglés\n\n¿Hay algo específico sobre este tema que quieras aprender? Estoy aquí para ayudarte. 😊";
+      const lowerMsg = msg.toLowerCase();
+      for (const [key, val] of Object.entries(chatResponses)) {
+        if (lowerMsg.includes(key)) { response = val; break; }
       }
       
       container.innerHTML += `<div class="flex gap-2"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700">${response}</p></div></div>`;
