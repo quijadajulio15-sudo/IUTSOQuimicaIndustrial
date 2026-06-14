@@ -92,6 +92,8 @@
   </script>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <!-- Elfsight AI Chatbot -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
  <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
@@ -110,15 +112,15 @@
       </div><button onclick="toggleSidebar()" class="p-2 rounded-full hover:bg-gray-100"><i data-lucide="x" class="w-5 h-5"></i></button>
      </div>
      <ul class="space-y-2">
-      <li><button onclick="navigateTo('home')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink/10 text-left transition-all"><span class="text-xl">🏠</span> <span>Inicio</span></button></li>
-      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">🤖</span> <span>Chat IA</span></button></li>
-      <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">📝</span> <span>Verbo To Be</span></button></li>
-      <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transition-all"><span class="text-xl">🔢</span> <span>Números</span></button></li>
-      <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><span class="text-xl">🧬</span> <span>Vocabulario</span></button></li>
-      <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><span class="text-xl">🔬</span> <span>Lab Virtual</span></button></li>
-      <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transition-all"><span class="text-xl">✏️</span> <span>Ejercicios</span></button></li>
-      <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><span class="text-xl">🎬</span> <span>Videos</span></button></li>
-      <li><button onclick="navigateTo('games')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><span class="text-xl">🎮</span> <span>Juegos</span></button></li>
+      <li><button onclick="navigateTo('home')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink/10 text-left transition-all"><i data-lucide="home" class="w-5 h-5"></i><span>Inicio</span></button></li>
+      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><i data-lucide="message-circle" class="w-5 h-5"></i><span>Chat IA</span></button></li>
+      <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><i data-lucide="book" class="w-5 h-5"></i><span>Verbo To Be</span></button></li>
+      <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transition-all"><i data-lucide="hash" class="w-5 h-5"></i><span>Números</span></button></li>
+      <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><i data-lucide="lightbulb" class="w-5 h-5"></i><span>Vocabulario</span></button></li>
+      <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><i data-lucide="flask" class="w-5 h-5"></i><span>Laboratorio</span></button></li>
+      <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transition-all"><i data-lucide="pencil" class="w-5 h-5"></i><span>Ejercicios</span></button></li>
+      <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><i data-lucide="video" class="w-5 h-5"></i><span>Videos</span></button></li>
+      <li><button onclick="navigateTo('games')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><i data-lucide="gamepad-2" class="w-5 h-5"></i><span>Juegos</span></button></li>
      </ul>
     </div>
    </nav>
@@ -144,25 +146,25 @@
       <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full"></div>
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
-       <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA avanzada potenciada por Google Gemini, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
+       <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial! 🚀</h2>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestro asistente IA avanzado.</p>
        <div class="flex flex-wrap gap-3">
-        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📚 Ver Lecciones</button>
+        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">Comenzar Lección 📚</button>
        </div>
       </div>
      </div>
      <div class="bg-white rounded-3xl shadow-xl p-8 overflow-hidden">
       <h3 class="text-2xl font-bold text-gray-800 mb-4">🎥 Video de Bienvenida</h3>
       <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border-2 border-secondary/20">
-       <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CsfsgpoAbjw" title="Video de Bienvenida - Laboratorio de Inglés Químico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+       <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CsfsgpoAbjw" title="Video de Bienvenida - Laboratorio de Inglés Químico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <p class="text-gray-600 text-sm comic-font mt-4">Mira este video para conocer más sobre nuestro laboratorio virtual y cómo aprender inglés mientras dominas la química industrial. 🌟</p>
      </div>
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">🤖</span>
-       <h3 class="font-bold text-lg">Chat IA Real</h3>
-       <p class="text-white/80 text-sm mt-1">Potenciado por Google Gemini...</p>
+       <h3 class="font-bold text-lg">Chat IA Avanzado</h3>
+       <p class="text-white/80 text-sm mt-1">Asistente inteligente disponible 24/7...</p>
       </div>
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -186,36 +188,18 @@
      <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
       <div class="flex items-center justify-between mb-4">
        <div>
-        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA - Google Gemini</h2>
-        <p id="gemini-status" class="text-gray-600 comic-font text-sm">✅ Conectado con Google Gemini - Listo para responder</p>
-       </div>
-       <div class="flex gap-2">
-        <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
+        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA Avanzado</h2>
+        <p class="text-gray-600 comic-font text-sm">Asistente inteligente para resolver tus preguntas sobre inglés y química</p>
        </div>
       </div>
-      <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3 mb-4 p-4 bg-gradient-to-b from-blue-50 to-purple-50 rounded-2xl">
-       <div class="flex gap-2 fade-in">
-        <span class="text-2xl">🤖</span>
-        <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu asistente IA 🚀</p>
-         <p class="comic-font text-gray-600 text-sm mt-2">Estoy potenciado por Google Gemini y puedo:</p>
-         <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
-          <li>Responder preguntas sobre cualquier tema</li>
-          <li>Explicar conceptos de química en inglés</li>
-          <li>Ayudarte con gramática y pronunciación</li>
-          <li>Generar explicaciones detalladas</li>
-          <li>Traducir y explicar términos químicos</li>
-          <li>Y mucho más...</li>
-         </ul>
-         <p class="comic-font text-gray-600 text-xs mt-3 italic">¡Pregunta lo que quieras sobre inglés y química! 💭</p>
-        </div>
+      <div class="bg-gradient-to-b from-blue-50 to-purple-50 rounded-2xl p-6 flex items-center justify-center flex-1">
+       <div class="text-center">
+        <div class="text-6xl mb-4">💬</div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Chat IA Disponible</h3>
+        <p class="text-gray-600 comic-font">El chatbot de IA está disponible en la esquina inferior derecha de la página.</p>
+        <p class="text-gray-500 text-sm mt-4">¡Haz clic en el icono del chat para comenzar una conversación!</p>
        </div>
       </div>
-      <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Pregunta cualquier cosa... ¿Qué es una reacción química? ¿Cómo se pronuncia...?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
-       <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
-      </form>
-      <p class="text-xs text-gray-400 mt-2 text-center">⚡ Potenciado por Google Gemini - Respuestas instantáneas</p>
      </div>
     </section>
 
@@ -285,7 +269,7 @@
            <td class="py-2">You <strong>aren't</strong> ready. (No estás listo)</td>
           </tr>
           <tr class="border-b border-red-100">
-           <td class="py-2 font-bold">He/She/It</td>
+           <td class="py-2 font-bold">He/She/She/It</td>
            <td class="py-2">is not</td>
            <td class="py-2">It <strong>isn't</strong> a base. (No es una base)</td>
           </tr>
@@ -314,7 +298,7 @@
       </div>
       <div class="mt-6 bg-gradient-to-r from-purple/10 to-pink/10 rounded-2xl p-6 border-2 border-purple-200">
        <h3 class="text-xl font-bold text-purple mb-4">🎮 Práctica Rápida - ¡Completa el espacio!</h3>
-       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Generar Nuevas Preguntas</button>
+       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">Generar Práctica</button>
       </div>
      </div>
     </section>
@@ -335,7 +319,7 @@
       <div class="mt-6 bg-gradient-to-r from-accent/10 to-orange/10 rounded-2xl p-6 border-2 border-yellow-200">
        <h3 class="text-xl font-bold text-orange mb-4">🎯 Juego de Coincidencia de Números</h3>
        <p class="text-gray-600 mb-4 comic-font">¡Haz clic en la palabra en inglés correcta para cada número!</p>
-       <div id="number-game" class="space-y-3"></div><button onclick="generateNumberGame()" class="mt-4 px-5 py-2 bg-gradient-to-r from-orange to-amber-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Nuevo Juego</button>
+       <div id="number-game" class="space-y-3"></div><button onclick="generateNumberGame()" class="mt-4 px-5 py-2 bg-gradient-to-r from-orange to-amber-500 text-white rounded-xl font-bold hover:scale-105 transition-all">Generar Juego</button>
       </div>
      </div>
     </section>
@@ -556,48 +540,26 @@
         <div class="flex justify-between items-center p-4 bg-gray-200">
          <h3 class="font-bold text-gray-800">Reproductor de Video</h3><button onclick="closeVideoModal()" class="p-2 hover:bg-gray-300 rounded-lg"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe></div>
+        <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
        </div>
       </div>
      </div>
     </section>
    </main>
    <footer class="relative z-10 mt-8 pb-6 text-center">
-    <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés Químico © 2024 | Hecho con ❤️ para estudiantes | Potenciado por Google Gemini</p>
+    <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés Químico © 2024 | Hecho con ❤️ para estudiantes</p>
    </footer>
+
+   <!-- Elfsight AI Chatbot -->
+   <div class="elfsight-app-908ce0c0-00bf-476d-8199-6a7b2042bd42" data-elfsight-app-lazy></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai"></script>
   <script>
   let currentSection = 'home';
   let score = 0;
   let quizCurrent = 0;
   let quizTotal = 5;
   let chatHistory = [];
-  let model = null;
-
-  // 🔑 TU API KEY DE GOOGLE GEMINI CONFIGURADA
-  const GEMINI_API_KEY = "AQ.Ab8RN6LF73-vrsQHNINfXyT9xg0E4X_vcNW5bfJrtWpuloniHA";
-
-  // Función para inicializar Gemini
-  async function initGemini() {
-    if (!GEMINI_API_KEY || GEMINI_API_KEY.trim() === "") {
-      console.error("❌ API Key no configurada");
-      return false;
-    }
-
-    try {
-      const { GoogleGenerativeAI } = window;
-      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-      model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      
-      console.log("✅ Google Gemini inicializado correctamente");
-      return true;
-    } catch (error) {
-      console.error("❌ Error inicializando Gemini:", error);
-      return false;
-    }
-  }
 
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -644,7 +606,7 @@
     const container = document.getElementById('tobe-practice');
     container.innerHTML = selected.map((q, i) => `
       <div class="flex flex-wrap items-center gap-2 bg-white rounded-xl p-3 shadow-sm">
-        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold focus:border-purple focus:outline-none" />')}</span>
+        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold focus:outline-none focus:ring-2 focus:ring-purple" />')}</span>
         <button onclick="checkToBe(${i},'${q.answer}')" class="px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">Check ✓</button>
         <span id="tobe-result-${i}" class="text-sm font-bold"></span>
       </div>
@@ -713,7 +675,7 @@
     const reactions = {
       'acid+base': {result: '💧 Salt + Water (NaCl + H₂O)', desc: 'This is a NEUTRALIZATION reaction! An acid and a base produce salt and water.', color: 'from-green-100 to-blue-100'},
       'acid+water': {result: '🧪 Diluted Acid', desc: 'Adding water to acid creates a DILUTED SOLUTION. Always add acid to water, never water to acid!', color: 'from-blue-100 to-cyan-100'},
-      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'from-red-100 to-orange-100'},
+      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'from-red-100 to-yellow-100'},
       'iron+oxygen': {result: '🟤 Iron Oxide (Rust)', desc: 'This is an OXIDATION reaction! Iron combines with oxygen to form rust (Fe₂O₃).', color: 'from-amber-100 to-red-100'},
     };
     const key = a + '+' + b;
@@ -886,17 +848,17 @@
     const container = document.getElementById('quiz-container');
     container.innerHTML = '';
     if (quizCurrent >= questions.length) {
-      container.innerHTML = `<div class="text-center bounce-in p-8"><span class="text-6xl block mb-4">🎉</span><h3 class="text-2xl font-bold text-green-600">Quiz Complete!</h3><p class="comic-font text-gray-600 mt-2">Great job! Keep practicing to improve your English!</p></div>`;
+      container.innerHTML = `<div class="text-center bounce-in p-8"><span class="text-6xl block mb-4">🎉</span><h3 class="text-2xl font-bold text-green-600">¡Quiz Completado!</h3><p class="comic-font text-gray-600 mt-2">Tu puntuación: <span class="font-bold text-orange">${score}</span> puntos</p></div>`;
       return;
     }
     const q = questions[quizCurrent];
     updateProgress();
     container.innerHTML = `
       <div class="bg-gradient-to-r from-orange/5 to-amber-50 rounded-2xl p-6 border-2 border-orange-200 bounce-in">
-        <p class="text-sm text-orange font-bold mb-2">Question ${quizCurrent + 1} of ${quizTotal}</p>
+        <p class="text-sm text-orange font-bold mb-2">Pregunta ${quizCurrent + 1} de ${quizTotal}</p>
         <h3 class="text-xl font-bold text-gray-800 mb-4">${q.q}</h3>
         <div class="space-y-2">
-          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-orange/20 rounded-xl hover:border-orange/50 transition-all font-medium">${o}</button>`).join('')}
+          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-300 hover:bg-orange-50 transition-all">${o}</button>`).join('')}
         </div>
       </div>`;
   }
@@ -923,151 +885,23 @@
     document.getElementById('score-text').textContent = score;
   }
 
-  // Chat con Google Gemini
-  async function sendChatMessage(e) {
-    e.preventDefault();
-    const input = document.getElementById('chat-input');
-    const msg = input.value.trim();
-    if (!msg || !model) return;
-    
-    const container = document.getElementById('chat-messages');
-    container.innerHTML += `<div class="flex gap-2 justify-end fade-in"><div class="chat-bubble-user bg-gradient-to-r from-secondary to-blue-500 text-white shadow-sm p-3 max-w-[80%]"><p class="comic-font">${escapeHtml(msg)}</p></div></div>`;
-    
-    input.value = '';
-    input.disabled = true;
-    
-    container.innerHTML += `<div class="flex gap-2 fade-in" id="typing"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
-    container.scrollTop = container.scrollHeight;
-    
-    try {
-      const systemContext = `You are an expert English and Chemistry teacher. You help students learn English vocabulary related to industrial chemistry. 
-      Be friendly, encouraging, and provide clear explanations in both English and Spanish when appropriate.
-      Focus on chemistry-related English terms and grammar.`;
-      
-      const fullPrompt = `${systemContext}\n\nEstudiante: ${msg}\n\nTu respuesta (en español e inglés cuando sea necesario):`;
-      
-      const result = await model.generateContent(fullPrompt);
-      const response = await result.response;
-      const text = response.text();
-      
-      const typingElement = document.getElementById('typing');
-      if (typingElement) typingElement.remove();
-      
-      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><div class="comic-font text-gray-700 text-sm" style="white-space:pre-wrap;margin:0">${escapeHtml(text)}</div></div></div>`;
-      container.scrollTop = container.scrollHeight;
-      addScore(3);
-    } catch (error) {
-      const typingElement = document.getElementById('typing');
-      if (typingElement) typingElement.remove();
-      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">❌ Error: ${error.message}</p></div></div>`;
-    }
-    
-    input.disabled = false;
-    input.focus();
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  function clearChatHistory() {
-    const container = document.getElementById('chat-messages');
-    container.innerHTML = `<div class="flex gap-2 fade-in">
-      <span class="text-2xl">🤖</span>
-      <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-        <p class="comic-font text-gray-700 font-bold">¡Historial limpio! Volvemos a empezar. 🚀</p>
-        <p class="comic-font text-gray-600 text-sm mt-2">¿Sobre qué quieres saber?</p>
-      </div>
-    </div>`;
-    chatHistory = [];
-  }
-
-  function getYouTubeEmbedUrl(url) {
-    if (url && !url.includes('youtube.com') && !url.includes('youtu.be') && url.length === 11) {
-      return `https://www.youtube.com/embed/${url}`;
-    }
-    let videoId = '';
-    if (url.includes('youtube.com/watch?v=')) {
-      videoId = url.split('v=')[1].split('&')[0];
-    } else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1].split('?')[0];
-    } else if (url.includes('youtube.com/embed/')) {
-      videoId = url.split('embed/')[1].split('?')[0];
-    }
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
-  }
-
-  function playVideoModal(url) {
+  function playVideoModal(videoId) {
     const modal = document.getElementById('video-modal');
     const frame = document.getElementById('video-frame');
-    const embedUrl = getYouTubeEmbedUrl(url);
-    frame.src = embedUrl + '?autoplay=1';
+    frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     modal.classList.remove('hidden');
   }
 
   function closeVideoModal() {
-    const modal = document.getElementById('video-modal');
-    const frame = document.getElementById('video-frame');
-    frame.src = '';
-    modal.classList.add('hidden');
+    document.getElementById('video-modal').classList.add('hidden');
+    document.getElementById('video-frame').src = '';
   }
 
-  document.addEventListener('click', (e) => {
-    const modal = document.getElementById('video-modal');
-    if (e.target === modal) {
-      closeVideoModal();
-    }
-  });
-
-  generateToBePractice();
-  generateNumberGame();
-  startQuiz();
-  lucide.createIcons();
-
-  // Inicializar Gemini al cargar la página
-  window.addEventListener('load', async () => {
-    const geminiReady = await initGemini();
-    if (geminiReady) {
-      console.log("✅ Google Gemini está listo para usar");
-    } else {
-      console.error("❌ Gemini no se pudo inicializar correctamente");
-    }
-  });
-
-  const defaultConfig = {
-    site_title: 'Chemistry English Lab',
-    welcome_message: 'Learn English for Industrial Chemistry! 🚀',
-    background_color: '#f0f4ff',
-    surface_color: '#ffffff',
-    text_color: '#1f2937',
-    primary_action: '#ff6b6b',
-    secondary_action: '#48dbfb'
-  };
-
-  window.elementSdk.init({
-    defaultConfig,
-    onConfigChange: async (config) => {
-      document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
-      document.getElementById('welcome-msg').textContent = config.welcome_message || defaultConfig.welcome_message;
-    },
-    mapToCapabilities: (config) => ({
-      recolorables: [
-        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({background_color: v}); }},
-        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({surface_color: v}); }},
-        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({text_color: v}); }},
-        { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({primary_action: v}); }},
-        { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({secondary_action: v}); }},
-      ],
-      borderables: [],
-      fontEditable: undefined,
-      fontSizeable: undefined
-    }),
-    mapToEditPanelValues: (config) => new Map([
-      ['site_title', config.site_title || defaultConfig.site_title],
-      ['welcome_message', config.welcome_message || defaultConfig.welcome_message]
-    ])
+  // Inicializar al cargar
+  document.addEventListener('DOMContentLoaded', () => {
+    generateToBePractice();
+    generateNumberGame();
   });
   </script>
+ </body>
 </html>
