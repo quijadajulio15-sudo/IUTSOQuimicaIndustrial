@@ -116,11 +116,11 @@
       <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><i data-lucide="message-circle" class="w-5 h-5"></i><span>Chat IA</span></button></li>
       <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><i data-lucide="book" class="w-5 h-5"></i><span>Verbo To Be</span></button></li>
       <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transition-all"><i data-lucide="hash" class="w-5 h-5"></i><span>Números</span></button></li>
-      <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><i data-lucide="lightbulb" class="w-5 h-5"></i><span>Vocabulario</span></button></li>
-      <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><i data-lucide="flask" class="w-5 h-5"></i><span>Laboratorio</span></button></li>
+      <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><i data-lucide="dna" class="w-5 h-5"></i><span>Vocabulario</span></button></li>
+      <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><i data-lucide="beaker" class="w-5 h-5"></i><span>Laboratorio</span></button></li>
       <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transition-all"><i data-lucide="pencil" class="w-5 h-5"></i><span>Ejercicios</span></button></li>
       <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><i data-lucide="video" class="w-5 h-5"></i><span>Videos</span></button></li>
-      <li><button onclick="navigateTo('games')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><i data-lucide="gamepad-2" class="w-5 h-5"></i><span>Juegos</span></button></li>
+      <li><button onclick="navigateTo('games')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><i data-lucide="gamepad2" class="w-5 h-5"></i><span>Juegos</span></button></li>
      </ul>
     </div>
    </nav>
@@ -146,10 +146,10 @@
       <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full"></div>
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
-       <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial! 🚀</h2>
+       <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
        <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestro asistente IA avanzado.</p>
        <div class="flex flex-wrap gap-3">
-        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">Comenzar Lección 📚</button>
+        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">Empezar con Verbo To Be</button>
        </div>
       </div>
      </div>
@@ -298,7 +298,7 @@
       </div>
       <div class="mt-6 bg-gradient-to-r from-purple/10 to-pink/10 rounded-2xl p-6 border-2 border-purple-200">
        <h3 class="text-xl font-bold text-purple mb-4">🎮 Práctica Rápida - ¡Completa el espacio!</h3>
-       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">Generar Práctica</button>
+       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">Generar Más</button>
       </div>
      </div>
     </section>
@@ -386,7 +386,7 @@
        <h3 class="text-xl font-bold text-purple mb-4">🧪 Experimento 1: Prueba de pH</h3>
        <p class="comic-font text-gray-600 mb-4">Selecciona una sustancia y observa su nivel de pH. ¡Describe el resultado en inglés!</p>
        <div class="flex flex-wrap gap-3 mb-4">
-        <button onclick="testPH('lemon', 2, '¡El jugo de limón es un ácido fuerte!')" class="px-4 py-2 bg-yellow-400 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🍋 Jugo de Limón</button>
+        <button onclick="testPH('lemon', 2, '¡El jugo de limón es un ácido fuerte!')" class="px-4 py-2 bg-yellow-400 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🍋 Jugo de limón</button>
         <button onclick="testPH('soap', 13, '¡El jabón es una base fuerte!')" class="px-4 py-2 bg-blue-400 rounded-xl font-bold hover:scale-105 transition-all text-white">🧼 Jabón</button>
         <button onclick="testPH('water', 7, '¡El agua es neutra!')" class="px-4 py-2 bg-cyan-400 rounded-xl font-bold hover:scale-105 transition-all text-white">💧 Agua</button>
         <button onclick="testPH('milk', 6, '¡La leche es ligeramente ácida!')" class="px-4 py-2 bg-yellow-200 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🥛 Leche</button>
@@ -606,7 +606,7 @@
     const container = document.getElementById('tobe-practice');
     container.innerHTML = selected.map((q, i) => `
       <div class="flex flex-wrap items-center gap-2 bg-white rounded-xl p-3 shadow-sm">
-        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold focus:outline-none focus:ring-2 focus:ring-purple" />')}</span>
+        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold focus:outline-none" />')}</span>
         <button onclick="checkToBe(${i},'${q.answer}')" class="px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">Check ✓</button>
         <span id="tobe-result-${i}" class="text-sm font-bold"></span>
       </div>
@@ -675,7 +675,7 @@
     const reactions = {
       'acid+base': {result: '💧 Salt + Water (NaCl + H₂O)', desc: 'This is a NEUTRALIZATION reaction! An acid and a base produce salt and water.', color: 'from-green-100 to-blue-100'},
       'acid+water': {result: '🧪 Diluted Acid', desc: 'Adding water to acid creates a DILUTED SOLUTION. Always add acid to water, never water to acid!', color: 'from-blue-100 to-cyan-100'},
-      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'from-red-100 to-yellow-100'},
+      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'from-red-100 to-orange-100'},
       'iron+oxygen': {result: '🟤 Iron Oxide (Rust)', desc: 'This is an OXIDATION reaction! Iron combines with oxygen to form rust (Fe₂O₃).', color: 'from-amber-100 to-red-100'},
     };
     const key = a + '+' + b;
@@ -848,7 +848,7 @@
     const container = document.getElementById('quiz-container');
     container.innerHTML = '';
     if (quizCurrent >= questions.length) {
-      container.innerHTML = `<div class="text-center bounce-in p-8"><span class="text-6xl block mb-4">🎉</span><h3 class="text-2xl font-bold text-green-600">¡Quiz Completado!</h3><p class="comic-font text-gray-600 mt-2">Tu puntuación: <span class="font-bold text-orange">${score}</span> puntos</p></div>`;
+      container.innerHTML = `<div class="text-center bounce-in p-8"><span class="text-6xl block mb-4">🎉</span><h3 class="text-2xl font-bold text-green-600">¡Quiz Completado!</h3><p class="comic-font text-gray-600">Tu puntuación: <span class="text-3xl font-bold text-orange">${score}</span> puntos</p></div>`;
       return;
     }
     const q = questions[quizCurrent];
@@ -858,7 +858,7 @@
         <p class="text-sm text-orange font-bold mb-2">Pregunta ${quizCurrent + 1} de ${quizTotal}</p>
         <h3 class="text-xl font-bold text-gray-800 mb-4">${q.q}</h3>
         <div class="space-y-2">
-          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-300 hover:bg-orange-50 transition-all">${o}</button>`).join('')}
+          ${q.options.map((o, i) => `<button onclick="answerQuiz(this,${i},${q.correct},${JSON.stringify(questions).replace(/"/g, '&quot;')})" class="quiz-option w-full text-left px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:bg-orange/5 transition-all">${o}</button>`).join('')}
         </div>
       </div>`;
   }
