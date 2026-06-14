@@ -145,9 +145,8 @@
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
        <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA avanzada potenciada por Hugging Face, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA avanzada potenciada por Google Gemini, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
        <div class="flex flex-wrap gap-3">
-        <!-- Botón "Usar IA Avanzada" eliminado según solicitud -->
         <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📚 Ver Lecciones</button>
        </div>
       </div>
@@ -163,7 +162,7 @@
       <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">🤖</span>
        <h3 class="font-bold text-lg">Chat IA Real</h3>
-       <p class="text-white/80 text-sm mt-1">Busca en internet como ChatGPT...</p>
+       <p class="text-white/80 text-sm mt-1">Potenciado por Google Gemini...</p>
       </div>
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -187,8 +186,8 @@
      <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
       <div class="flex items-center justify-between mb-4">
        <div>
-        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA - Búsqueda en Internet</h2>
-        <p class="text-gray-600 comic-font text-sm">Powered by Hugging Face AI - Busca información en tiempo real como ChatGPT</p>
+        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA - Google Gemini</h2>
+        <p class="text-gray-600 comic-font text-sm">Potenciado por Google Gemini - Respuestas inteligentes y búsqueda de información en tiempo real</p>
        </div>
        <div class="flex gap-2">
         <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
@@ -198,25 +197,25 @@
        <div class="flex gap-2 fade-in">
         <span class="text-2xl">🤖</span>
         <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu IA Avanzada 🚀</p>
-         <p class="comic-font text-gray-600 text-sm mt-2">Estoy conectada a Hugging Face AI y puedo:</p>
+         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu asistente IA 🚀</p>
+         <p class="comic-font text-gray-600 text-sm mt-2">Estoy potenciado por Google Gemini y puedo:</p>
          <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
-          <li>Buscar información en internet en tiempo real</li>
-          <li>Responder sobre CUALQUIER tema</li>
-          <li>Analizar y explicar conceptos complejos</li>
-          <li>Generar código y soluciones</li>
-          <li>Traducir y explicar idiomas</li>
+          <li>Responder preguntas sobre cualquier tema</li>
+          <li>Explicar conceptos de química en inglés</li>
+          <li>Ayudarte con gramática y pronunciación</li>
+          <li>Generar explicaciones detalladas</li>
+          <li>Traducir y explicar términos químicos</li>
           <li>Y mucho más...</li>
          </ul>
-         <p class="comic-font text-gray-600 text-xs mt-3 italic">¡Sin limitaciones! Pregunta lo que quieras... 💭</p>
+         <p class="comic-font text-gray-600 text-xs mt-3 italic">¡Pregunta lo que quieras sobre inglés y química! 💭</p>
         </div>
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Pregunta cualquier cosa... ¿Quién fue Cleopatra? ¿Cómo funciona la fotosíntesis? ¿Cuál es la capital de Japón?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
+       <input id="chat-input" type="text" placeholder="Pregunta cualquier cosa... ¿Qué es una reacción química? ¿Cómo se pronuncia...? ¿Explica el verbo to be?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
-      <p class="text-xs text-gray-400 mt-2 text-center">🌐 Conectada a Hugging Face - Respuestas en tiempo real sin límites</p>
+      <p class="text-xs text-gray-400 mt-2 text-center">⚡ Potenciado por Google Gemini - Respuestas instantáneas</p>
      </div>
     </section>
 
@@ -286,7 +285,7 @@
            <td class="py-2">You <strong>aren't</strong> ready. (No estás listo)</td>
           </tr>
           <tr class="border-b border-red-100">
-           <td class="py-2 font-bold">He/She/It</td>
+           <td class="py-2 font-bold">He/She/She/It</td>
            <td class="py-2">is not</td>
            <td class="py-2">It <strong>isn't</strong> a base. (No es una base)</td>
           </tr>
@@ -564,10 +563,11 @@
     </section>
    </main>
    <footer class="relative z-10 mt-8 pb-6 text-center">
-    <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés Químico © 2024 | Hecho con ❤️ para estudiantes</p>
+    <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés Químico © 2024 | Hecho con ❤️ para estudiantes | Potenciado por Google Gemini</p>
    </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.1.3/dist/index.min.js"></script>
   <script>
   let currentSection = 'home';
   let score = 0;
@@ -575,9 +575,27 @@
   let quizTotal = 5;
   let chatHistory = [];
 
-  // Hugging Face API Configuration
-  const HF_API_KEY = "hf_kSvzxJrMqMfklmPnOqRsTuVwXyZaBcDeFgHiJkLmNoPqRsTuVwXyZ"; // Tu API KEY aquí
-  const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.1";
+  // Google Gemini API Configuration
+  const GEMINI_API_KEY = "AIzaSyDkM..."; // ← REEMPLAZA CON TU API KEY DE GOOGLE
+  let genAI;
+  let model;
+
+  // Inicializar Gemini
+  function initGemini() {
+    if (GEMINI_API_KEY === "AIzaSyDkM...") {
+      console.warn("⚠️ Por favor, configura tu API KEY de Google Gemini en el código");
+      return false;
+    }
+    try {
+      const { GoogleGenerativeAI } = window;
+      genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+      model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      return true;
+    } catch (error) {
+      console.error("Error al inicializar Gemini:", error);
+      return false;
+    }
+  }
 
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -707,7 +725,6 @@
     addScore(5);
   }
 
-  // Juegos nuevos
   function generateMatchingGame() {
     const pairs = [
       {eng: 'Acid', esp: 'Sustancia con pH < 7'},
@@ -904,7 +921,7 @@
     document.getElementById('score-text').textContent = score;
   }
 
-  // Chat con Hugging Face API
+  // Chat con Google Gemini
   async function sendChatMessage(e) {
     e.preventDefault();
     const input = document.getElementById('chat-input');
@@ -921,9 +938,23 @@
     container.scrollTop = container.scrollHeight;
     
     try {
-      const response = await queryWeb(msg);
+      if (!model) {
+        throw new Error("Gemini no está configurado. Verifica tu API KEY.");
+      }
+
+      // Contexto de química e inglés
+      const systemContext = `You are an expert English and Chemistry teacher. You help students learn English vocabulary related to industrial chemistry. 
+      Be friendly, encouraging, and provide clear explanations in both English and Spanish.
+      Focus on chemistry-related English terms and grammar.`;
+      
+      const fullPrompt = `${systemContext}\n\nEstudiante: ${msg}\n\nTu respuesta (en español e inglés cuando sea necesario):`;
+      
+      const result = await model.generateContent(fullPrompt);
+      const response = await result.response;
+      const text = response.text();
+      
       container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
-      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><pre class="comic-font text-gray-700 text-sm" style="white-space:pre-wrap;margin:0">${escapeHtml(response)}</pre></div></div>`;
+      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><div class="comic-font text-gray-700 text-sm" style="white-space:pre-wrap;margin:0">${escapeHtml(text)}</div></div></div>`;
       container.scrollTop = container.scrollHeight;
       addScore(3);
     } catch (error) {
@@ -933,58 +964,6 @@
     
     input.disabled = false;
     input.focus();
-  }
-
-  async function queryHuggingFace(prompt) {
-    const response = await fetch("https://api-inference.huggingface.co/models/" + HF_MODEL, {
-      headers: { Authorization: `Bearer ${HF_API_KEY}` },
-      method: "POST",
-      body: JSON.stringify({ inputs: prompt }),
-    });
-    
-    const result = await response.json();
-    if (result[0] && result[0].generated_text) {
-      return result[0].generated_text.split(prompt)[1]?.trim() || "No pude procesar tu pregunta";
-    }
-    throw new Error("No se pudo obtener respuesta");
-  }
-
-  // Búsqueda web pública usando DuckDuckGo vía AllOrigins (sin API key)
-  async function queryWeb(query) {
-    try {
-      const ddgUrl = 'https://duckduckgo.com/html/?q=' + encodeURIComponent(query);
-      const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(ddgUrl);
-      const res = await fetch(proxy);
-      if (!res.ok) throw new Error('Error al obtener resultados de búsqueda');
-      const text = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(text, 'text/html');
-      const results = [];
-
-      // Intenta extraer enlaces y snippets comunes de la página de resultados
-      const anchors = doc.querySelectorAll('a.result__a');
-      if (anchors && anchors.length > 0) {
-        anchors.forEach(a => {
-          const parent = a.closest('.result');
-          const snippet = parent?.querySelector('.result__snippet')?.textContent || '';
-          results.push({ title: a.textContent.trim(), href: a.href, snippet: snippet.trim() });
-        });
-      } else {
-        // Fallback: buscar elementos con clase 'result' y extraer primer link
-        const items = doc.querySelectorAll('.result');
-        items.forEach(item => {
-          const a = item.querySelector('a');
-          const snippet = item.querySelector('.result__snippet')?.textContent || item.textContent || '';
-          if (a && a.href) results.push({ title: a.textContent.trim() || a.href, href: a.href, snippet: snippet.trim() });
-        });
-      }
-
-      if (results.length === 0) return 'No se encontraron resultados.';
-      const top = results.slice(0, 5);
-      return top.map((r, i) => `${i + 1}. ${r.title}\n${r.href}${r.snippet ? '\n' + r.snippet : ''}`).join('\n\n');
-    } catch (e) {
-      return 'Error en búsqueda: ' + e.message;
-    }
   }
 
   function escapeHtml(text) {
@@ -1046,6 +1025,13 @@
   generateNumberGame();
   startQuiz();
   lucide.createIcons();
+
+  // Inicializar Gemini al cargar la página
+  window.addEventListener('load', () => {
+    if (!initGemini()) {
+      console.warn("⚠️ Gemini no está disponible. Por favor, configura tu API KEY.");
+    }
+  });
 
   const defaultConfig = {
     site_title: 'Chemistry English Lab',
