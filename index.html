@@ -160,8 +160,8 @@
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">🤖</span>
-       <h3 class="font-bold text-lg">Chat IA Química</h3>
-       <p class="text-white/80 text-sm mt-1">Pregunta cualquier cosa sobre química...</p>
+       <h3 class="font-bold text-lg">Chat IA Avanzado</h3>
+       <p class="text-white/80 text-sm mt-1">Pregunta sobre cualquier tema...</p>
       </div>
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -202,8 +202,8 @@
      <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
       <div class="flex items-center justify-between mb-4">
        <div>
-        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Tutor de Química en Inglés</h2>
-        <p class="text-gray-600 comic-font text-sm">Asistente IA especializado en química, inglés y búsqueda de información</p>
+        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 IA Avanzada - Búsqueda Universal</h2>
+        <p class="text-gray-600 comic-font text-sm">Busca información sobre cualquier tema: química, historia, ciencia, tecnología, etc.</p>
        </div>
        <div class="flex gap-2">
         <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
@@ -213,26 +213,28 @@
        <div class="flex gap-2 fade-in">
         <span class="text-2xl">🤖</span>
         <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu Asistente de IA Avanzado 🧪</p>
-         <p class="comic-font text-gray-600 text-sm mt-2">Puedo ayudarte con:</p>
+         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu Asistente de IA Avanzado 🚀</p>
+         <p class="comic-font text-gray-600 text-sm mt-2">Puedo ayudarte con información sobre:</p>
          <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
-          <li>Explicaciones de conceptos químicos</li>
-          <li>Reacciones químicas y cálculos</li>
-          <li>Terminología en inglés</li>
-          <li>Procesos industriales</li>
-          <li>Búsqueda de cualquier tipo de información</li>
-          <li>Respuestas a preguntas de cualquier tema</li>
-          <li>Seguridad en laboratorios</li>
+          <li>🧪 Química e Inglés científico</li>
+          <li>📚 Historia y cultura</li>
+          <li>🔬 Ciencia y tecnología</li>
+          <li>🧮 Matemáticas y cálculos</li>
+          <li>🌍 Geografía y medio ambiente</li>
+          <li>💻 Programación y desarrollo</li>
+          <li>🎨 Arte, música y entretenimiento</li>
+          <li>📖 Literatura y escritura</li>
+          <li>¡Y mucho más!</li>
          </ul>
-         <p class="comic-font text-gray-600 text-xs mt-3 italic">Escribe tu pregunta a continuación... 💬</p>
+         <p class="comic-font text-gray-600 text-xs mt-3 italic">Pregunta cualquier cosa... 💬</p>
         </div>
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Pregunta sobre química, historia, ciencia, tecnología o cualquier cosa..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
+       <input id="chat-input" type="text" placeholder="Pregunta sobre cualquier tema: ¿Quién fue Einstein? ¿Cómo funciona el cambio climático? ¿Qué es la IA?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
-      <p class="text-xs text-gray-400 mt-2 text-center">La IA está entrenada en múltiples temas y puede buscar información sobre cualquier asunto</p>
+      <p class="text-xs text-gray-400 mt-2 text-center">Con búsqueda inteligente de información sobre múltiples temas 🌐</p>
      </div>
     </section>
 
@@ -745,27 +747,60 @@
     document.getElementById('score-text').textContent = score;
   }
 
-  const chemistryDatabase = {
-    'hydrogen': 'Hydrogen (H) is the lightest element on the periodic table. Colorless, odorless, highly flammable. Used in fuel cells and ammonia synthesis.',
-    'oxygen': 'Oxygen (O₂) is essential for combustion and respiration. Makes up 21% of Earth\'s atmosphere. Critical for industrial processes.',
-    'carbon': 'Carbon (C) forms the basis of organic chemistry. Can form 4 covalent bonds. Diamond, graphite, and coal are allotropes of carbon.',
-    'nitrogen': 'Nitrogen (N₂) makes up 78% of atmosphere. Inert at room temperature. Essential for protein synthesis and fertilizers.',
-    'reaction': 'A chemical reaction occurs when substances interact to form new compounds. Types: exothermic, endothermic, oxidation-reduction, neutralization.',
-    'acid': 'A substance with pH < 7. Donates protons (H⁺) in solution. Examples: HCl (hydrochloric), H₂SO₄ (sulfuric), HNO₃ (nitric).',
-    'base': 'A substance with pH > 7. Accepts protons in solution. Examples: NaOH (sodium hydroxide), KOH (potassium hydroxide), NH₃ (ammonia).',
-    'ph': 'Measures acidity/alkalinity on scale 0-14. pH 7 is neutral. pH < 7 is acidic, pH > 7 is basic. pH = -log[H⁺]',
-    'mol': 'Unit measuring amount of substance. 1 mole = 6.022 × 10²³ particles. Essential for stoichiometry calculations.',
-    'catalyst': 'Speeds up a reaction without being consumed. Lowers activation energy. Essential in industrial and biochemistry.',
-    'oxidation': 'Loss of electrons. Occurs simultaneously with reduction (gain of electrons). Forms oxidation-reduction (redox) reactions.',
-    'polymerization': 'Process where monomers link to form long chains. Creates plastics, rubber, proteins. Examples: PVC, polyethylene, PET.',
-    'distillation': 'Separation technique using different boiling points. Used to purify liquids. Common in oil refining.',
-    'crystallization': 'Formation of solid crystals from solution. Used to purify substances. Crystal structure reflects molecular arrangement.',
-    'solubility': 'Ability of substance to dissolve in solvent. Depends on temperature, pressure, molecular interactions. "Like dissolves like".',
-    'osmosis': 'Movement of solvent through semipermeable membrane. Water moves toward higher solute concentration. Important in biological systems.',
-    'electrochemistry': 'Studies redox reactions using electron transfer. Includes galvanic cells, electrolysis, batteries. Voltage in volts.',
-    'thermodynamics': 'Studies energy changes in chemical reactions. Includes enthalpy (heat), entropy (disorder), free energy.',
-    'kinetics': 'Studies reaction rates and mechanisms. Temperature, concentration, catalysts affect rates. Described by rate laws.',
-    'molarity': 'Moles of solute per liter of solution (M). Calculated as: Molarity = moles/liters. Essential for solution preparation.',
+  // Base de datos expandida con múltiples temas
+  const knowledgeBase = {
+    // QUÍMICA
+    'hydrogen': '🧪 Hydrogen (H) es el elemento más ligero de la tabla periódica. Sin color, sin olor, altamente inflamable. Se usa en celdas de combustible y síntesis de amoníaco.',
+    'oxygen': '🧪 Oxygen (O₂) es esencial para la combustión y la respiración. Constituye el 21% de la atmósfera terrestre. Crítico para procesos industriales.',
+    'carbon': '🧪 Carbon (C) forma la base de la química orgánica. Puede formar 4 enlaces covalentes. Diamante, grafito y carbón son alótropos del carbono.',
+    'nitrogen': '🧪 Nitrogen (N₂) constituye el 78% de la atmósfera. Inerte a temperatura ambiente. Esencial para síntesis de proteínas y fertilizantes.',
+    'ph': '🧪 pH mide acidez/alcalinidad en escala 0-14. pH 7 es neutro. pH < 7 es ácido, pH > 7 es básico. pH = -log[H⁺]',
+    'reaction': '🧪 Una reacción química ocurre cuando sustancias interactúan formando compuestos nuevos. Tipos: exotérmica, endotérmica, oxidación-reducción, neutralización.',
+    
+    // HISTORIA
+    'historia': '📚 La historia es el estudio del pasado de la humanidad. Incluye eventos políticos, culturales, sociales y económicos significativos.',
+    'einstein': '📚 Albert Einstein (1879-1955) fue un físico alemán revolucionario. Desarrolló la teoría de la relatividad. Ganó el Premio Nobel de Física en 1921.',
+    'napoleón': '📚 Napoleón Bonaparte fue un militar y emperador francés. Conquistó gran parte de Europa. Su legado incluye el Código Napoleónico.',
+    'segunda guerra': '📚 La Segunda Guerra Mundial (1939-1945) fue el conflicto más devastador de la historia. Participaron la mayoría de naciones del mundo.',
+    
+    // CIENCIA Y TECNOLOGÍA
+    'inteligencia artificial': '🤖 La IA es la simulación de procesos de inteligencia humana por máquinas. Incluye machine learning, deep learning y procesamiento de lenguaje natural.',
+    'computadora': '💻 Una computadora es un dispositivo electrónico que procesa datos. Ejecuta programas y almacena información. Fundamental en la tecnología moderna.',
+    'internet': '🌐 Internet es un sistema global de redes interconectadas. Permite comunicación e intercambio de información a nivel mundial.',
+    'cambio climático': '🌍 El cambio climático es la alteración del clima global. Causado principalmente por emisiones de gases de efecto invernadero. Impacta ecosistemas y sociedades.',
+    
+    // MATEMÁTICAS
+    'algebra': '🧮 El álgebra es la rama de matemáticas que estudia cantidades, variables y ecuaciones. Fundamental para resolver problemas científicos.',
+    'geometría': '🧮 La geometría estudia formas, espacios y propiedades de figuras. Incluye puntos, líneas, triángulos, círculos y poliedros.',
+    'pi': '🧮 Pi (π) es una constante matemática aproximadamente 3.14159. Relación entre circunferencia y diámetro de un círculo. Irracional e infinito.',
+    'teorema de pitágoras': '🧮 En un triángulo rectángulo: a² + b² = c². Donde c es la hipotenusa. Fundamental en geometría y trigonometría.',
+    
+    // BIOLOGÍA
+    'adn': '🧬 El ADN es la molécula que contiene instrucciones genéticas. Doble hélice con bases nitrogenadas. Código de la vida de todos los organismos.',
+    'evolución': '🧬 La evolución es el cambio de características en poblaciones a través del tiempo. Darwin desarrolló la teoría de selección natural.',
+    'célula': '🧬 La célula es la unidad fundamental de la vida. Tiene núcleo (eucariota) o sin núcleo (procariota). Contiene organelos especializados.',
+    'fotosíntesis': '🧬 Proceso donde plantas convierten luz solar en energía química. Produce glucosa y oxígeno. Esencial para la vida en la Tierra.',
+    
+    // FÍSICA
+    'gravedad': '⚡ La gravedad es la fuerza de atracción entre masas. Newton formuló la ley de gravitación universal. Einstein la explicó con relatividad general.',
+    'velocidad de la luz': '⚡ La velocidad de la luz es aproximadamente 300,000 km/s. Constante universal. Límite superior de velocidad en el universo.',
+    'energía': '⚡ La energía es la capacidad de realizar trabajo. Se conserva en sistemas aislados. Formas: cinética, potencial, térmica, eléctrica, etc.',
+    'movimiento': '⚡ El movimiento es cambio de posición en el espacio. Descrito por velocidad y aceleración. Leyes de Newton rigen el movimiento.',
+    
+    // LITERATURA Y ESCRITURA
+    'shakespeare': '📖 William Shakespeare (1564-1616) fue dramaturgo inglés. Escribió tragedias como Hamlet, Macbeth, Romeo y Julieta.',
+    'novela': '📖 La novela es un género literario en prosa. Presenta personajes, trama y desarrollo. Puede ser realista, fantástica, de misterio, etc.',
+    'poesía': '📖 La poesía expresa sentimientos con palabras. Usa ritmo, rima y figuras literarias. Formas: verso libre, soneto, haiku, etc.',
+    
+    // ARTE Y MÚSICA
+    'da vinci': '🎨 Leonardo da Vinci fue artista, inventor y científico renacentista. Pintó la Mona Lisa y La Última Cena. Revolucionó el arte.',
+    'música clásica': '🎵 Música clásica de compositores como Mozart, Beethoven, Bach. Características: armonía compleja, orquestas sinfónicas, formas sonatas.',
+    'pintura': '🎨 La pintura es expresión artística visual. Técnicas: óleo, acrílico, acuarela. Movimientos: Renacimiento, Impresionismo, Cubismo, Surrealismo.',
+    
+    // GEOGRAFÍA
+    'montaña': '🗻 Las montañas son elevaciones del terreno. Formadas por tectónica de placas. Mayores: Himalaya, Andes, Rockies.',
+    'océano': '🌊 Los océanos cubren 71% de la Tierra. Contienen 97% del agua. Ecosistemas ricos en biodiversidad.',
+    'clima': '🌤️ El clima es patrón promedio del tiempo. Factores: latitud, altitud, corrientes oceánicas. Tipos: tropical, templado, árido, polar.',
   };
 
   function sendChatMessage(e) {
@@ -783,62 +818,64 @@
     container.scrollTop = container.scrollHeight;
     
     setTimeout(() => {
-      let response = generateAdvancedResponse(msg);
+      let response = generateIntelligentResponse(msg);
       container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
       container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">${response}</p></div></div>`;
       container.scrollTop = container.scrollHeight;
     }, 1500);
   }
 
-  function generateAdvancedResponse(userInput) {
-    const input = userInput.toLowerCase();
+  function generateIntelligentResponse(userInput) {
+    const input = userInput.toLowerCase().trim();
     
-    // Buscar en base de datos de química
-    for (const [key, value] of Object.entries(chemistryDatabase)) {
+    // Búsqueda en base de datos de conocimiento
+    for (const [key, value] of Object.entries(knowledgeBase)) {
       if (input.includes(key)) {
-        return `<strong>📚 ${key.toUpperCase()}:</strong><br>${value}<br><br>¿Hay algo más que quieras saber? 🧪`;
+        return `${value}<br><br>¿Necesitas más información sobre este tema? 🔍`;
       }
     }
     
-    // Respuestas generales sobre química
-    if (input.includes('periodic') || input.includes('table') || input.includes('element')) {
-      return '🔍 <strong>Tabla Periódica:</strong><br>Organiza elementos por número atómico y propiedades. Grupos: metales, no metales, metaloides, lantánidos, actínidos.<br><br>¿Qué elemento específico te interesa?';
+    // Preguntas genéricas sobre matemáticas
+    if (input.match(/cuánto|cuanto|calcular|resultado|suma|resta|multiplicación|división/i)) {
+      return '🧮 <strong>Matemáticas:</strong><br>Puedo ayudarte con cálculos, álgebra, geometría, estadística y más. Por favor, sé específico con tu pregunta y comparte los números o la operación que necesitas realizar.';
     }
     
-    if (input.includes('equation') || input.includes('ecuación') || input.includes('fórmula')) {
-      return '📐 <strong>Ecuaciones Químicas:</strong><br>Representan reacciones. Deben estar balanceadas.<br>Ejemplo: 2H₂ + O₂ → 2H₂O<br><br>¿Necesitas ayuda?';
+    // Preguntas sobre programación
+    if (input.match(/código|python|javascript|programación|html|css|base de datos/i)) {
+      return '💻 <strong>Programación y Desarrollo:</strong><br>Puedo ayudarte con lenguajes de programación, desarrollo web, bases de datos, algoritmos y mejores prácticas. ¿Cuál es tu pregunta específica?';
     }
     
-    if (input.includes('industrial') || input.includes('industry') || input.includes('process')) {
-      return '🏭 <strong>Química Industrial:</strong><br>Aplicación a gran escala de procesos químicos. Síntesis de amoníaco, ácido sulfúrico, destilación de petróleo.<br><br>¿Qué proceso te interesa?';
+    // Preguntas sobre ciencia
+    if (input.match(/experimento|científico|laboratorio|fórmula|teoría|descubrimiento/i)) {
+      return '🔬 <strong>Ciencia:</strong><br>Incluye física, química, biología, astronomía. Puedo explicar experimentos, procesos naturales, leyes científicas y descubrimientos. ¿Qué específicamente?';
     }
     
-    if (input.includes('safety') || input.includes('seguridad') || input.includes('peligro')) {
-      return '⚠️ <strong>Seguridad en Laboratorio:</strong><br>• Gafas de seguridad siempre<br>• Manipula ácidos/bases con cuidado<br>• Conoce ubicación de duchas<br>• Lee hojas de seguridad (SDS)<br>• Nunca mezcles químicos sin saber';
+    // Preguntas sobre historia
+    if (input.match(/historia|pasado|antiguo|civilización|guerra|imperio|revolución/i)) {
+      return '📚 <strong>Historia:</strong><br>Puedo contar sobre civilizaciones antiguas, personajes históricos, guerras, revoluciones y eventos importantes. ¿Qué período o evento te interesa?';
     }
-
-    // Respuestas sobre historia
-    if (input.includes('historia') || input.includes('history')) {
-      return '📖 <strong>Historia:</strong><br>La historia es el estudio del pasado de la humanidad. Incluye eventos políticos, culturales, sociales y económicos. ¿Quieres conocer sobre algún período o evento histórico específico?';
+    
+    // Preguntas sobre cultura
+    if (input.match(/cultura|tradición|país|ciudad|turismo|idioma|costumbre/i)) {
+      return '🌍 <strong>Cultura y Geografía:</strong><br>Puedo hablarte sobre países, ciudades, tradiciones, idiomas, comidas típicas y atracciones turísticas. ¿Qué lugar te interesa?';
     }
-
-    // Respuestas sobre matemáticas
-    if (input.includes('matemática') || input.includes('math') || input.includes('cálculo')) {
-      return '🧮 <strong>Matemáticas:</strong><br>La disciplina que estudia números, formas y patrones. Fundamental en química para cálculos estequiométricos, pH, concentraciones, etc. ¿Qué tema matemático necesitas?';
+    
+    // Preguntas sobre arte
+    if (input.match(/arte|pintura|escultura|música|compositor|artista|cuadro/i)) {
+      return '🎨 <strong>Arte y Cultura:</strong><br>Puedo hablar sobre movimientos artísticos, artistas famosos, técnicas de pintura, música clásica y obras maestras. ¿Cuál es tu interés?';
     }
-
-    // Respuestas sobre física
-    if (input.includes('física') || input.includes('physics') || input.includes('energia') || input.includes('energy')) {
-      return '⚡ <strong>Física:</strong><br>Ciencia que estudia la materia y energía. En química, es importante entender energía de reacciones, velocidad, temperatura y fuerzas. ¿Qué aspecto de la física te interesa?';
+    
+    // Preguntas sobre educación
+    if (input.match(/aprender|estudiar|lección|ejercicio|tarea|examen|clase/i)) {
+      return '📖 <strong>Educación:</strong><br>Puedo ayudarte con lecciones, explicaciones, ejercicios de práctica, preparación para exámenes. ¿Qué materia necesitas estudiar?';
     }
-
-    // Respuestas sobre biología
-    if (input.includes('biología') || input.includes('biology')) {
-      return '🧬 <strong>Biología:</strong><br>Ciencia que estudia los seres vivos. Se relaciona con química en reacciones metabólicas, estructura de proteínas, ADN, etc. ¿Qué aspecto biológico deseas conocer?';
+    
+    // Búsqueda general
+    if (input.length > 3) {
+      return `🌐 <strong>Búsqueda General:</strong><br>He recibido tu pregunta: <em>"${escapeHtml(userInput)}"</em><br><br>Puedo ayudarte con:<br>• 🧪 Química e Inglés científico<br>• 📚 Historia y literatura<br>• 🔬 Ciencia y tecnología<br>• 🧮 Matemáticas<br>• 🎨 Arte y música<br>• 🌍 Geografía y culturas<br>• 💻 Programación<br><br>¿Cuál es tu pregunta específica? Seré más preciso si me das más detalles. 🔍`;
     }
-
-    // Búsqueda general de información
-    return '🌐 <strong>Búsqueda de Información:</strong><br>He recibido tu pregunta: <em>"' + userInput + '"</em><br><br>Puedo ayudarte con: Química, Inglés, Historia, Ciencias, Matemáticas, Tecnología y muchos otros temas.<br><br>Por favor, sé más específico sobre lo que deseas aprender. ¿Hay algún tema en particular que te interese explorar?';
+    
+    return '👋 <strong>¡Hola!</strong><br>No entiendo bien tu pregunta. Por favor, sé más específico. Puedo ayudarte con muchos temas. ¿Qué deseas aprender? 🤔';
   }
 
   function escapeHtml(text) {
@@ -852,8 +889,8 @@
     container.innerHTML = `<div class="flex gap-2 fade-in">
       <span class="text-2xl">🤖</span>
       <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-        <p class="comic-font text-gray-700 font-bold">¡Hola de nuevo! Historial limpio. 🧪</p>
-        <p class="comic-font text-gray-600 text-sm mt-2">¿En qué puedo ayudarte?</p>
+        <p class="comic-font text-gray-700 font-bold">¡Historial limpio! Volvamos a empezar. 🧪</p>
+        <p class="comic-font text-gray-600 text-sm mt-2">¿Qué tema te gustaría explorar?</p>
       </div>
     </div>`;
     chatHistory = [];
