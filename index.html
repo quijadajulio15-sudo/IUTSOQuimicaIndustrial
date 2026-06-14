@@ -187,7 +187,7 @@
       <div class="flex items-center justify-between mb-4">
        <div>
         <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA - Google Gemini</h2>
-        <p class="text-gray-600 comic-font text-sm">Potenciado por Google Gemini - Respuestas inteligentes y búsqueda de información en tiempo real</p>
+        <p id="gemini-status" class="text-gray-600 comic-font text-sm">✅ Conectado con Google Gemini - Listo para responder</p>
        </div>
        <div class="flex gap-2">
         <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
@@ -212,7 +212,7 @@
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Pregunta cualquier cosa... ¿Qué es una reacción química? ¿Cómo se pronuncia...? ¿Explica el verbo to be?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
+       <input id="chat-input" type="text" placeholder="Pregunta cualquier cosa... ¿Qué es una reacción química? ¿Cómo se pronuncia...?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
       <p class="text-xs text-gray-400 mt-2 text-center">⚡ Potenciado por Google Gemini - Respuestas instantáneas</p>
@@ -285,7 +285,7 @@
            <td class="py-2">You <strong>aren't</strong> ready. (No estás listo)</td>
           </tr>
           <tr class="border-b border-red-100">
-           <td class="py-2 font-bold">He/She/She/It</td>
+           <td class="py-2 font-bold">He/She/It</td>
            <td class="py-2">is not</td>
            <td class="py-2">It <strong>isn't</strong> a base. (No es una base)</td>
           </tr>
@@ -567,32 +567,34 @@
    </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.1.3/dist/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai"></script>
   <script>
   let currentSection = 'home';
   let score = 0;
   let quizCurrent = 0;
   let quizTotal = 5;
   let chatHistory = [];
+  let model = null;
 
-  // Google Gemini API Configuration
-  const GEMINI_API_KEY = "AQ.Ab8RN6LF73-vrsQHNINfXyT9xg0E4X_vcNW5bfJrtWpuloniHA"; // ← REEMPLAZA CON TU API KEY DE GOOGLE
-  let genAI;
-  let model;
+  // 🔑 TU API KEY DE GOOGLE GEMINI CONFIGURADA
+  const GEMINI_API_KEY = "AQ.Ab8RN6LF73-vrsQHNINfXyT9xg0E4X_vcNW5bfJrtWpuloniHA";
 
-  // Inicializar Gemini
-  function initGemini() {
-    if (GEMINI_API_KEY === "AQ.Ab8RN6LF73-vrsQHNINfXyT9xg0E4X_vcNW5bfJrtWpuloniHA") {
-      console.warn("⚠️ Por favor, configura tu API KEY de Google Gemini en el código");
+  // Función para inicializar Gemini
+  async function initGemini() {
+    if (!GEMINI_API_KEY || GEMINI_API_KEY.trim() === "") {
+      console.error("❌ API Key no configurada");
       return false;
     }
+
     try {
       const { GoogleGenerativeAI } = window;
-      genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
       model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      
+      console.log("✅ Google Gemini inicializado correctamente");
       return true;
     } catch (error) {
-      console.error("Error al inicializar Gemini:", error);
+      console.error("❌ Error inicializando Gemini:", error);
       return false;
     }
   }
@@ -926,7 +928,7 @@
     e.preventDefault();
     const input = document.getElementById('chat-input');
     const msg = input.value.trim();
-    if (!msg) return;
+    if (!msg || !model) return;
     
     const container = document.getElementById('chat-messages');
     container.innerHTML += `<div class="flex gap-2 justify-end fade-in"><div class="chat-bubble-user bg-gradient-to-r from-secondary to-blue-500 text-white shadow-sm p-3 max-w-[80%]"><p class="comic-font">${escapeHtml(msg)}</p></div></div>`;
@@ -934,17 +936,12 @@
     input.value = '';
     input.disabled = true;
     
-    container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
+    container.innerHTML += `<div class="flex gap-2 fade-in" id="typing"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
     container.scrollTop = container.scrollHeight;
     
     try {
-      if (!model) {
-        throw new Error("Gemini no está configurado. Verifica tu API KEY.");
-      }
-
-      // Contexto de química e inglés
       const systemContext = `You are an expert English and Chemistry teacher. You help students learn English vocabulary related to industrial chemistry. 
-      Be friendly, encouraging, and provide clear explanations in both English and Spanish.
+      Be friendly, encouraging, and provide clear explanations in both English and Spanish when appropriate.
       Focus on chemistry-related English terms and grammar.`;
       
       const fullPrompt = `${systemContext}\n\nEstudiante: ${msg}\n\nTu respuesta (en español e inglés cuando sea necesario):`;
@@ -953,12 +950,15 @@
       const response = await result.response;
       const text = response.text();
       
-      container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
+      const typingElement = document.getElementById('typing');
+      if (typingElement) typingElement.remove();
+      
       container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><div class="comic-font text-gray-700 text-sm" style="white-space:pre-wrap;margin:0">${escapeHtml(text)}</div></div></div>`;
       container.scrollTop = container.scrollHeight;
       addScore(3);
     } catch (error) {
-      container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
+      const typingElement = document.getElementById('typing');
+      if (typingElement) typingElement.remove();
       container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">❌ Error: ${error.message}</p></div></div>`;
     }
     
@@ -1027,9 +1027,12 @@
   lucide.createIcons();
 
   // Inicializar Gemini al cargar la página
-  window.addEventListener('load', () => {
-    if (!initGemini()) {
-      console.warn("⚠️ Gemini no está disponible. Por favor, configura tu API KEY.");
+  window.addEventListener('load', async () => {
+    const geminiReady = await initGemini();
+    if (geminiReady) {
+      console.log("✅ Google Gemini está listo para usar");
+    } else {
+      console.error("❌ Gemini no se pudo inicializar correctamente");
     }
   });
 
