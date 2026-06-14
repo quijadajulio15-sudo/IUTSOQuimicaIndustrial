@@ -17,11 +17,13 @@
     @keyframes slide-in { from{transform:translateX(-100%);opacity:0} to{transform:translateX(0);opacity:1} }
     @keyframes bounce-in { 0%{transform:scale(0)} 50%{transform:scale(1.1)} 100%{transform:scale(1)} }
     @keyframes rainbow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes fade-in { from{opacity:0} to{opacity:1} }
     
     .float-anim { animation: float 3s ease-in-out infinite; }
     .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
     .slide-in { animation: slide-in 0.5s ease-out; }
     .bounce-in { animation: bounce-in 0.4s ease-out; }
+    .fade-in { animation: fade-in 0.5s ease-out; }
     
     .rainbow-bg {
       background: linear-gradient(270deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd);
@@ -59,6 +61,16 @@
     .sidebar-closed { transform: translateX(-100%); }
     
     .overlay { background: rgba(0,0,0,0.5); }
+    
+    .typing-indicator { display: flex; gap: 4px; align-items: flex-end; }
+    .typing-indicator span { width: 8px; height: 8px; border-radius: 50%; background: #48dbfb; animation: bounce 1.4s infinite; }
+    .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-10px); } }
+    
+    .loading-spinner { border: 3px solid #f3f4f6; border-top: 3px solid #48dbfb; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
@@ -103,13 +115,13 @@
      </div>
      <ul class="space-y-2">
       <li><button onclick="navigateTo('home')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink/10 text-left transition-all"><span class="text-xl">🏠</span> <span>Inicio</span></button></li>
+      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">🤖</span> <span>Chat IA</span></button></li>
       <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">📝</span> <span>Verbo To Be</span></button></li>
       <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transition-all"><span class="text-xl">🔢</span> <span>Números</span></button></li>
       <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><span class="text-xl">🧬</span> <span>Vocabulario</span></button></li>
       <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><span class="text-xl">🔬</span> <span>Lab Virtual</span></button></li>
       <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transition-all"><span class="text-xl">✏️</span> <span>Ejercicios</span></button></li>
       <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><span class="text-xl">🎬</span> <span>Videos</span></button></li>
-      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><span class="text-xl">🤖</span> <span>Chat</span></button></li>
      </ul>
     </div>
    </nav><!-- Top Navigation Bar -->
@@ -138,9 +150,10 @@
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
        <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Explora lecciones, realiza experimentos y practica con nuestro tutor de IA. 🧪✨</p>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA especializada, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
        <div class="flex flex-wrap gap-3">
-        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📝 Comenzar</button>
+        <button onclick="navigateTo('chat')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">🚀 Comenzar con IA</button>
+        <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📚 Ver Lecciones</button>
        </div>
       </div>
      </div>
@@ -162,7 +175,12 @@
      </div>
      <!-- Quick Access Cards -->
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
+      <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
+       <span class="text-4xl block mb-3">🤖</span>
+       <h3 class="font-bold text-lg">Chat IA Química</h3>
+       <p class="text-white/80 text-sm mt-1">Pregunta cualquier cosa sobre química...</p>
+      </div>
+      <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
        <h3 class="font-bold text-lg">Verbo To Be</h3>
        <p class="text-white/80 text-sm mt-1">Yo soy, Tú eres, Él es...</p>
@@ -174,13 +192,8 @@
       </div>
       <div onclick="navigateTo('vocabulary')" class="card-hover cursor-pointer bg-gradient-to-br from-mint to-green-500 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">🧪</span>
-       <h3 class="font-bold text-lg">Palabras de Química</h3>
-       <p class="text-white/80 text-sm mt-1">Ácido, Base, Solución...</p>
-      </div>
-      <div onclick="navigateTo('videos')" class="card-hover cursor-pointer bg-gradient-to-br from-purple to-indigo-500 rounded-2xl p-5 text-white shadow-lg">
-       <span class="text-4xl block mb-3">🎬</span>
-       <h3 class="font-bold text-lg">Clases en Video</h3>
-       <p class="text-white/80 text-sm mt-1">Mira y Aprende</p>
+       <h3 class="font-bold text-lg">Vocabulario</h3>
+       <p class="text-white/80 text-sm mt-1">Palabras de Química...</p>
       </div>
      </div><!-- Fun Facts -->
      <div class="bg-white rounded-3xl shadow-xl p-6">
@@ -200,7 +213,45 @@
        </div>
       </div>
      </div>
-    </section><!-- VERB TO BE SECTION -->
+    </section><!-- CHAT SECTION - MOVIDO AL INICIO -->
+    <section id="section-chat" class="hidden space-y-6">
+     <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
+      <div class="flex items-center justify-between mb-4">
+       <div>
+        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Tutor de Química en Inglés</h2>
+        <p class="text-gray-600 comic-font text-sm">Asistente IA especializado en química e inglés</p>
+       </div>
+       <div class="flex gap-2">
+        <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
+       </div>
+      </div>
+      <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3 mb-4 p-4 bg-gradient-to-b from-blue-50 to-purple-50 rounded-2xl">
+       <div class="flex gap-2 fade-in">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
+         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu Asistente de Química 🧪</p>
+         <p class="comic-font text-gray-600 text-sm mt-2">Puedo ayudarte con:</p>
+         <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
+          <li>Explicaciones de conceptos químicos</li>
+          <li>Reacciones químicas y cálculos</li>
+          <li>Terminología en inglés</li>
+          <li>Procesos industriales</li>
+          <li>Preguntas sobre la tabla periódica</li>
+          <li>Seguridad en laboratorios</li>
+         </ul>
+         <p class="comic-font text-gray-600 text-xs mt-3 italic">Escribe tu pregunta a continuación... 💬</p>
+        </div>
+       </div>
+      </div>
+      <form onsubmit="sendChatMessage(event)" class="flex gap-2">
+       <input id="chat-input" type="text" placeholder="Pregunta sobre química, reacciones, elementos..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
+       <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
+      </form>
+      <p class="text-xs text-gray-400 mt-2 text-center">La IA está entrenada en química industrial e inglés científico</p>
+     </div>
+    </section>
+
+    <!-- VERB TO BE SECTION -->
     <section id="section-verbtobe" class="hidden space-y-6">
      <div class="bg-white rounded-3xl shadow-xl p-8">
       <h2 class="text-3xl font-bold text-primary mb-2">📝 El Verbo "To Be"</h2>
@@ -531,42 +582,20 @@
        </div>
       </div>
      </div>
-    </section><!-- CHAT SECTION -->
-    <section id="section-chat" class="hidden space-y-6">
-     <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col" style="height: 600px;">
-      <h2 class="text-3xl font-bold text-secondary mb-2">🤖 Tutor de Química en Inglés</h2>
-      <p class="text-gray-600 comic-font mb-4">¡Pregúntame cualquier cosa sobre inglés o química industrial!</p>
-      <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3 mb-4 p-4 bg-gradient-to-b from-blue-50 to-purple-50 rounded-2xl">
-       <div class="flex gap-2">
-        <span class="text-2xl">🤖</span>
-        <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-         <p class="comic-font text-gray-700">¡Hola! Soy tu Tutor de Inglés para Química 🧪 Pregúntame sobre:</p>
-         <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
-          <li>Gramática en inglés (verbo to be, números, etc.)</li>
-          <li>Vocabulario de química</li>
-          <li>Procesos de química industrial</li>
-          <li>Nombres de equipo de laboratorio en inglés</li>
-         </ul>
-        </div>
-       </div>
-      </div>
-      <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Escribe tu pregunta aquí... 💬" class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font">
-       <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
-      </form>
-     </div>
     </section>
    </main><!-- Footer -->
    <footer class="relative z-10 mt-8 pb-6 text-center">
     <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés Químico © 2024 | Hecho con ❤️ para estudiantes</p>
    </footer>
   </div>
+
   <script>
   // State
   let currentSection = 'home';
   let score = 0;
   let quizCurrent = 0;
   let quizTotal = 5;
+  let chatHistory = [];
 
   // Navigation
   function toggleSidebar() {
@@ -717,17 +746,10 @@
     {q: 'NaOH is a:', options: ['Acid', 'Salt', 'Base', 'Gas'], correct: 2},
     {q: 'How do you say 100 in English?', options: ['One thousand', 'Ten', 'One hundred', 'Twelve'], correct: 2},
   ];
-  const hardQuizBank = [
-    {q: 'Translate: "The industrial process requires a catalyst to increase the reaction rate."', options: ['El proceso industrial requiere un catalizador para aumentar la velocidad de reacción', 'El laboratorio necesita más estudiantes', 'Debemos comprar equipos nuevos', 'La reacción produce mucho calor'], correct: 0},
-    {q: 'What does "exothermic" mean?', options: ['Absorbs heat', 'Releases heat', 'No change', 'Freezes'], correct: 1},
-    {q: 'Complete: "The beaker ___ filled with sulfuric acid."', options: ['are', 'am', 'is', 'were being'], correct: 2},
-    {q: '"Filtration" is used to separate:', options: ['Gases', 'Liquids from solids', 'Colors', 'Sounds'], correct: 1},
-    {q: 'The atomic number tells you the number of:', options: ['Neutrons', 'Electrons', 'Protons', 'Molecules'], correct: 2},
-  ];
 
   function startQuiz(mode) {
     quizCurrent = 0;
-    const bank = mode === 'hard' ? [...hardQuizBank] : [...quizBank];
+    const bank = [...quizBank];
     const questions = bank.sort(() => Math.random() - 0.5).slice(0, quizTotal);
     renderQuiz(questions);
   }
@@ -778,14 +800,135 @@
     document.getElementById('score-text').textContent = score;
   }
 
+  // MEJORADO: Base de datos de química expandida para IA
+  const chemistryDatabase = {
+    'hydrogen': 'Hydrogen (H) is the lightest element on the periodic table. It\'s colorless, odorless, and highly flammable. Used in fuel cells and ammonia synthesis.',
+    'oxygen': 'Oxygen (O₂) is essential for combustion and respiration. Makes up 21% of Earth\'s atmosphere. Critical for industrial processes.',
+    'carbon': 'Carbon (C) forms the basis of organic chemistry. Can form 4 covalent bonds. Diamond, graphite, and coal are allotropes of carbon.',
+    'nitrogen': 'Nitrogen (N₂) makes up 78% of the atmosphere. Inert at room temperature. Essential for protein synthesis and fertilizers.',
+    'reaction': 'A chemical reaction occurs when substances interact to form new compounds. Types include: exothermic (releases heat), endothermic (absorbs heat), oxidation-reduction, neutralization.',
+    'acid': 'An acid is a substance with pH < 7. Donates protons (H⁺) in solution. Examples: HCl (hydrochloric), H₂SO₄ (sulfuric), HNO₃ (nitric).',
+    'base': 'A base is a substance with pH > 7. Accepts protons in solution. Examples: NaOH (sodium hydroxide), KOH (potassium hydroxide), NH₃ (ammonia).',
+    'ph': 'pH measures acidity/alkalinity on a scale of 0-14. pH 7 is neutral. pH < 7 is acidic, pH > 7 is basic. pH = -log[H⁺]',
+    'mol': 'A mole is a unit measuring the amount of substance. 1 mole = 6.022 × 10²³ particles. Essential for stoichiometry calculations.',
+    'catalyst': 'A catalyst speeds up a reaction without being consumed. Lowers activation energy. Essential in industrial chemistry and biochemistry.',
+    'oxidation': 'Oxidation is the loss of electrons. Occurs simultaneously with reduction (gain of electrons). Forms oxidation-reduction (redox) reactions.',
+    'polymerization': 'The process where monomers link to form long chains. Creates plastics, rubber, and proteins. Examples: PVC, polyethylene, PET.',
+    'distillation': 'A separation technique using different boiling points. Used to purify liquids and separate components. Common in oil refining.',
+    'crystallization': 'Formation of solid crystals from a solution. Used to purify substances. The crystal structure reflects molecular arrangement.',
+    'solubility': 'The ability of a substance to dissolve in a solvent. Depends on temperature, pressure, and molecular interactions. "Like dissolves like".',
+    'osmosis': 'Movement of solvent through a semipermeable membrane. Water molecules move toward higher solute concentration. Important in biological systems.',
+    'electrochemistry': 'Studies redox reactions using electron transfer. Includes galvanic cells, electrolysis, and batteries. Voltage is measured in volts.',
+    'thermodynamics': 'Studies energy changes in chemical reactions. Includes enthalpy (heat), entropy (disorder), and free energy.',
+    'kinetics': 'Studies reaction rates and mechanisms. Temperature, concentration, and catalysts affect reaction rates. Described by rate laws.',
+    'molarity': 'Moles of solute per liter of solution (M). Calculated as: Molarity = moles/liters. Essential for solution preparation.',
+    'titration': 'Laboratory technique to determine concentration. Uses a known concentration to find unknown. Acid-base titration is most common.',
+    'indicator': 'A substance that changes color at specific pH. Examples: phenolphthalein (colorless-pink), methyl orange (red-yellow). Used in titrations.',
+    'buffer': 'Solution resisting pH changes. Contains weak acid + conjugate base or weak base + conjugate acid. Blood pH is buffered by bicarbonate.',
+    'chelation': 'Process of binding metal ions with organic molecules. Important in medicine, industry, and environmental cleanup.',
+    'nucleophile': 'An electron-rich species that attacks electron-poor atoms. Bases are nucleophiles. Attacks during substitution and addition reactions.',
+  };
+
+  // MEJORADO: Chat System con búsqueda de química
+  function sendChatMessage(e) {
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+    
+    const container = document.getElementById('chat-messages');
+    
+    // Agregar mensaje del usuario
+    container.innerHTML += `<div class="flex gap-2 justify-end fade-in"><div class="chat-bubble-user bg-gradient-to-r from-secondary to-blue-500 text-white shadow-sm p-3 max-w-[80%]"><p class="comic-font">${escapeHtml(msg)}</p></div></div>`;
+    
+    input.value = '';
+    
+    // Mostrar indicador de escritura
+    container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
+    container.scrollTop = container.scrollHeight;
+    
+    setTimeout(() => {
+      let response = generateChemistryResponse(msg);
+      
+      // Eliminar indicador de escritura
+      container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
+      
+      // Agregar respuesta de la IA
+      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">${response}</p></div></div>`;
+      container.scrollTop = container.scrollHeight;
+    }, 1500);
+  }
+
+  // MEJORADO: Generador de respuestas con búsqueda semántica
+  function generateChemistryResponse(userInput) {
+    const input = userInput.toLowerCase();
+    
+    // Búsqueda exacta en la base de datos
+    for (const [key, value] of Object.entries(chemistryDatabase)) {
+      if (input.includes(key)) {
+        return `<strong>📚 ${key.toUpperCase()}:</strong><br>${value}<br><br>¿Hay algo más que quieras saber? 🧪`;
+      }
+    }
+    
+    // Búsqueda por palabras clave relacionadas
+    if (input.includes('periodic') || input.includes('table') || input.includes('element')) {
+      return '🔍 <strong>Tabla Periódica:</strong><br>La tabla periódica organiza elementos por número atómico y propiedades. Los elementos se agrupan en: metales, no metales, metaloides, lantánidos y actínidos.<br><br>¿Qué elemento específico te interesa?';
+    }
+    
+    if (input.includes('equation') || input.includes('ecuación') || input.includes('fórmula')) {
+      return '📐 <strong>Ecuaciones Químicas:</strong><br>Representan reacciones químicas. Deben estar balanceadas (mismo número de átomos a ambos lados).<br>Ejemplo: 2H₂ + O₂ → 2H₂O<br><br>¿Necesitas ayuda balanceando una ecuación?';
+    }
+    
+    if (input.includes('industrial') || input.includes('industry') || input.includes('process')) {
+      return '🏭 <strong>Química Industrial:</strong><br>Aplicación a gran escala de procesos químicos. Incluye: síntesis de amoníaco (Haber-Bosch), producción de ácido sulfúrico, destilación de petróleo.<br><br>¿Qué proceso industrial te interesa?';
+    }
+    
+    if (input.includes('safety') || input.includes('seguridad') || input.includes('peligro')) {
+      return '⚠️ <strong>Seguridad en Laboratorio:</strong><br>• Usa gafas de seguridad siempre<br>• Manipula ácidos y bases con cuidado<br>• Conoce la ubicación de duchas de emergencia<br>• Lee las hojas de seguridad (SDS)<br>• Nunca mezcles químicos sin saber<br><br>¿Preguntas sobre químicos específicos?';
+    }
+    
+    if (input.includes('how to') || input.includes('cómo') || input.includes('prepare') || input.includes('preparar')) {
+      return '🧪 <strong>Procedimientos de Laboratorio:</strong><br>Necesito más detalles. ¿Quieres saber cómo:<br>• Preparar una solución con molarity específica?<br>• Realizar una titulación?<br>• Hacer una cristalización?<br>• Destilación?<br><br>Pregunta con más específico y te ayudaré paso a paso.';
+    }
+    
+    if (input.includes('english') || input.includes('grammar') || input.includes('inglés')) {
+      return '📝 <strong>Inglés Científico:</strong><br>En química usamos términos específicos en inglés:<br>• Reactants (reactivos)<br>• Products (productos)<br>• Equilibrium (equilibrio)<br>• Yield (rendimiento)<br>• Solvent (disolvente)<br>• Solute (soluto)<br><br>¿Quieres practicar vocabulario específico?';
+    }
+    
+    if (input.includes('calculate') || input.includes('calcular') || input.includes('math')) {
+      return '🔢 <strong>Cálculos Químicos:</strong><br>Puedo ayudarte con:<br>• Molarity calculations<br>• Stoichiometry<br>• Percent composition<br>• Limiting reagent problems<br>• Gas laws (PV=nRT)<br><br>¡Dame los números y te ayudaré a calcular!';
+    }
+    
+    // Respuesta por defecto amigable
+    return '🤔 <strong>¡Interesante pregunta!</strong><br>He buscado en mi base de datos sobre: ' + userInput + '<br><br>Puedo ayudarte con:<br>• Elementos químicos y tabla periódica<br>• Reacciones y ecuaciones<br>• Procesos industriales<br>• Seguridad en laboratorio<br>• Cálculos químicos<br>• Vocabulario en inglés<br><br>¿Prueba siendo más específico o pregunta por un tema diferente?';
+  }
+
+  // Función para escapar caracteres HTML
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Limpiar historial de chat
+  function clearChatHistory() {
+    const container = document.getElementById('chat-messages');
+    container.innerHTML = `<div class="flex gap-2 fade-in">
+      <span class="text-2xl">🤖</span>
+      <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
+        <p class="comic-font text-gray-700 font-bold">¡Hola de nuevo! Historial limpio. 🧪</p>
+        <p class="comic-font text-gray-600 text-sm mt-2">¿En qué puedo ayudarte?</p>
+      </div>
+    </div>`;
+    chatHistory = [];
+  }
+
   // Helper function to extract YouTube video ID and convert to embed URL
   function getYouTubeEmbedUrl(url) {
-    // If it's already just a video ID, use it directly
     if (url && !url.includes('youtube.com') && !url.includes('youtu.be') && url.length === 11) {
       return `https://www.youtube.com/embed/${url}`;
     }
     
-    // Extract video ID from various YouTube URL formats
     let videoId = '';
     
     if (url.includes('youtube.com/watch?v=')) {
@@ -822,41 +965,6 @@
       closeVideoModal();
     }
   });
-
-  // Chat System
-  const chatResponses = {
-    'verb to be': "El verbo 'to be' tiene tres formas: AM (I), IS (he/she/it), ARE (you/we/they). Ejemplo: 'The acid IS corrosive.' (El ácido ES corrosivo.) 'We ARE in the lab.' (Estamos en el lab.) 🧪",
-    'acid': "Un ÁCIDO es una sustancia con pH < 7. En inglés decimos: 'Hydrochloric acid is a strong acid used in industrial cleaning.' (El ácido clorhídrico es un ácido fuerte usado en limpieza industrial.) 💧",
-    'base': "Una BASE (también llamada alcalino) tiene pH > 7. Ejemplo: 'Sodium hydroxide is a strong base used in soap making.' (El hidróxido de sodio es una base fuerte usada en la fabricación de jabón.) ✨",
-    'lab': "LABORATORIO (o 'lab' para abreviar) es donde trabajan los químicos. Equipo común en el laboratorio: beaker, flask, test tube, burner, pipette, y funnel. 🔬",
-    'numbers': "¡En química, los números son cruciales! Decimos: 'Add TWO HUNDRED milliliters' (Agrega DOSCIENTOS mililitros), 'Heat to SEVENTY-FIVE degrees' (Calienta a SETENTA Y CINCO grados). Practica contando en inglés 🔢",
-    'hola': "¡Hola! 👋 Soy tu Tutor de Inglés para Química. Pregúntame sobre gramática, vocabulario o conceptos químicos. Por ejemplo: '¿Qué es un ácido?' o '¿Cómo uso el verbo to be?'",
-    'ayuda': "Puedo ayudarte con: 📝 Gramática (verbo to be, presente), 🔢 Números, 🧪 Vocabulario de química, 🔬 Nombres de equipo de laboratorio, y 🏭 Procesos industriales. ¿Qué te interesa aprender?"
-  };
-
-  function sendChatMessage(e) {
-    e.preventDefault();
-    const input = document.getElementById('chat-input');
-    const msg = input.value.trim();
-    if (!msg) return;
-    
-    const container = document.getElementById('chat-messages');
-    container.innerHTML += `<div class="flex gap-2 justify-end"><div class="chat-bubble-user bg-gradient-to-r from-secondary to-blue-500 text-white shadow-sm p-3 max-w-[80%]"><p class="comic-font">${msg}</p></div></div>`;
-    
-    input.value = '';
-    
-    setTimeout(() => {
-      let response = "That's a great question! 🤔 In industrial chemistry, we use English for international communication. Here are some tips:\n\n• Practice reading chemical labels in English\n• Learn the names of common laboratory equipment\n• Try to describe chemical reactions in English\n\nKeep practicing! 📚✨";
-      
-      const lowerMsg = msg.toLowerCase();
-      for (const [key, val] of Object.entries(chatResponses)) {
-        if (lowerMsg.includes(key)) { response = val; break; }
-      }
-      
-      container.innerHTML += `<div class="flex gap-2"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700">${response}</p></div></div>`;
-      container.scrollTop = container.scrollHeight;
-    }, 800);
-  }
 
   // Init
   generateToBePractice();
@@ -898,5 +1006,5 @@
       ['welcome_message', config.welcome_message || defaultConfig.welcome_message]
     ])
   });
-</script>
+  </script>
 </html>
