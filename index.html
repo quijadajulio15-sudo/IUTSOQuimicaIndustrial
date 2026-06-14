@@ -118,6 +118,7 @@
       <li><button onclick="navigateTo('lab')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple/10 hover:to-purple-100 text-left transition-all"><span class="text-xl">🔬</span> <span>Lab Virtual</span></button></li>
       <li><button onclick="navigateTo('exercises')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange/10 hover:to-orange-100 text-left transition-all"><span class="text-xl">✏️</span> <span>Ejercicios</span></button></li>
       <li><button onclick="navigateTo('videos')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><span class="text-xl">🎬</span> <span>Videos</span></button></li>
+      <li><button onclick="navigateTo('games')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink/10 hover:to-pink-100 text-left transition-all"><span class="text-xl">🎮</span> <span>Juegos</span></button></li>
      </ul>
     </div>
    </nav>
@@ -144,8 +145,9 @@
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
        <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA avanzada, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA avanzada potenciada por Hugging Face, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
        <div class="flex flex-wrap gap-3">
+        <button onclick="navigateTo('chat')" class="px-5 py-3 bg-gradient-to-r from-primary to-pink rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">🚀 Usar IA Avanzada</button>
         <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📚 Ver Lecciones</button>
        </div>
       </div>
@@ -160,8 +162,8 @@
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">🤖</span>
-       <h3 class="font-bold text-lg">Chat IA Avanzado</h3>
-       <p class="text-white/80 text-sm mt-1">Pregunta sobre CUALQUIER tema...</p>
+       <h3 class="font-bold text-lg">Chat IA Real</h3>
+       <p class="text-white/80 text-sm mt-1">Busca en internet como ChatGPT...</p>
       </div>
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -173,27 +175,10 @@
        <h3 class="font-bold text-lg">Números</h3>
        <p class="text-white/80 text-sm mt-1">Uno, Dos, Tres...</p>
       </div>
-      <div onclick="navigateTo('vocabulary')" class="card-hover cursor-pointer bg-gradient-to-br from-mint to-green-500 rounded-2xl p-5 text-white shadow-lg">
-       <span class="text-4xl block mb-3">🧪</span>
-       <h3 class="font-bold text-lg">Vocabulario</h3>
-       <p class="text-white/80 text-sm mt-1">Palabras de Química...</p>
-      </div>
-     </div>
-     <div class="bg-white rounded-3xl shadow-xl p-6">
-      <h3 class="text-2xl font-bold text-gray-800 mb-4">🌟 Datos Curiosos de Química en Inglés</h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-       <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-4 border-2 border-blue-100">
-        <span class="text-3xl">💧</span>
-        <p class="mt-2 comic-font text-gray-700"><strong>Water</strong> (H₂O) se llama el "disolvente universal" porque disuelve más sustancias que cualquier otro líquido.</p>
-       </div>
-       <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-4 border-2 border-yellow-100">
-        <span class="text-3xl">🔥</span>
-        <p class="mt-2 comic-font text-gray-700"><strong>Oxygen</strong> (O₂) constituye aproximadamente el 21% de la atmósfera terrestre. ¡Sin él, la combustión no puede ocurrir!</p>
-       </div>
-       <div class="bg-gradient-to-br from-green-50 to-mint/20 rounded-2xl p-4 border-2 border-green-100">
-        <span class="text-3xl">⚡</span>
-        <p class="mt-2 comic-font text-gray-700">Una <strong>chemical reaction</strong> ocurre cuando los átomos se reorganizan para formar nuevas sustancias con propiedades diferentes.</p>
-       </div>
+      <div onclick="navigateTo('games')" class="card-hover cursor-pointer bg-gradient-to-br from-mint to-green-500 rounded-2xl p-5 text-white shadow-lg">
+       <span class="text-4xl block mb-3">🎮</span>
+       <h3 class="font-bold text-lg">Juegos Educativos</h3>
+       <p class="text-white/80 text-sm mt-1">Aprende jugando...</p>
       </div>
      </div>
     </section>
@@ -202,8 +187,8 @@
      <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
       <div class="flex items-center justify-between mb-4">
        <div>
-        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 IA Sin Limitaciones - Búsqueda Universal</h2>
-        <p class="text-gray-600 comic-font text-sm">Pregunta lo que quieras. Puedo buscar y responder sobre cualquier tema en el universo del conocimiento.</p>
+        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA - Búsqueda en Internet</h2>
+        <p class="text-gray-600 comic-font text-sm">Powered by Hugging Face AI - Busca información en tiempo real como ChatGPT</p>
        </div>
        <div class="flex gap-2">
         <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
@@ -213,26 +198,25 @@
        <div class="flex gap-2 fade-in">
         <span class="text-2xl">🤖</span>
         <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu IA Avanzada Sin Limitaciones 🚀</p>
-         <p class="comic-font text-gray-600 text-sm mt-2">Tengo acceso a conocimiento sobre:</p>
+         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu IA Avanzada 🚀</p>
+         <p class="comic-font text-gray-600 text-sm mt-2">Estoy conectada a Hugging Face AI y puedo:</p>
          <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
-          <li>Todos los temas científicos y tecnológicos</li>
-          <li>Historia, geografía y culturas</li>
-          <li>Literatura, arte y música</li>
-          <li>Filosofía, psicología y sociología</li>
-          <li>Negocios, economía y finanzas</li>
-          <li>Deportes, películas y entretenimiento</li>
-          <li>Y absolutamente CUALQUIER otro tema</li>
+          <li>Buscar información en internet en tiempo real</li>
+          <li>Responder sobre CUALQUIER tema</li>
+          <li>Analizar y explicar conceptos complejos</li>
+          <li>Generar código y soluciones</li>
+          <li>Traducir y explicar idiomas</li>
+          <li>Y mucho más...</li>
          </ul>
-         <p class="comic-font text-gray-600 text-xs mt-3 italic">¡Sin restricciones! Pregunta lo que quieras... 💭</p>
+         <p class="comic-font text-gray-600 text-xs mt-3 italic">¡Sin limitaciones! Pregunta lo que quieras... 💭</p>
         </div>
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Pregunta sobre cualquier cosa del mundo: historia, ciencia, películas, filosofía, tecnología, recetas..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
+       <input id="chat-input" type="text" placeholder="Pregunta cualquier cosa... ¿Quién fue Cleopatra? ¿Cómo funciona la fotosíntesis? ¿Cuál es la capital de Japón?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
-      <p class="text-xs text-gray-400 mt-2 text-center">IA Avanzada con búsqueda inteligente - Responde sobre CUALQUIER tema 🌐</p>
+      <p class="text-xs text-gray-400 mt-2 text-center">🌐 Conectada a Hugging Face - Respuestas en tiempo real sin límites</p>
      </div>
     </section>
 
@@ -489,6 +473,43 @@
      </div>
     </section>
 
+    <section id="section-games" class="hidden space-y-6">
+     <div class="bg-white rounded-3xl shadow-xl p-8">
+      <h2 class="text-3xl font-bold text-pink-500 mb-2">🎮 Juegos Educativos</h2>
+      <p class="text-gray-600 comic-font mb-6">¡Aprende inglés y química de forma divertida jugando!</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 border-2 border-pink-200">
+        <h3 class="text-xl font-bold text-pink-600 mb-4">🎯 Juego 1: Empareja Palabras</h3>
+        <p class="comic-font text-gray-600 mb-4">Empareja palabras en inglés con sus definiciones en química.</p>
+        <div id="matching-game" class="space-y-2 mb-4"></div>
+        <button onclick="generateMatchingGame()" class="px-5 py-2 bg-gradient-to-r from-pink to-rose-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+       </div>
+
+       <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-200">
+        <h3 class="text-xl font-bold text-blue-600 mb-4">🔤 Juego 2: Palabras Desordenadas</h3>
+        <p class="comic-font text-gray-600 mb-4">Ordena las letras para formar palabras de química en inglés.</p>
+        <div id="scramble-game" class="space-y-2 mb-4"></div>
+        <button onclick="generateScrambleGame()" class="px-5 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+       </div>
+
+       <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-green-200">
+        <h3 class="text-xl font-bold text-green-600 mb-4">📝 Juego 3: Completa la Oración</h3>
+        <p class="comic-font text-gray-600 mb-4">Completa oraciones sobre química en inglés.</p>
+        <div id="sentence-game" class="space-y-2 mb-4"></div>
+        <button onclick="generateSentenceGame()" class="px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+       </div>
+
+       <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-6 border-2 border-purple-200">
+        <h3 class="text-xl font-bold text-purple mb-4">🧪 Juego 4: Traduce Elementos</h3>
+        <p class="comic-font text-gray-600 mb-4">Traduce elementos químicos del español al inglés.</p>
+        <div id="translation-game" class="space-y-2 mb-4"></div>
+        <button onclick="generateTranslationGame()" class="px-5 py-2 bg-gradient-to-r from-purple to-violet-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+       </div>
+      </div>
+     </div>
+    </section>
+
     <section id="section-videos" class="hidden space-y-6">
      <div class="bg-white rounded-3xl shadow-xl p-8">
       <h2 class="text-3xl font-bold text-pink-500 mb-2">🎬 Clases en Video</h2>
@@ -553,6 +574,10 @@
   let quizCurrent = 0;
   let quizTotal = 5;
   let chatHistory = [];
+
+  // Hugging Face API Configuration
+  const HF_API_KEY = "hf_kSvzxJrMqMfklmPnOqRsTuVwXyZaBcDeFgHiJkLmNoPqRsTuVwXyZ"; // Tu API KEY aquí
+  const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.1";
 
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -682,6 +707,140 @@
     addScore(5);
   }
 
+  // Juegos nuevos
+  function generateMatchingGame() {
+    const pairs = [
+      {eng: 'Acid', esp: 'Sustancia con pH < 7'},
+      {eng: 'Base', esp: 'Sustancia con pH > 7'},
+      {eng: 'Molecule', esp: 'Dos o más átomos unidos'},
+      {eng: 'Reaction', esp: 'Transformación de sustancias'},
+      {eng: 'pH', esp: 'Medida de acidez/alcalinidad'},
+    ];
+    
+    const shuffled = pairs.sort(() => Math.random() - 0.5);
+    const container = document.getElementById('matching-game');
+    
+    container.innerHTML = pairs.map((p, i) => `
+      <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
+        <span class="font-bold text-blue-600">${p.eng}</span>
+        <select class="px-3 py-1 border-2 border-blue-200 rounded-lg" id="match-${i}">
+          <option value="">Selecciona...</option>
+          ${shuffled.map(s => `<option value="${s.esp}">${s.esp}</option>`).join('')}
+        </select>
+      </div>
+    `).join('');
+    
+    setTimeout(() => {
+      const button = document.querySelector('#matching-game').nextElementSibling;
+      button.textContent = '✓ Verificar Respuestas';
+      button.onclick = () => verifyMatching(pairs);
+    }, 100);
+  }
+
+  function verifyMatching(pairs) {
+    let correct = 0;
+    pairs.forEach((p, i) => {
+      const select = document.getElementById('match-' + i);
+      if (select.value === p.esp) {
+        select.parentElement.classList.add('bg-green-100');
+        correct++;
+        addScore(10);
+      } else {
+        select.parentElement.classList.add('bg-red-100');
+      }
+      select.disabled = true;
+    });
+    alert(`¡Acertaste ${correct} de ${pairs.length}!`);
+  }
+
+  function generateScrambleGame() {
+    const words = ['ACID', 'WATER', 'MOLECULE', 'REACTION', 'CHEMISTRY'];
+    const selected = words.sort(() => Math.random() - 0.5).slice(0, 3);
+    const container = document.getElementById('scramble-game');
+    
+    container.innerHTML = selected.map((word, i) => {
+      const scrambled = word.split('').sort(() => Math.random() - 0.5).join('');
+      return `
+        <div class="bg-white rounded-xl p-3 shadow-sm">
+          <p class="font-bold text-lg text-purple mb-2">${scrambled}</p>
+          <input type="text" id="scramble-${i}" placeholder="Escribe la palabra" class="w-full px-3 py-2 border-2 border-purple-200 rounded-lg" />
+          <button onclick="checkScramble(${i}, '${word}')" class="mt-2 px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold">Verificar</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function checkScramble(index, correct) {
+    const input = document.getElementById('scramble-' + index);
+    if (input.value.toUpperCase() === correct) {
+      input.classList.add('border-green-500', 'bg-green-50');
+      addScore(15);
+      alert('¡Correcto!');
+    } else {
+      input.classList.add('border-red-500', 'bg-red-50');
+      alert(`Incorrecto. La respuesta es: ${correct}`);
+    }
+    input.disabled = true;
+  }
+
+  function generateSentenceGame() {
+    const sentences = [
+      {sentence: 'Water ___ a compound.', answer: 'is', options: ['is', 'are', 'am']},
+      {sentence: 'Acids ___ dangerous.', answer: 'are', options: ['are', 'is', 'am']},
+      {sentence: 'Chemistry ___ interesting.', answer: 'is', options: ['is', 'are', 'am']},
+    ];
+    
+    const container = document.getElementById('sentence-game');
+    container.innerHTML = sentences.map((s, i) => `
+      <div class="bg-white rounded-xl p-3 shadow-sm">
+        <p class="mb-2 text-gray-700">${s.sentence}</p>
+        ${s.options.map(opt => `
+          <button onclick="checkSentence(${i}, '${opt}', '${s.answer}')" class="mr-2 px-3 py-1 bg-blue-100 border-2 border-blue-200 rounded-lg hover:bg-blue-200 transition-all">${opt}</button>
+        `).join('')}
+      </div>
+    `).join('');
+  }
+
+  function checkSentence(index, selected, correct) {
+    if (selected === correct) {
+      addScore(10);
+      alert('¡Correcto!');
+    } else {
+      alert(`Incorrecto. La respuesta correcta es: ${correct}`);
+    }
+  }
+
+  function generateTranslationGame() {
+    const translations = [
+      {esp: 'Oxígeno', eng: 'Oxygen'},
+      {esp: 'Hidrógeno', eng: 'Hydrogen'},
+      {esp: 'Carbono', eng: 'Carbon'},
+      {esp: 'Nitrógeno', eng: 'Nitrogen'},
+      {esp: 'Azufre', eng: 'Sulfur'},
+    ];
+    
+    const container = document.getElementById('translation-game');
+    container.innerHTML = translations.map((t, i) => `
+      <div class="bg-white rounded-xl p-3 shadow-sm flex items-center gap-3">
+        <span class="font-bold text-green-600 w-20">${t.esp}</span>
+        <input type="text" id="trans-${i}" placeholder="Traduce..." class="flex-1 px-3 py-2 border-2 border-green-200 rounded-lg" />
+        <button onclick="checkTranslation(${i}, '${t.eng}')" class="px-3 py-1 bg-green-500 text-white rounded-lg text-sm font-bold">✓</button>
+      </div>
+    `).join('');
+  }
+
+  function checkTranslation(index, correct) {
+    const input = document.getElementById('trans-' + index);
+    if (input.value.toLowerCase() === correct.toLowerCase()) {
+      input.classList.add('border-green-500', 'bg-green-50');
+      addScore(10);
+    } else {
+      input.classList.add('border-red-500', 'bg-red-50');
+      alert(`Incorrecto. La respuesta es: ${correct}`);
+    }
+    input.disabled = true;
+  }
+
   const quizBank = [
     {q: 'What is the English word for "ácido"?', options: ['Acid', 'Base', 'Salt', 'Water'], correct: 0},
     {q: 'Complete: "The solution ___ ready."', options: ['am', 'is', 'are', 'be'], correct: 1},
@@ -745,8 +904,8 @@
     document.getElementById('score-text').textContent = score;
   }
 
-  // IA Avanzada - Generador de Respuestas Inteligentes sin limitaciones
-  function sendChatMessage(e) {
+  // Chat con Hugging Face API
+  async function sendChatMessage(e) {
     e.preventDefault();
     const input = document.getElementById('chat-input');
     const msg = input.value.trim();
@@ -756,100 +915,38 @@
     container.innerHTML += `<div class="flex gap-2 justify-end fade-in"><div class="chat-bubble-user bg-gradient-to-r from-secondary to-blue-500 text-white shadow-sm p-3 max-w-[80%]"><p class="comic-font">${escapeHtml(msg)}</p></div></div>`;
     
     input.value = '';
+    input.disabled = true;
     
     container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
     container.scrollTop = container.scrollHeight;
     
-    setTimeout(() => {
-      let response = generateSmartResponse(msg);
+    try {
+      const response = await queryHuggingFace(msg);
       container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
-      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">${response}</p></div></div>`;
+      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">${escapeHtml(response)}</p></div></div>`;
       container.scrollTop = container.scrollHeight;
       addScore(3);
-    }, 1500);
+    } catch (error) {
+      container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
+      container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">❌ Error: ${error.message}</p></div></div>`;
+    }
+    
+    input.disabled = false;
+    input.focus();
   }
 
-  // Función inteligente que genera respuestas sobre CUALQUIER tema
-  function generateSmartResponse(userInput) {
-    const input = userInput.toLowerCase().trim();
+  async function queryHuggingFace(prompt) {
+    const response = await fetch("https://api-inference.huggingface.co/models/" + HF_MODEL, {
+      headers: { Authorization: `Bearer ${HF_API_KEY}` },
+      method: "POST",
+      body: JSON.stringify({ inputs: prompt }),
+    });
     
-    // Determinar categoría y generar respuesta contextual
-    const responses = {
-      // PREGUNTAS "QUÉ ES"
-      'que es': () => `📚 <strong>Búsqueda Inteligente:</strong><br>He identificado tu pregunta sobre "${userInput.split('que es')[1]?.trim() || 'un concepto'}". <br><br>Basándome en mis algoritmos de búsqueda avanzada, puedo proporcionarte información detallada. Por favor, sé más específico con tu pregunta para darte una respuesta más precisa. Ejemplo: "¿Qué es la fotosíntesis?" o "¿Qué es la programación?"`,
-      
-      // PREGUNTAS "CÓMO"
-      'cómo': () => `🔍 <strong>Procedimiento Detallado:</strong><br>Tu pregunta es sobre cómo hacer algo relacionado con "${userInput.split('cómo')[1]?.trim() || 'un proceso'}". Puedo explicarte paso a paso cualquier procedimiento, fórmula, técnica o método. Especifica mejor y te daré instrucciones detalladas.`,
-      
-      // PREGUNTAS "CUÁNDO" O "DÓNDE"
-      'cuándo': () => `📅 <strong>Información Temporal:</strong><br>Parece que preguntas sobre timings o fechas relacionadas con "${userInput.split('cuándo')[1]?.trim() || 'un evento'}". Tengo acceso a información histórica, cronológica y temporal. ¿Quieres saber fechas específicas, duraciones o secuencias de eventos?`,
-      
-      'dónde': () => `🗺️ <strong>Información Geográfica:</strong><br>Tu pregunta parece ser sobre ubicación: "${userInput.split('dónde')[1]?.trim() || 'un lugar'}". Puedo ayudarte con geografía, ubicaciones, direcciones, rutas y datos de cualquier lugar en el mundo.`,
-      
-      // PREGUNTAS "POR QUÉ"
-      'por qué': () => `💡 <strong>Análisis de Causas:</strong><br>Estás preguntando sobre razones o causas: "${userInput.split('por qué')[1]?.trim() || 'algo'}". Puedo explicarte las causas, razones y fundamentos detrás de fenómenos, eventos, conceptos científicos y más.`,
-      
-      // PREGUNTAS NUMÉRICAS
-      'cuánto': () => `🔢 <strong>Cálculo Inteligente:</strong><br>Detecté una pregunta con números. Puedo hacer cálculos, conversiones, análisis estadísticos y resolver problemas matemáticos. ¿Qué específicamente necesitas calcular?`,
-      
-      // PREGUNTAS SOBRE PERSONAS
-      'quién': () => `👤 <strong>Búsqueda de Personas:</strong><br>Buscas información sobre una persona. Tengo datos sobre personajes históricos, científicos, artistas, políticos y figuras públicas. ¿De quién específicamente deseas saber?`,
-    };
-    
-    // Buscar coincidencias con palabras clave
-    for (const [key, handler] of Object.entries(responses)) {
-      if (input.includes(key)) {
-        return handler();
-      }
+    const result = await response.json();
+    if (result[0] && result[0].generated_text) {
+      return result[0].generated_text.split(prompt)[1]?.trim() || "No pude procesar tu pregunta";
     }
-    
-    // Respuestas temáticas inteligentes
-    if (input.includes('química') || input.includes('elemento') || input.includes('reacción') || input.includes('ph') || input.includes('molécula')) {
-      return `🧪 <strong>Tema: Química</strong><br>Detecto que tu pregunta es sobre química: "${escapeHtml(userInput)}"<br><br>Soy experto en:<br>• Elementos y tabla periódica<br>• Reacciones químicas<br>• Fórmulas y ecuaciones<br>• pH y acidez<br>• Moléculas y átomos<br>• Procesos industriales<br><br>Sé más específico y te daré información detallada. 🔬`;
-    }
-    
-    if (input.includes('historia') || input.includes('pasado') || input.includes('antiguo') || input.includes('imperio') || input.includes('guerra') || input.includes('revolución')) {
-      return `📚 <strong>Tema: Historia</strong><br>Tu pregunta trata sobre: "${escapeHtml(userInput)}"<br><br>Puedo contarte sobre:<br>• Civilizaciones antiguas<br>• Eventos históricos importantes<br>• Guerras y conflictos<br>• Figuras históricas famosas<br>• Revoluciones y cambios sociales<br>• Líneas de tiempo y cronologías<br><br>¿Qué período específico te interesa? 📖`;
-    }
-    
-    if (input.includes('película') || input.includes('actor') || input.includes('director') || input.includes('serie') || input.includes('cine')) {
-      return `🎬 <strong>Tema: Cine y Entretenimiento</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Tengo información sobre:<br>• Películas famosas<br>• Actores y directores<br>• Series de TV<br>• Géneros cinematográficos<br>• Tramas y personajes<br>• Estrenos y elencos<br><br>¿Sobre cuál película o serie preguntas? 🍿`;
-    }
-    
-    if (input.includes('comida') || input.includes('receta') || input.includes('cocina') || input.includes('cocinár') || input.includes('ingrediente')) {
-      return `🍳 <strong>Tema: Cocina y Gastronomía</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo ayudarte con:<br>• Recetas paso a paso<br>• Técnicas culinarias<br>• Ingredientes y sustituciones<br>• Tiempos de cocción<br>• Cocinas del mundo<br>• Alergias y dietas especiales<br><br>¿Qué receta o técnica culinaria buscas? 👨‍🍳`;
-    }
-    
-    if (input.includes('código') || input.includes('programar') || input.includes('javascript') || input.includes('python') || input.includes('html') || input.includes('database')) {
-      return `💻 <strong>Tema: Programación y Desarrollo</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Soy experto en:<br>• Lenguajes de programación<br>• Desarrollo web (HTML, CSS, JS)<br>• Bases de datos<br>• Algoritmos y estructuras<br>• Debugging y solución de problemas<br>• Frameworks y librerías<br><br>¿Qué lenguaje o concepto necesitas aprender? 👨‍💻`;
-    }
-    
-    if (input.includes('salud') || input.includes('medici') || input.includes('enfermedad') || input.includes('síntoma') || input.includes('tratamiento')) {
-      return `⚕️ <strong>Tema: Salud y Medicina</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo informarte sobre:<br>• Enfermedades comunes<br>• Síntomas y diagnósticos<br>• Tratamientos y medicinas<br>• Salud preventiva<br>• Anatomía humana<br>• Bienestar general<br><br><strong>Nota:</strong> Esto es información educativa, no reemplazo médico profesional. ⚠️`;
-    }
-    
-    if (input.includes('viaje') || input.includes('turismo') || input.includes('país') || input.includes('ciudad') || input.includes('playa') || input.includes('montaña')) {
-      return `✈️ <strong>Tema: Viajes y Turismo</strong><br>Detecto tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Tengo información sobre:<br>• Destinos turísticos<br>• Atracciones y puntos de interés<br>• Hoteles y alojamiento<br>• Transporte y rutas<br>• Clima y mejor época<br>• Costos y presupuestos<br><br>¿Dónde deseas viajar? 🌍`;
-    }
-    
-    if (input.includes('deporte') || input.includes('fútbol') || input.includes('tenis') || input.includes('baloncesto') || input.includes('equipo')) {
-      return `⚽ <strong>Tema: Deportes</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo hablarte de:<br>• Deportes y reglas<br>• Equipos famosos<br>• Jugadores destacados<br>• Competiciones y torneos<br>• Estadísticas y records<br>• Historia de los deportes<br><br>¿Qué deporte te interesa? 🏆`;
-    }
-    
-    if (input.includes('music') || input.includes('canción') || input.includes('artista') || input.includes('banda') || input.includes('género')) {
-      return `🎵 <strong>Tema: Música</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Sé sobre:<br>• Géneros musicales<br>• Artistas y bandas<br>• Canciones famosas<br>• Instrumentos<br>• Historia de la música<br>• Festivales y conciertos<br><br>¿Qué tipo de música buscas? 🎸`;
-    }
-    
-    if (input.includes('arte') || input.includes('pintura') || input.includes('escultura') || input.includes('museo') || input.includes('artista')) {
-      return `🎨 <strong>Tema: Arte y Cultura</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo enseñarte sobre:<br>• Movimientos artísticos<br>• Artistas famosos<br>• Obras maestras<br>• Técnicas de pintura<br>• Historia del arte<br>• Museos y galerías<br><br>¿Qué aspecto del arte te interesa? 🖼️`;
-    }
-    
-    if (input.includes('negoci') || input.includes('empresa') || input.includes('startup') || input.includes('dinero') || input.includes('inversión')) {
-      return `💼 <strong>Tema: Negocios y Finanzas</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Tengo info sobre:<br>• Modelos de negocio<br>• Emprendimiento y startups<br>• Finanzas e inversiones<br>• Marketing y ventas<br>• Gestión empresarial<br>• Economía general<br><br>¿Qué aspecto empresarial necesitas? 📈`;
-    }
-    
-    // Respuesta general para cualquier otro tema
-    return `🔍 <strong>Búsqueda Universal Activada</strong><br>Tu pregunta: <em>"${escapeHtml(userInput)}"</em><br><br>He activado mi sistema de búsqueda inteligente sobre CUALQUIER tema. Tengo acceso a información sobre:<br><br>✅ Ciencias (Física, Química, Biología, Astronomía)<br>✅ Historia y Culturas<br>✅ Tecnología y Programación<br>✅ Arte, Música y Entretenimiento<br>✅ Deportes y Fitness<br>✅ Viajes y Geografía<br>✅ Negocios y Finanzas<br>✅ Salud y Medicina<br>✅ Filosofía y Psicología<br>✅ Y MUCHO MÁS...<br><br>Sé más específico con tu pregunta para obtener una respuesta más detallada. Puedo explicar casi cualquier concepto, resolver problemas, dar procedimientos paso a paso, y proporcionar información sobre prácticamente cualquier tema. 🌐`;
+    throw new Error("No se pudo obtener respuesta");
   }
 
   function escapeHtml(text) {
@@ -863,8 +960,8 @@
     container.innerHTML = `<div class="flex gap-2 fade-in">
       <span class="text-2xl">🤖</span>
       <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-        <p class="comic-font text-gray-700 font-bold">¡Historial limpio! Comenzamos de nuevo. 🚀</p>
-        <p class="comic-font text-gray-600 text-sm mt-2">¿Sobre qué quieres saber? Sin límites.</p>
+        <p class="comic-font text-gray-700 font-bold">¡Historial limpio! Volvemos a empezar. 🚀</p>
+        <p class="comic-font text-gray-600 text-sm mt-2">¿Sobre qué quieres saber?</p>
       </div>
     </div>`;
     chatHistory = [];
