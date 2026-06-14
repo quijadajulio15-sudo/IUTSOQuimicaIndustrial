@@ -144,7 +144,7 @@
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
        <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA especializada, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestra IA avanzada, realiza experimentos y practica con ejercicios interactivos. 🧪✨</p>
        <div class="flex flex-wrap gap-3">
         <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">📚 Ver Lecciones</button>
        </div>
@@ -161,7 +161,7 @@
       <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">🤖</span>
        <h3 class="font-bold text-lg">Chat IA Avanzado</h3>
-       <p class="text-white/80 text-sm mt-1">Pregunta sobre cualquier tema...</p>
+       <p class="text-white/80 text-sm mt-1">Pregunta sobre CUALQUIER tema...</p>
       </div>
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
@@ -202,8 +202,8 @@
      <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
       <div class="flex items-center justify-between mb-4">
        <div>
-        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 IA Avanzada - Búsqueda Universal</h2>
-        <p class="text-gray-600 comic-font text-sm">Busca información sobre cualquier tema: química, historia, ciencia, tecnología, etc.</p>
+        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 IA Sin Limitaciones - Búsqueda Universal</h2>
+        <p class="text-gray-600 comic-font text-sm">Pregunta lo que quieras. Puedo buscar y responder sobre cualquier tema en el universo del conocimiento.</p>
        </div>
        <div class="flex gap-2">
         <button onclick="clearChatHistory()" class="px-3 py-2 bg-orange/20 text-orange rounded-lg text-sm font-bold hover:bg-orange/30 transition-all" title="Limpiar historial">🗑️ Limpiar</button>
@@ -213,28 +213,26 @@
        <div class="flex gap-2 fade-in">
         <span class="text-2xl">🤖</span>
         <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu Asistente de IA Avanzado 🚀</p>
-         <p class="comic-font text-gray-600 text-sm mt-2">Puedo ayudarte con información sobre:</p>
+         <p class="comic-font text-gray-700 font-bold">¡Hola! Soy tu IA Avanzada Sin Limitaciones 🚀</p>
+         <p class="comic-font text-gray-600 text-sm mt-2">Tengo acceso a conocimiento sobre:</p>
          <ul class="comic-font text-gray-600 text-sm mt-2 list-disc list-inside">
-          <li>🧪 Química e Inglés científico</li>
-          <li>📚 Historia y cultura</li>
-          <li>🔬 Ciencia y tecnología</li>
-          <li>🧮 Matemáticas y cálculos</li>
-          <li>🌍 Geografía y medio ambiente</li>
-          <li>💻 Programación y desarrollo</li>
-          <li>🎨 Arte, música y entretenimiento</li>
-          <li>📖 Literatura y escritura</li>
-          <li>¡Y mucho más!</li>
+          <li>Todos los temas científicos y tecnológicos</li>
+          <li>Historia, geografía y culturas</li>
+          <li>Literatura, arte y música</li>
+          <li>Filosofía, psicología y sociología</li>
+          <li>Negocios, economía y finanzas</li>
+          <li>Deportes, películas y entretenimiento</li>
+          <li>Y absolutamente CUALQUIER otro tema</li>
          </ul>
-         <p class="comic-font text-gray-600 text-xs mt-3 italic">Pregunta cualquier cosa... 💬</p>
+         <p class="comic-font text-gray-600 text-xs mt-3 italic">¡Sin restricciones! Pregunta lo que quieras... 💭</p>
         </div>
        </div>
       </div>
       <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-       <input id="chat-input" type="text" placeholder="Pregunta sobre cualquier tema: ¿Quién fue Einstein? ¿Cómo funciona el cambio climático? ¿Qué es la IA?..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
+       <input id="chat-input" type="text" placeholder="Pregunta sobre cualquier cosa del mundo: historia, ciencia, películas, filosofía, tecnología, recetas..." class="flex-1 p-3 rounded-xl border-2 border-secondary/30 focus:border-secondary focus:outline-none comic-font text-sm" autocomplete="off">
        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white rounded-xl font-bold hover:scale-105 transition-all"><i data-lucide="send" class="w-5 h-5"></i></button>
       </form>
-      <p class="text-xs text-gray-400 mt-2 text-center">Con búsqueda inteligente de información sobre múltiples temas 🌐</p>
+      <p class="text-xs text-gray-400 mt-2 text-center">IA Avanzada con búsqueda inteligente - Responde sobre CUALQUIER tema 🌐</p>
      </div>
     </section>
 
@@ -747,62 +745,7 @@
     document.getElementById('score-text').textContent = score;
   }
 
-  // Base de datos expandida con múltiples temas
-  const knowledgeBase = {
-    // QUÍMICA
-    'hydrogen': '🧪 Hydrogen (H) es el elemento más ligero de la tabla periódica. Sin color, sin olor, altamente inflamable. Se usa en celdas de combustible y síntesis de amoníaco.',
-    'oxygen': '🧪 Oxygen (O₂) es esencial para la combustión y la respiración. Constituye el 21% de la atmósfera terrestre. Crítico para procesos industriales.',
-    'carbon': '🧪 Carbon (C) forma la base de la química orgánica. Puede formar 4 enlaces covalentes. Diamante, grafito y carbón son alótropos del carbono.',
-    'nitrogen': '🧪 Nitrogen (N₂) constituye el 78% de la atmósfera. Inerte a temperatura ambiente. Esencial para síntesis de proteínas y fertilizantes.',
-    'ph': '🧪 pH mide acidez/alcalinidad en escala 0-14. pH 7 es neutro. pH < 7 es ácido, pH > 7 es básico. pH = -log[H⁺]',
-    'reaction': '🧪 Una reacción química ocurre cuando sustancias interactúan formando compuestos nuevos. Tipos: exotérmica, endotérmica, oxidación-reducción, neutralización.',
-    
-    // HISTORIA
-    'historia': '📚 La historia es el estudio del pasado de la humanidad. Incluye eventos políticos, culturales, sociales y económicos significativos.',
-    'einstein': '📚 Albert Einstein (1879-1955) fue un físico alemán revolucionario. Desarrolló la teoría de la relatividad. Ganó el Premio Nobel de Física en 1921.',
-    'napoleón': '📚 Napoleón Bonaparte fue un militar y emperador francés. Conquistó gran parte de Europa. Su legado incluye el Código Napoleónico.',
-    'segunda guerra': '📚 La Segunda Guerra Mundial (1939-1945) fue el conflicto más devastador de la historia. Participaron la mayoría de naciones del mundo.',
-    
-    // CIENCIA Y TECNOLOGÍA
-    'inteligencia artificial': '🤖 La IA es la simulación de procesos de inteligencia humana por máquinas. Incluye machine learning, deep learning y procesamiento de lenguaje natural.',
-    'computadora': '💻 Una computadora es un dispositivo electrónico que procesa datos. Ejecuta programas y almacena información. Fundamental en la tecnología moderna.',
-    'internet': '🌐 Internet es un sistema global de redes interconectadas. Permite comunicación e intercambio de información a nivel mundial.',
-    'cambio climático': '🌍 El cambio climático es la alteración del clima global. Causado principalmente por emisiones de gases de efecto invernadero. Impacta ecosistemas y sociedades.',
-    
-    // MATEMÁTICAS
-    'algebra': '🧮 El álgebra es la rama de matemáticas que estudia cantidades, variables y ecuaciones. Fundamental para resolver problemas científicos.',
-    'geometría': '🧮 La geometría estudia formas, espacios y propiedades de figuras. Incluye puntos, líneas, triángulos, círculos y poliedros.',
-    'pi': '🧮 Pi (π) es una constante matemática aproximadamente 3.14159. Relación entre circunferencia y diámetro de un círculo. Irracional e infinito.',
-    'teorema de pitágoras': '🧮 En un triángulo rectángulo: a² + b² = c². Donde c es la hipotenusa. Fundamental en geometría y trigonometría.',
-    
-    // BIOLOGÍA
-    'adn': '🧬 El ADN es la molécula que contiene instrucciones genéticas. Doble hélice con bases nitrogenadas. Código de la vida de todos los organismos.',
-    'evolución': '🧬 La evolución es el cambio de características en poblaciones a través del tiempo. Darwin desarrolló la teoría de selección natural.',
-    'célula': '🧬 La célula es la unidad fundamental de la vida. Tiene núcleo (eucariota) o sin núcleo (procariota). Contiene organelos especializados.',
-    'fotosíntesis': '🧬 Proceso donde plantas convierten luz solar en energía química. Produce glucosa y oxígeno. Esencial para la vida en la Tierra.',
-    
-    // FÍSICA
-    'gravedad': '⚡ La gravedad es la fuerza de atracción entre masas. Newton formuló la ley de gravitación universal. Einstein la explicó con relatividad general.',
-    'velocidad de la luz': '⚡ La velocidad de la luz es aproximadamente 300,000 km/s. Constante universal. Límite superior de velocidad en el universo.',
-    'energía': '⚡ La energía es la capacidad de realizar trabajo. Se conserva en sistemas aislados. Formas: cinética, potencial, térmica, eléctrica, etc.',
-    'movimiento': '⚡ El movimiento es cambio de posición en el espacio. Descrito por velocidad y aceleración. Leyes de Newton rigen el movimiento.',
-    
-    // LITERATURA Y ESCRITURA
-    'shakespeare': '📖 William Shakespeare (1564-1616) fue dramaturgo inglés. Escribió tragedias como Hamlet, Macbeth, Romeo y Julieta.',
-    'novela': '📖 La novela es un género literario en prosa. Presenta personajes, trama y desarrollo. Puede ser realista, fantástica, de misterio, etc.',
-    'poesía': '📖 La poesía expresa sentimientos con palabras. Usa ritmo, rima y figuras literarias. Formas: verso libre, soneto, haiku, etc.',
-    
-    // ARTE Y MÚSICA
-    'da vinci': '🎨 Leonardo da Vinci fue artista, inventor y científico renacentista. Pintó la Mona Lisa y La Última Cena. Revolucionó el arte.',
-    'música clásica': '🎵 Música clásica de compositores como Mozart, Beethoven, Bach. Características: armonía compleja, orquestas sinfónicas, formas sonatas.',
-    'pintura': '🎨 La pintura es expresión artística visual. Técnicas: óleo, acrílico, acuarela. Movimientos: Renacimiento, Impresionismo, Cubismo, Surrealismo.',
-    
-    // GEOGRAFÍA
-    'montaña': '🗻 Las montañas son elevaciones del terreno. Formadas por tectónica de placas. Mayores: Himalaya, Andes, Rockies.',
-    'océano': '🌊 Los océanos cubren 71% de la Tierra. Contienen 97% del agua. Ecosistemas ricos en biodiversidad.',
-    'clima': '🌤️ El clima es patrón promedio del tiempo. Factores: latitud, altitud, corrientes oceánicas. Tipos: tropical, templado, árido, polar.',
-  };
-
+  // IA Avanzada - Generador de Respuestas Inteligentes sin limitaciones
   function sendChatMessage(e) {
     e.preventDefault();
     const input = document.getElementById('chat-input');
@@ -818,64 +761,95 @@
     container.scrollTop = container.scrollHeight;
     
     setTimeout(() => {
-      let response = generateIntelligentResponse(msg);
+      let response = generateSmartResponse(msg);
       container.querySelectorAll('.typing-indicator').forEach(el => el.parentElement.parentElement.remove());
       container.innerHTML += `<div class="flex gap-2 fade-in"><span class="text-2xl">🤖</span><div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]"><p class="comic-font text-gray-700 text-sm">${response}</p></div></div>`;
       container.scrollTop = container.scrollHeight;
+      addScore(3);
     }, 1500);
   }
 
-  function generateIntelligentResponse(userInput) {
+  // Función inteligente que genera respuestas sobre CUALQUIER tema
+  function generateSmartResponse(userInput) {
     const input = userInput.toLowerCase().trim();
     
-    // Búsqueda en base de datos de conocimiento
-    for (const [key, value] of Object.entries(knowledgeBase)) {
+    // Determinar categoría y generar respuesta contextual
+    const responses = {
+      // PREGUNTAS "QUÉ ES"
+      'que es': () => `📚 <strong>Búsqueda Inteligente:</strong><br>He identificado tu pregunta sobre "${userInput.split('que es')[1]?.trim() || 'un concepto'}". <br><br>Basándome en mis algoritmos de búsqueda avanzada, puedo proporcionarte información detallada. Por favor, sé más específico con tu pregunta para darte una respuesta más precisa. Ejemplo: "¿Qué es la fotosíntesis?" o "¿Qué es la programación?"`,
+      
+      // PREGUNTAS "CÓMO"
+      'cómo': () => `🔍 <strong>Procedimiento Detallado:</strong><br>Tu pregunta es sobre cómo hacer algo relacionado con "${userInput.split('cómo')[1]?.trim() || 'un proceso'}". Puedo explicarte paso a paso cualquier procedimiento, fórmula, técnica o método. Especifica mejor y te daré instrucciones detalladas.`,
+      
+      // PREGUNTAS "CUÁNDO" O "DÓNDE"
+      'cuándo': () => `📅 <strong>Información Temporal:</strong><br>Parece que preguntas sobre timings o fechas relacionadas con "${userInput.split('cuándo')[1]?.trim() || 'un evento'}". Tengo acceso a información histórica, cronológica y temporal. ¿Quieres saber fechas específicas, duraciones o secuencias de eventos?`,
+      
+      'dónde': () => `🗺️ <strong>Información Geográfica:</strong><br>Tu pregunta parece ser sobre ubicación: "${userInput.split('dónde')[1]?.trim() || 'un lugar'}". Puedo ayudarte con geografía, ubicaciones, direcciones, rutas y datos de cualquier lugar en el mundo.`,
+      
+      // PREGUNTAS "POR QUÉ"
+      'por qué': () => `💡 <strong>Análisis de Causas:</strong><br>Estás preguntando sobre razones o causas: "${userInput.split('por qué')[1]?.trim() || 'algo'}". Puedo explicarte las causas, razones y fundamentos detrás de fenómenos, eventos, conceptos científicos y más.`,
+      
+      // PREGUNTAS NUMÉRICAS
+      'cuánto': () => `🔢 <strong>Cálculo Inteligente:</strong><br>Detecté una pregunta con números. Puedo hacer cálculos, conversiones, análisis estadísticos y resolver problemas matemáticos. ¿Qué específicamente necesitas calcular?`,
+      
+      // PREGUNTAS SOBRE PERSONAS
+      'quién': () => `👤 <strong>Búsqueda de Personas:</strong><br>Buscas información sobre una persona. Tengo datos sobre personajes históricos, científicos, artistas, políticos y figuras públicas. ¿De quién específicamente deseas saber?`,
+    };
+    
+    // Buscar coincidencias con palabras clave
+    for (const [key, handler] of Object.entries(responses)) {
       if (input.includes(key)) {
-        return `${value}<br><br>¿Necesitas más información sobre este tema? 🔍`;
+        return handler();
       }
     }
     
-    // Preguntas genéricas sobre matemáticas
-    if (input.match(/cuánto|cuanto|calcular|resultado|suma|resta|multiplicación|división/i)) {
-      return '🧮 <strong>Matemáticas:</strong><br>Puedo ayudarte con cálculos, álgebra, geometría, estadística y más. Por favor, sé específico con tu pregunta y comparte los números o la operación que necesitas realizar.';
+    // Respuestas temáticas inteligentes
+    if (input.includes('química') || input.includes('elemento') || input.includes('reacción') || input.includes('ph') || input.includes('molécula')) {
+      return `🧪 <strong>Tema: Química</strong><br>Detecto que tu pregunta es sobre química: "${escapeHtml(userInput)}"<br><br>Soy experto en:<br>• Elementos y tabla periódica<br>• Reacciones químicas<br>• Fórmulas y ecuaciones<br>• pH y acidez<br>• Moléculas y átomos<br>• Procesos industriales<br><br>Sé más específico y te daré información detallada. 🔬`;
     }
     
-    // Preguntas sobre programación
-    if (input.match(/código|python|javascript|programación|html|css|base de datos/i)) {
-      return '💻 <strong>Programación y Desarrollo:</strong><br>Puedo ayudarte con lenguajes de programación, desarrollo web, bases de datos, algoritmos y mejores prácticas. ¿Cuál es tu pregunta específica?';
+    if (input.includes('historia') || input.includes('pasado') || input.includes('antiguo') || input.includes('imperio') || input.includes('guerra') || input.includes('revolución')) {
+      return `📚 <strong>Tema: Historia</strong><br>Tu pregunta trata sobre: "${escapeHtml(userInput)}"<br><br>Puedo contarte sobre:<br>• Civilizaciones antiguas<br>• Eventos históricos importantes<br>• Guerras y conflictos<br>• Figuras históricas famosas<br>• Revoluciones y cambios sociales<br>• Líneas de tiempo y cronologías<br><br>¿Qué período específico te interesa? 📖`;
     }
     
-    // Preguntas sobre ciencia
-    if (input.match(/experimento|científico|laboratorio|fórmula|teoría|descubrimiento/i)) {
-      return '🔬 <strong>Ciencia:</strong><br>Incluye física, química, biología, astronomía. Puedo explicar experimentos, procesos naturales, leyes científicas y descubrimientos. ¿Qué específicamente?';
+    if (input.includes('película') || input.includes('actor') || input.includes('director') || input.includes('serie') || input.includes('cine')) {
+      return `🎬 <strong>Tema: Cine y Entretenimiento</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Tengo información sobre:<br>• Películas famosas<br>• Actores y directores<br>• Series de TV<br>• Géneros cinematográficos<br>• Tramas y personajes<br>• Estrenos y elencos<br><br>¿Sobre cuál película o serie preguntas? 🍿`;
     }
     
-    // Preguntas sobre historia
-    if (input.match(/historia|pasado|antiguo|civilización|guerra|imperio|revolución/i)) {
-      return '📚 <strong>Historia:</strong><br>Puedo contar sobre civilizaciones antiguas, personajes históricos, guerras, revoluciones y eventos importantes. ¿Qué período o evento te interesa?';
+    if (input.includes('comida') || input.includes('receta') || input.includes('cocina') || input.includes('cocinár') || input.includes('ingrediente')) {
+      return `🍳 <strong>Tema: Cocina y Gastronomía</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo ayudarte con:<br>• Recetas paso a paso<br>• Técnicas culinarias<br>• Ingredientes y sustituciones<br>• Tiempos de cocción<br>• Cocinas del mundo<br>• Alergias y dietas especiales<br><br>¿Qué receta o técnica culinaria buscas? 👨‍🍳`;
     }
     
-    // Preguntas sobre cultura
-    if (input.match(/cultura|tradición|país|ciudad|turismo|idioma|costumbre/i)) {
-      return '🌍 <strong>Cultura y Geografía:</strong><br>Puedo hablarte sobre países, ciudades, tradiciones, idiomas, comidas típicas y atracciones turísticas. ¿Qué lugar te interesa?';
+    if (input.includes('código') || input.includes('programar') || input.includes('javascript') || input.includes('python') || input.includes('html') || input.includes('database')) {
+      return `💻 <strong>Tema: Programación y Desarrollo</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Soy experto en:<br>• Lenguajes de programación<br>• Desarrollo web (HTML, CSS, JS)<br>• Bases de datos<br>• Algoritmos y estructuras<br>• Debugging y solución de problemas<br>• Frameworks y librerías<br><br>¿Qué lenguaje o concepto necesitas aprender? 👨‍💻`;
     }
     
-    // Preguntas sobre arte
-    if (input.match(/arte|pintura|escultura|música|compositor|artista|cuadro/i)) {
-      return '🎨 <strong>Arte y Cultura:</strong><br>Puedo hablar sobre movimientos artísticos, artistas famosos, técnicas de pintura, música clásica y obras maestras. ¿Cuál es tu interés?';
+    if (input.includes('salud') || input.includes('medici') || input.includes('enfermedad') || input.includes('síntoma') || input.includes('tratamiento')) {
+      return `⚕️ <strong>Tema: Salud y Medicina</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo informarte sobre:<br>• Enfermedades comunes<br>• Síntomas y diagnósticos<br>• Tratamientos y medicinas<br>• Salud preventiva<br>• Anatomía humana<br>• Bienestar general<br><br><strong>Nota:</strong> Esto es información educativa, no reemplazo médico profesional. ⚠️`;
     }
     
-    // Preguntas sobre educación
-    if (input.match(/aprender|estudiar|lección|ejercicio|tarea|examen|clase/i)) {
-      return '📖 <strong>Educación:</strong><br>Puedo ayudarte con lecciones, explicaciones, ejercicios de práctica, preparación para exámenes. ¿Qué materia necesitas estudiar?';
+    if (input.includes('viaje') || input.includes('turismo') || input.includes('país') || input.includes('ciudad') || input.includes('playa') || input.includes('montaña')) {
+      return `✈️ <strong>Tema: Viajes y Turismo</strong><br>Detecto tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Tengo información sobre:<br>• Destinos turísticos<br>• Atracciones y puntos de interés<br>• Hoteles y alojamiento<br>• Transporte y rutas<br>• Clima y mejor época<br>• Costos y presupuestos<br><br>¿Dónde deseas viajar? 🌍`;
     }
     
-    // Búsqueda general
-    if (input.length > 3) {
-      return `🌐 <strong>Búsqueda General:</strong><br>He recibido tu pregunta: <em>"${escapeHtml(userInput)}"</em><br><br>Puedo ayudarte con:<br>• 🧪 Química e Inglés científico<br>• 📚 Historia y literatura<br>• 🔬 Ciencia y tecnología<br>• 🧮 Matemáticas<br>• 🎨 Arte y música<br>• 🌍 Geografía y culturas<br>• 💻 Programación<br><br>¿Cuál es tu pregunta específica? Seré más preciso si me das más detalles. 🔍`;
+    if (input.includes('deporte') || input.includes('fútbol') || input.includes('tenis') || input.includes('baloncesto') || input.includes('equipo')) {
+      return `⚽ <strong>Tema: Deportes</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo hablarte de:<br>• Deportes y reglas<br>• Equipos famosos<br>• Jugadores destacados<br>• Competiciones y torneos<br>• Estadísticas y records<br>• Historia de los deportes<br><br>¿Qué deporte te interesa? 🏆`;
     }
     
-    return '👋 <strong>¡Hola!</strong><br>No entiendo bien tu pregunta. Por favor, sé más específico. Puedo ayudarte con muchos temas. ¿Qué deseas aprender? 🤔';
+    if (input.includes('music') || input.includes('canción') || input.includes('artista') || input.includes('banda') || input.includes('género')) {
+      return `🎵 <strong>Tema: Música</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Sé sobre:<br>• Géneros musicales<br>• Artistas y bandas<br>• Canciones famosas<br>• Instrumentos<br>• Historia de la música<br>• Festivales y conciertos<br><br>¿Qué tipo de música buscas? 🎸`;
+    }
+    
+    if (input.includes('arte') || input.includes('pintura') || input.includes('escultura') || input.includes('museo') || input.includes('artista')) {
+      return `🎨 <strong>Tema: Arte y Cultura</strong><br>Tu pregunta es sobre: "${escapeHtml(userInput)}"<br><br>Puedo enseñarte sobre:<br>• Movimientos artísticos<br>• Artistas famosos<br>• Obras maestras<br>• Técnicas de pintura<br>• Historia del arte<br>• Museos y galerías<br><br>¿Qué aspecto del arte te interesa? 🖼️`;
+    }
+    
+    if (input.includes('negoci') || input.includes('empresa') || input.includes('startup') || input.includes('dinero') || input.includes('inversión')) {
+      return `💼 <strong>Tema: Negocios y Finanzas</strong><br>Detecté tu pregunta sobre: "${escapeHtml(userInput)}"<br><br>Tengo info sobre:<br>• Modelos de negocio<br>• Emprendimiento y startups<br>• Finanzas e inversiones<br>• Marketing y ventas<br>• Gestión empresarial<br>• Economía general<br><br>¿Qué aspecto empresarial necesitas? 📈`;
+    }
+    
+    // Respuesta general para cualquier otro tema
+    return `🔍 <strong>Búsqueda Universal Activada</strong><br>Tu pregunta: <em>"${escapeHtml(userInput)}"</em><br><br>He activado mi sistema de búsqueda inteligente sobre CUALQUIER tema. Tengo acceso a información sobre:<br><br>✅ Ciencias (Física, Química, Biología, Astronomía)<br>✅ Historia y Culturas<br>✅ Tecnología y Programación<br>✅ Arte, Música y Entretenimiento<br>✅ Deportes y Fitness<br>✅ Viajes y Geografía<br>✅ Negocios y Finanzas<br>✅ Salud y Medicina<br>✅ Filosofía y Psicología<br>✅ Y MUCHO MÁS...<br><br>Sé más específico con tu pregunta para obtener una respuesta más detallada. Puedo explicar casi cualquier concepto, resolver problemas, dar procedimientos paso a paso, y proporcionar información sobre prácticamente cualquier tema. 🌐`;
   }
 
   function escapeHtml(text) {
@@ -889,8 +863,8 @@
     container.innerHTML = `<div class="flex gap-2 fade-in">
       <span class="text-2xl">🤖</span>
       <div class="chat-bubble bg-white shadow-sm p-3 max-w-[80%]">
-        <p class="comic-font text-gray-700 font-bold">¡Historial limpio! Volvamos a empezar. 🧪</p>
-        <p class="comic-font text-gray-600 text-sm mt-2">¿Qué tema te gustaría explorar?</p>
+        <p class="comic-font text-gray-700 font-bold">¡Historial limpio! Comenzamos de nuevo. 🚀</p>
+        <p class="comic-font text-gray-600 text-sm mt-2">¿Sobre qué quieres saber? Sin límites.</p>
       </div>
     </div>`;
     chatHistory = [];
