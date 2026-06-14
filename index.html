@@ -113,7 +113,6 @@
      </div>
      <ul class="space-y-2">
       <li><button onclick="navigateTo('home')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink/10 text-left transition-all"><i data-lucide="home" class="w-5 h-5"></i><span>Inicio</span></button></li>
-      <li><button onclick="navigateTo('chat')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><i data-lucide="message-circle" class="w-5 h-5"></i><span>Chat IA</span></button></li>
       <li><button onclick="navigateTo('verbtobe')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-secondary/10 hover:to-blue-100 text-left transition-all"><i data-lucide="book" class="w-5 h-5"></i><span>Verbo To Be</span></button></li>
       <li><button onclick="navigateTo('numbers')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-accent/10 hover:to-yellow-100 text-left transition-all"><i data-lucide="hash" class="w-5 h-5"></i><span>Números</span></button></li>
       <li><button onclick="navigateTo('vocabulary')" class="nav-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-mint/10 hover:to-green-100 text-left transition-all"><i data-lucide="dna" class="w-5 h-5"></i><span>Vocabulario</span></button></li>
@@ -136,7 +135,7 @@
      <div class="flex items-center gap-2">
       <div id="score-display" class="hidden md:flex items-center gap-1 bg-white/20 rounded-full px-3 py-1">
        <span class="text-xl">⭐</span> <span id="score-text" class="text-white font-bold">0</span>
-      </div><button onclick="navigateTo('chat')" class="p-2 bg-white/20 rounded-xl hover:bg-white/30 transition-all pulse-glow"> <i data-lucide="message-circle" class="w-6 h-6 text-white"></i> </button>
+      </div>
      </div>
     </div>
    </header>
@@ -147,7 +146,7 @@
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full"></div>
       <div class="relative z-10">
        <h2 id="welcome-msg" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple to-secondary bg-clip-text text-transparent mb-4">¡Aprende Inglés para Química Industrial!</h2>
-       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo! Chatea con nuestro asistente IA avanzado.</p>
+       <p class="text-gray-600 text-lg comic-font mb-6">¡Bienvenido a la forma más divertida de aprender Inglés y Química al mismo tiempo!</p>
        <div class="flex flex-wrap gap-3">
         <button onclick="navigateTo('verbtobe')" class="px-5 py-3 bg-gradient-to-r from-secondary to-blue-500 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">Empezar con Verbo To Be</button>
        </div>
@@ -160,12 +159,7 @@
       </div>
       <p class="text-gray-600 text-sm comic-font mt-4">Mira este video para conocer más sobre nuestro laboratorio virtual y cómo aprender inglés mientras dominas la química industrial. 🌟</p>
      </div>
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div onclick="navigateTo('chat')" class="card-hover cursor-pointer bg-gradient-to-br from-primary to-pink-400 rounded-2xl p-5 text-white shadow-lg">
-       <span class="text-4xl block mb-3">🤖</span>
-       <h3 class="font-bold text-lg">Chat IA Avanzado</h3>
-       <p class="text-white/80 text-sm mt-1">Asistente inteligente disponible 24/7...</p>
-      </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div onclick="navigateTo('verbtobe')" class="card-hover cursor-pointer bg-gradient-to-br from-secondary to-blue-400 rounded-2xl p-5 text-white shadow-lg">
        <span class="text-4xl block mb-3">📖</span>
        <h3 class="font-bold text-lg">Verbo To Be</h3>
@@ -180,25 +174,6 @@
        <span class="text-4xl block mb-3">🎮</span>
        <h3 class="font-bold text-lg">Juegos Educativos</h3>
        <p class="text-white/80 text-sm mt-1">Aprende jugando...</p>
-      </div>
-     </div>
-    </section>
-
-    <section id="section-chat" class="hidden space-y-6">
-     <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col h-screen max-h-[700px]">
-      <div class="flex items-center justify-between mb-4">
-       <div>
-        <h2 class="text-3xl font-bold text-secondary mb-1">🤖 Chat IA Avanzado</h2>
-        <p class="text-gray-600 comic-font text-sm">Asistente inteligente para resolver tus preguntas sobre inglés y química</p>
-       </div>
-      </div>
-      <div class="bg-gradient-to-b from-blue-50 to-purple-50 rounded-2xl p-6 flex items-center justify-center flex-1">
-       <div class="text-center">
-        <div class="text-6xl mb-4">💬</div>
-        <h3 class="text-xl font-bold text-gray-800 mb-2">Chat IA Disponible</h3>
-        <p class="text-gray-600 comic-font">El chatbot de IA está disponible en la esquina inferior derecha de la página.</p>
-        <p class="text-gray-500 text-sm mt-4">¡Haz clic en el icono del chat para comenzar una conversación!</p>
-       </div>
       </div>
      </div>
     </section>
