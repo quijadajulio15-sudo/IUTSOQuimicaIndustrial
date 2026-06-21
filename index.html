@@ -1173,21 +1173,46 @@
   }
 
   function showGameResult(message, isCorrect) {
+
+    // Elimina modales anteriores si existen
+    document.querySelectorAll('.result-overlay').forEach(el => el.remove());
+    document.querySelectorAll('.result-modal').forEach(el => el.remove());
+
     const overlay = document.createElement('div');
     overlay.className = 'result-overlay';
-    overlay.onclick = () => { overlay.remove(); modal.remove(); };
-    
+
     const modal = document.createElement('div');
     modal.className = 'result-modal';
+
     modal.innerHTML = `
-      <div class="text-6xl mb-4">${isCorrect ? '✅' : '❌'}</div>
-      <p class="text-xl font-bold text-gray-800 mb-4">${message}</p>
-      <button onclick="this.closest('.result-modal').parentElement.remove(); this.closest('.result-modal').remove()" class="px-4 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg font-bold hover:scale-105 transition-all">Continuar</button>
+        <div class="text-6xl mb-4">
+            ${isCorrect ? '✅' : '❌'}
+        </div>
+
+        <p class="text-xl font-bold text-gray-800 mb-4">
+            ${message}
+        </p>
+
+        <button id="continueGameBtn"
+            class="px-4 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg font-bold hover:scale-105 transition-all">
+            Continuar
+        </button>
     `;
-    
+
     document.body.appendChild(overlay);
     document.body.appendChild(modal);
-  }
+
+    const closeModal = () => {
+        overlay.remove();
+        modal.remove();
+    };
+
+    overlay.addEventListener('click', closeModal);
+
+    document
+        .getElementById('continueGameBtn')
+        .addEventListener('click', closeModal);
+}
 
   const quizBank = [
     {q: 'What is the English word for "ácido"?', options: ['Acid', 'Base', 'Salt', 'Water'], correct: 0},
