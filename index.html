@@ -73,7 +73,6 @@
     ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: #ff6b6b; border-radius: 10px; }
 
-    /* Icono de menú personalizado */
     .menu-icon {
       display: flex;
       flex-direction: column;
@@ -95,7 +94,6 @@
     .menu-line:nth-child(2) { width: 28px; }
     .menu-line:nth-child(3) { width: 20px; }
 
-    /* Sidebar con más azul que rosado */
     .sidebar-gradient {
       background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 20%, #6366f1 40%, #8b5cf6 60%, #a78bfa 80%, #60a5fa 100%);
       background-size: 400% 400%;
@@ -108,7 +106,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Menu items con color degradado */
     .nav-item-styled {
       position: relative;
       overflow: hidden;
@@ -127,6 +124,27 @@
 
     .nav-item-styled:hover::before {
       left: 100%;
+    }
+
+    .result-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      z-index: 1000;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .result-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
     }
   </style>
   <script>
@@ -148,7 +166,6 @@
   </script>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <!-- Elfsight AI Chatbot -->
   <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
  <body class="h-full">
@@ -175,6 +192,8 @@
      <ul class="space-y-3">
       <li><button onclick="navigateTo('home')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🏠</span><span>Inicio</span></button></li>
       <li><button onclick="navigateTo('verbtobe')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">📖</span><span>Verbo To Be</span></button></li>
+      <li><button onclick="navigateTo('tobepast')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">⏰</span><span>To Be Pasado</span></button></li>
+      <li><button onclick="navigateTo('gerund')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔤</span><span>Gerundio (-ING)</span></button></li>
       <li><button onclick="navigateTo('numbers')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔢</span><span>Números</span></button></li>
       <li><button onclick="navigateTo('vocabulary')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🧬</span><span>Vocabulario</span></button></li>
       <li><button onclick="navigateTo('lab')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔬</span><span>Laboratorio</span></button></li>
@@ -247,12 +266,12 @@
 
     <section id="section-verbtobe" class="hidden space-y-6">
      <div class="bg-white rounded-3xl shadow-xl p-8">
-      <h2 class="text-3xl font-bold text-primary mb-2">📝 El Verbo "To Be"</h2>
+      <h2 class="text-3xl font-bold text-primary mb-2">📝 El Verbo "To Be" (Presente)</h2>
       <p class="text-gray-600 comic-font mb-6">¡El verbo "to be" es el verbo más importante en inglés! Aprendámoslo con ejemplos de química. 🧪</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
        <div class="bg-gradient-to-br from-green-50 to-mint/10 rounded-2xl p-6 border-2 border-green-200">
         <h3 class="text-xl font-bold text-green-700 mb-4">✅ Afirmativo</h3>
-        <table class="w-full text-left">
+        <table class="w-full text-left text-sm">
          <thead>
           <tr class="border-b-2 border-green-200">
            <th class="py-2 text-green-600">Sujeto</th>
@@ -260,38 +279,38 @@
            <th class="py-2 text-green-600">Ejemplo</th>
           </tr>
          </thead>
-         <tbody class="comic-font">
+         <tbody class="comic-font text-xs">
           <tr class="border-b border-green-100">
            <td class="py-2 font-bold">I</td>
            <td class="py-2">am</td>
-           <td class="py-2">I <strong>am</strong> a chemist. (Yo soy químico)</td>
+           <td class="py-2">I <strong>am</strong> a chemist</td>
           </tr>
           <tr class="border-b border-green-100">
            <td class="py-2 font-bold">You</td>
            <td class="py-2">are</td>
-           <td class="py-2">You <strong>are</strong> in the lab. (Tú estás en el lab)</td>
+           <td class="py-2">You <strong>are</strong> in the lab</td>
           </tr>
           <tr class="border-b border-green-100">
            <td class="py-2 font-bold">He/She/It</td>
            <td class="py-2">is</td>
-           <td class="py-2">It <strong>is</strong> an acid. (Es un ácido)</td>
+           <td class="py-2">It <strong>is</strong> an acid</td>
           </tr>
           <tr class="border-b border-green-100">
            <td class="py-2 font-bold">We</td>
            <td class="py-2">are</td>
-           <td class="py-2">We <strong>are</strong> mixing. (Estamos mezclando)</td>
+           <td class="py-2">We <strong>are</strong> mixing</td>
           </tr>
           <tr>
            <td class="py-2 font-bold">They</td>
            <td class="py-2">are</td>
-           <td class="py-2">They <strong>are</strong> engineers. (Ellos son ingenieros)</td>
+           <td class="py-2">They <strong>are</strong> engineers</td>
           </tr>
          </tbody>
         </table>
        </div>
        <div class="bg-gradient-to-br from-red-50 to-primary/10 rounded-2xl p-6 border-2 border-red-200">
         <h3 class="text-xl font-bold text-red-600 mb-4">❌ Negativo</h3>
-        <table class="w-full text-left">
+        <table class="w-full text-left text-sm">
          <thead>
           <tr class="border-b-2 border-red-200">
            <th class="py-2 text-red-500">Sujeto</th>
@@ -299,48 +318,193 @@
            <th class="py-2 text-red-500">Ejemplo</th>
           </tr>
          </thead>
-         <tbody class="comic-font">
+         <tbody class="comic-font text-xs">
           <tr class="border-b border-red-100">
            <td class="py-2 font-bold">I</td>
            <td class="py-2">am not</td>
-           <td class="py-2">I <strong>am not</strong> a physicist. (No soy físico)</td>
+           <td class="py-2">I <strong>am not</strong> a physicist</td>
           </tr>
           <tr class="border-b border-red-100">
            <td class="py-2 font-bold">You</td>
            <td class="py-2">are not</td>
-           <td class="py-2">You <strong>aren't</strong> ready. (No estás listo)</td>
+           <td class="py-2">You <strong>aren't</strong> ready</td>
           </tr>
           <tr class="border-b border-red-100">
-           <td class="py-2 font-bold">He/She/She/It</td>
+           <td class="py-2 font-bold">He/She/It</td>
            <td class="py-2">is not</td>
-           <td class="py-2">It <strong>isn't</strong> a base. (No es una base)</td>
+           <td class="py-2">It <strong>isn't</strong> a base</td>
           </tr>
           <tr class="border-b border-red-100">
            <td class="py-2 font-bold">We</td>
            <td class="py-2">are not</td>
-           <td class="py-2">We <strong>aren't</strong> done. (No hemos terminado)</td>
+           <td class="py-2">We <strong>aren't</strong> done</td>
           </tr>
           <tr>
            <td class="py-2 font-bold">They</td>
            <td class="py-2">are not</td>
-           <td class="py-2">They <strong>aren't</strong> toxic. (No son tóxicos)</td>
+           <td class="py-2">They <strong>aren't</strong> toxic</td>
           </tr>
          </tbody>
         </table>
        </div>
       </div>
-      <div class="mt-6 bg-gradient-to-br from-blue-50 to-secondary/10 rounded-2xl p-6 border-2 border-blue-200">
-       <h3 class="text-xl font-bold text-blue-600 mb-4">❓ Preguntas</h3>
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 comic-font">
-        <div class="bg-white/50 rounded-xl p-3"><strong>Am</strong> I a good student? → Yes, you <strong>are</strong>! (¿Soy buen estudiante? Sí, lo eres)</div>
-        <div class="bg-white/50 rounded-xl p-3"><strong>Is</strong> this a chemical reaction? → Yes, it <strong>is</strong>! (¿Es una reacción química? Sí, lo es)</div>
-        <div class="bg-white/50 rounded-xl p-3"><strong>Are</strong> they in the laboratory? → No, they <strong>aren't</strong>. (¿Están en el laboratorio? No)</div>
-        <div class="bg-white/50 rounded-xl p-3"><strong>Is</strong> water a compound? → Yes, it <strong>is</strong>! (¿Es el agua un compuesto? Sí)</div>
+      <div class="mt-6 bg-gradient-to-r from-purple/10 to-pink/10 rounded-2xl p-6 border-2 border-purple-200">
+       <h3 class="text-xl font-bold text-purple mb-4">🎮 20 Ejercicios Interactivos - ¡Completa el espacio!</h3>
+       <div id="tobe-practice" class="space-y-3 max-h-96 overflow-y-auto"></div>
+       <button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Generar Más</button>
+      </div>
+     </div>
+    </section>
+
+    <section id="section-tobepast" class="hidden space-y-6">
+     <div class="bg-white rounded-3xl shadow-xl p-8">
+      <h2 class="text-3xl font-bold text-amber-600 mb-2">⏰ El Verbo "To Be" (Pasado)</h2>
+      <p class="text-gray-600 comic-font mb-6">¡Aprende el verbo "to be" en pasado! Era, Eras, Era... con ejemplos químicos. 🧪</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-6 border-2 border-amber-200">
+        <h3 class="text-xl font-bold text-amber-700 mb-4">✅ Pasado Afirmativo</h3>
+        <table class="w-full text-left text-sm">
+         <thead>
+          <tr class="border-b-2 border-amber-200">
+           <th class="py-2 text-amber-600">Sujeto</th>
+           <th class="py-2 text-amber-600">Verbo</th>
+           <th class="py-2 text-amber-600">Ejemplo</th>
+          </tr>
+         </thead>
+         <tbody class="comic-font text-xs">
+          <tr class="border-b border-amber-100">
+           <td class="py-2 font-bold">I</td>
+           <td class="py-2">was</td>
+           <td class="py-2">I <strong>was</strong> happy</td>
+          </tr>
+          <tr class="border-b border-amber-100">
+           <td class="py-2 font-bold">You</td>
+           <td class="py-2">were</td>
+           <td class="py-2">You <strong>were</strong> in the lab</td>
+          </tr>
+          <tr class="border-b border-amber-100">
+           <td class="py-2 font-bold">He/She/It</td>
+           <td class="py-2">was</td>
+           <td class="py-2">It <strong>was</strong> an acid</td>
+          </tr>
+          <tr class="border-b border-amber-100">
+           <td class="py-2 font-bold">We</td>
+           <td class="py-2">were</td>
+           <td class="py-2">We <strong>were</strong> mixing</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-bold">They</td>
+           <td class="py-2">were</td>
+           <td class="py-2">They <strong>were</strong> engineers</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 border-2 border-orange-200">
+        <h3 class="text-xl font-bold text-orange-600 mb-4">❌ Pasado Negativo</h3>
+        <table class="w-full text-left text-sm">
+         <thead>
+          <tr class="border-b-2 border-orange-200">
+           <th class="py-2 text-orange-600">Sujeto</th>
+           <th class="py-2 text-orange-600">Verbo</th>
+           <th class="py-2 text-orange-600">Ejemplo</th>
+          </tr>
+         </thead>
+         <tbody class="comic-font text-xs">
+          <tr class="border-b border-orange-100">
+           <td class="py-2 font-bold">I</td>
+           <td class="py-2">was not</td>
+           <td class="py-2">I <strong>wasn't</strong> ready</td>
+          </tr>
+          <tr class="border-b border-orange-100">
+           <td class="py-2 font-bold">You</td>
+           <td class="py-2">were not</td>
+           <td class="py-2">You <strong>weren't</strong> here</td>
+          </tr>
+          <tr class="border-b border-orange-100">
+           <td class="py-2 font-bold">He/She/It</td>
+           <td class="py-2">was not</td>
+           <td class="py-2">It <strong>wasn't</strong> a base</td>
+          </tr>
+          <tr class="border-b border-orange-100">
+           <td class="py-2 font-bold">We</td>
+           <td class="py-2">were not</td>
+           <td class="py-2">We <strong>weren't</strong> done</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-bold">They</td>
+           <td class="py-2">were not</td>
+           <td class="py-2">They <strong>weren't</strong> toxic</td>
+          </tr>
+         </tbody>
+        </table>
        </div>
       </div>
-      <div class="mt-6 bg-gradient-to-r from-purple/10 to-pink/10 rounded-2xl p-6 border-2 border-purple-200">
-       <h3 class="text-xl font-bold text-purple mb-4">🎮 Práctica Rápida - ¡Completa el espacio!</h3>
-       <div id="tobe-practice" class="space-y-4"></div><button onclick="generateToBePractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-xl font-bold hover:scale-105 transition-all">Generar Más</button>
+      <div class="mt-6 bg-gradient-to-r from-amber-100/50 to-orange-100/50 rounded-2xl p-6 border-2 border-amber-300">
+       <h3 class="text-xl font-bold text-amber-700 mb-4">🎮 20 Ejercicios - Pasado del Verbo To Be</h3>
+       <div id="tobepast-practice" class="space-y-3 max-h-96 overflow-y-auto"></div>
+       <button onclick="generateToBePassedPractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Generar Más</button>
+      </div>
+     </div>
+    </section>
+
+    <section id="section-gerund" class="hidden space-y-6">
+     <div class="bg-white rounded-3xl shadow-xl p-8">
+      <h2 class="text-3xl font-bold text-teal-600 mb-2">🔤 Gerundio (-ING)</h2>
+      <p class="text-gray-600 comic-font mb-6">¡El gerundio es una forma verbal que termina en -ING! Se usa para acciones en desarrollo. Estudiando, Corriendo, Cocinando... 🧪</p>
+      
+      <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 border-2 border-teal-200 mb-6">
+       <h3 class="text-xl font-bold text-teal-700 mb-4">📚 Reglas para formar el Gerundio</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div class="bg-white rounded-lg p-4 border-l-4 border-teal-500">
+         <p class="font-bold text-teal-600 mb-2">Regla 1: Verbos regulares</p>
+         <p class="comic-font text-gray-700">Solo añade -ING: study → studying, mix → mixing</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 border-l-4 border-teal-500">
+         <p class="font-bold text-teal-600 mb-2">Regla 2: Verbos terminados en -E</p>
+         <p class="comic-font text-gray-700">Elimina la E y añade -ING: make → making, prepare → preparing</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 border-l-4 border-teal-500">
+         <p class="font-bold text-teal-600 mb-2">Regla 3: Verbos monosílabos consonante-vocal-consonante</p>
+         <p class="comic-font text-gray-700">Duplica la consonante: run → running, mix → mixing</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 border-l-4 border-teal-500">
+         <p class="font-bold text-teal-600 mb-2">Regla 4: Verbos terminados en -IE</p>
+         <p class="comic-font text-gray-700">Cambia IE por Y: lie → lying, tie → tying</p>
+        </div>
+       </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-6 border-2 border-cyan-200 mb-6">
+       <h3 class="text-xl font-bold text-cyan-700 mb-4">💡 Usos del Gerundio</h3>
+       <div class="space-y-3 text-sm">
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-bold text-cyan-600 mb-1">1. Después de Presente Continuo (Present Continuous)</p>
+         <p class="comic-font text-gray-700">I <strong>am studying</strong> chemistry | Estoy estudiando química</p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-bold text-cyan-600 mb-1">2. Después de ciertos verbos (like, love, enjoy, hate, etc.)</p>
+         <p class="comic-font text-gray-700">I <strong>enjoy mixing</strong> chemicals | Me encanta mezclar químicos</p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-bold text-cyan-600 mb-1">3. Como sustantivo</p>
+         <p class="comic-font text-gray-700"><strong>Studying</strong> is important | Estudiar es importante</p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-bold text-cyan-600 mb-1">4. Después de preposiciones</p>
+         <p class="comic-font text-gray-700">I finished <strong>by adding</strong> water | Terminé añadiendo agua</p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-bold text-cyan-600 mb-1">5. Expresando propósito o causa</p>
+         <p class="comic-font text-gray-700">The purpose of <strong>heating</strong> is to dissolve | El propósito de calentar es disolver</p>
+        </div>
+       </div>
+      </div>
+
+      <div class="mt-6 bg-gradient-to-r from-teal-100/50 to-cyan-100/50 rounded-2xl p-6 border-2 border-teal-300">
+       <h3 class="text-xl font-bold text-teal-700 mb-4">🎮 20 Ejercicios - Gerundio (-ING)</h3>
+       <div id="gerund-practice" class="space-y-3 max-h-96 overflow-y-auto"></div>
+       <button onclick="generateGerundPractice()" class="mt-4 px-5 py-2 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-bold hover:scale-105 transition-all">🔄 Generar Más</button>
       </div>
      </div>
     </section>
@@ -351,11 +515,11 @@
       <p class="text-gray-600 comic-font mb-6">¡Los números son esenciales en química para medidas, fórmulas y cálculos!</p>
       <div class="bg-gradient-to-r from-secondary/10 to-blue-100 rounded-2xl p-6 border-2 border-blue-200">
        <h3 class="text-xl font-bold text-blue-700 mb-4">📏 Números en Medidas de Química</h3>
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 comic-font">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 comic-font text-sm">
         <div class="bg-white rounded-xl p-3 shadow-sm">"Añade <strong>doscientos</strong> mililitros (200 mL) de agua."</div>
-        <div class="bg-white rounded-xl p-3 shadow-sm">"La temperatura es de <strong>treinta y siete</strong> grados Celsius (37°C)."</div>
+        <div class="bg-white rounded-xl p-3 shadow-sm">"La temperatura es de <strong>treinta y siete</strong> grados (37°C)."</div>
         <div class="bg-white rounded-xl p-3 shadow-sm">"El nivel de pH es <strong>siete punto cinco</strong> (7.5)."</div>
-        <div class="bg-white rounded-xl p-3 shadow-sm">"Necesitamos <strong>cincuenta</strong> gramos (50 g) de cloruro de sodio."</div>
+        <div class="bg-white rounded-xl p-3 shadow-sm">"Necesitamos <strong>cincuenta</strong> gramos (50 g) de cloruro."</div>
        </div>
       </div>
       <div class="mt-6 bg-gradient-to-r from-accent/10 to-orange/10 rounded-2xl p-6 border-2 border-yellow-200">
@@ -373,48 +537,48 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-5 border-2 border-red-200 cursor-pointer" onclick="speakWord('acid')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-red-500">H⁺</span><h4 class="font-bold text-lg text-red-700">Ácido</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Una sustancia con pH menor a 7. Ejemplo: Ácido clorhídrico (HCl)</p>
-        <p class="text-xs text-red-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Una sustancia con pH menor a 7.</p>
+        <p class="text-xs text-red-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-5 border-2 border-blue-200 cursor-pointer" onclick="speakWord('base')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-blue-500">OH⁻</span><h4 class="font-bold text-lg text-blue-700">Base</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Una sustancia con pH mayor a 7. Ejemplo: Hidróxido de sodio (NaOH)</p>
-        <p class="text-xs text-blue-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Una sustancia con pH mayor a 7.</p>
+        <p class="text-xs text-blue-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-5 border-2 border-green-200 cursor-pointer" onclick="speakWord('solution')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-green-500">Sol</span><h4 class="font-bold text-lg text-green-700">Solución</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Una mezcla donde una sustancia se disuelve en otra. Ejemplo: Agua salada</p>
-        <p class="text-xs text-green-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Una mezcla donde una sustancia se disuelve.</p>
+        <p class="text-xs text-green-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-5 border-2 border-purple-200 cursor-pointer" onclick="speakWord('catalyst')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-purple">Cat</span><h4 class="font-bold text-lg text-purple">Catalizador</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Una sustancia que acelera una reacción sin ser consumida.</p>
-        <p class="text-xs text-purple mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Sustancia que acelera una reacción.</p>
+        <p class="text-xs text-purple mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-5 border-2 border-orange-200 cursor-pointer" onclick="speakWord('distillation')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-orange">Dis</span><h4 class="font-bold text-lg text-orange-700">Destilación</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Separar mezclas por puntos de ebullición. Usado en refinación de petróleo.</p>
-        <p class="text-xs text-orange-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Separar mezclas por puntos de ebullición.</p>
+        <p class="text-xs text-orange-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-5 border-2 border-pink-200 cursor-pointer" onclick="speakWord('molecule')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-pink-500">Mol</span><h4 class="font-bold text-lg text-pink-700">Molécula</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Dos o más átomos unidos. Ejemplo: H₂O (molécula de agua)</p>
-        <p class="text-xs text-pink-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Dos o más átomos unidos.</p>
+        <p class="text-xs text-pink-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-5 border-2 border-cyan-200 cursor-pointer" onclick="speakWord('reaction')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-cyan-500">Rx</span><h4 class="font-bold text-lg text-cyan-700">Reacción</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Un proceso donde sustancias se transforman en nuevas sustancias con propiedades diferentes.</p>
-        <p class="text-xs text-cyan-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Transformación de sustancias.</p>
+        <p class="text-xs text-cyan-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl p-5 border-2 border-amber-200 cursor-pointer" onclick="speakWord('laboratory')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-amber-500">Lab</span><h4 class="font-bold text-lg text-amber-700">Laboratorio</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Una sala equipada para experimentos científicos e investigación.</p>
-        <p class="text-xs text-amber-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Sala para experimentos científicos.</p>
+        <p class="text-xs text-amber-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
        <div class="card-hover bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-5 border-2 border-teal-200 cursor-pointer" onclick="speakWord('filtration')">
         <div class="flex items-center gap-3 mb-2"><span class="atom bg-teal-500">Fil</span><h4 class="font-bold text-lg text-teal-700">Filtración</h4></div>
-        <p class="comic-font text-gray-600 text-sm">Separar sólidos de líquidos usando un filtro. Común en tratamiento de agua.</p>
-        <p class="text-xs text-teal-500 mt-2 font-medium">🔊 Haz clic para escuchar pronunciación</p>
+        <p class="comic-font text-gray-600 text-sm">Separar sólidos de líquidos.</p>
+        <p class="text-xs text-teal-500 mt-2 font-medium">🔊 Haz clic para escuchar</p>
        </div>
       </div>
      </div>
@@ -426,9 +590,9 @@
       <p class="text-gray-600 comic-font mb-6">¡Realiza experimentos virtuales y aprende vocabulario de química en inglés!</p>
       <div class="bg-gradient-to-br from-purple/5 to-indigo-50 rounded-2xl p-6 border-2 border-purple-200 mb-6">
        <h3 class="text-xl font-bold text-purple mb-4">🧪 Experimento 1: Prueba de pH</h3>
-       <p class="comic-font text-gray-600 mb-4">Selecciona una sustancia y observa su nivel de pH. ¡Describe el resultado en inglés!</p>
+       <p class="comic-font text-gray-600 mb-4">Selecciona una sustancia y observa su nivel de pH.</p>
        <div class="flex flex-wrap gap-3 mb-4">
-        <button onclick="testPH('lemon', 2, '¡El jugo de limón es un ácido fuerte!')" class="px-4 py-2 bg-yellow-400 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🍋 Jugo de limón</button>
+        <button onclick="testPH('lemon', 2, '¡El jugo de limón es un ácido fuerte!')" class="px-4 py-2 bg-yellow-400 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🍋 Limón</button>
         <button onclick="testPH('soap', 13, '¡El jabón es una base fuerte!')" class="px-4 py-2 bg-blue-400 rounded-xl font-bold hover:scale-105 transition-all text-white">🧼 Jabón</button>
         <button onclick="testPH('water', 7, '¡El agua es neutra!')" class="px-4 py-2 bg-cyan-400 rounded-xl font-bold hover:scale-105 transition-all text-white">💧 Agua</button>
         <button onclick="testPH('milk', 6, '¡La leche es ligeramente ácida!')" class="px-4 py-2 bg-yellow-200 rounded-xl font-bold hover:scale-105 transition-all text-yellow-900">🥛 Leche</button>
@@ -448,12 +612,11 @@
          <div class="flex-1 bg-indigo-500 flex items-center justify-center text-white text-xs font-bold">12</div>
          <div class="flex-1 bg-purple flex items-center justify-center text-white text-xs font-bold">14</div>
         </div>
-        <div class="flex justify-between mt-1 text-xs text-gray-500"><span>Ácido</span><span>Neutro</span><span>Base</span></div>
        </div>
       </div>
       <div class="bg-gradient-to-br from-mint/5 to-green-50 rounded-2xl p-6 border-2 border-green-200">
        <h3 class="text-xl font-bold text-green-700 mb-4">⚗️ Experimento 2: Mezcla Química</h3>
-       <p class="comic-font text-gray-600 mb-4">¡Mezcla dos sustancias y describe la reacción en inglés!</p>
+       <p class="comic-font text-gray-600 mb-4">¡Mezcla dos sustancias y describe la reacción!</p>
        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
         <div>
          <label class="block text-sm font-bold text-gray-600 mb-2">Sustancia A:</label>
@@ -506,30 +669,30 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
        <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 border-2 border-pink-200">
         <h3 class="text-xl font-bold text-pink-600 mb-4">🎯 Juego 1: Empareja Palabras</h3>
-        <p class="comic-font text-gray-600 mb-4">Empareja palabras en inglés con sus definiciones en química.</p>
-        <div id="matching-game" class="space-y-2 mb-4"></div>
-        <button onclick="generateMatchingGame()" class="px-5 py-2 bg-gradient-to-r from-pink to-rose-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+        <p class="comic-font text-gray-600 mb-4">Empareja palabras en inglés con sus definiciones.</p>
+        <div id="matching-game" class="space-y-2 mb-4 max-h-48 overflow-y-auto"></div>
+        <button onclick="generateMatchingGame()" class="w-full px-5 py-2 bg-gradient-to-r from-pink to-rose-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar</button>
        </div>
 
        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-200">
         <h3 class="text-xl font-bold text-blue-600 mb-4">🔤 Juego 2: Palabras Desordenadas</h3>
-        <p class="comic-font text-gray-600 mb-4">Ordena las letras para formar palabras de química en inglés.</p>
-        <div id="scramble-game" class="space-y-2 mb-4"></div>
-        <button onclick="generateScrambleGame()" class="px-5 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+        <p class="comic-font text-gray-600 mb-4">Ordena las letras para formar palabras de química.</p>
+        <div id="scramble-game" class="space-y-2 mb-4 max-h-48 overflow-y-auto"></div>
+        <button onclick="generateScrambleGame()" class="w-full px-5 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar</button>
        </div>
 
        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-green-200">
         <h3 class="text-xl font-bold text-green-600 mb-4">📝 Juego 3: Completa la Oración</h3>
         <p class="comic-font text-gray-600 mb-4">Completa oraciones sobre química en inglés.</p>
-        <div id="sentence-game" class="space-y-2 mb-4"></div>
-        <button onclick="generateSentenceGame()" class="px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+        <div id="sentence-game" class="space-y-2 mb-4 max-h-48 overflow-y-auto"></div>
+        <button onclick="generateSentenceGame()" class="w-full px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar</button>
        </div>
 
        <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-6 border-2 border-purple-200">
         <h3 class="text-xl font-bold text-purple mb-4">🧪 Juego 4: Traduce Elementos</h3>
         <p class="comic-font text-gray-600 mb-4">Traduce elementos químicos del español al inglés.</p>
-        <div id="translation-game" class="space-y-2 mb-4"></div>
-        <button onclick="generateTranslationGame()" class="px-5 py-2 bg-gradient-to-r from-purple to-violet-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar Juego</button>
+        <div id="translation-game" class="space-y-2 mb-4 max-h-48 overflow-y-auto"></div>
+        <button onclick="generateTranslationGame()" class="w-full px-5 py-2 bg-gradient-to-r from-purple to-violet-400 text-white rounded-xl font-bold hover:scale-105 transition-all">Comenzar</button>
        </div>
       </div>
      </div>
@@ -545,8 +708,8 @@
          <div class="text-center text-white"><span class="text-6xl block mb-2">▶️</span><p class="font-bold">Haz clic para ver</p></div>
         </div>
         <div class="p-4 bg-gradient-to-r from-pink-50 to-rose-50">
-         <h4 class="font-bold text-gray-800">Introducción a la Química en Inglés</h4>
-         <p class="text-sm text-gray-600 comic-font">Aprende conceptos básicos de química en inglés</p>
+         <h4 class="font-bold text-gray-800">Introducción a la Química</h4>
+         <p class="text-sm text-gray-600 comic-font">Conceptos básicos en inglés</p>
         </div>
        </div>
        <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-blue-200">
@@ -554,8 +717,8 @@
          <div class="text-center text-white"><span class="text-6xl block mb-2">▶️</span><p class="font-bold">Haz clic para ver</p></div>
         </div>
         <div class="p-4 bg-gradient-to-r from-blue-50 to-cyan-50">
-         <h4 class="font-bold text-gray-800">Verbo To Be - Gramática en Inglés</h4>
-         <p class="text-sm text-gray-600 comic-font">Domina el verbo "to be" en inglés</p>
+         <h4 class="font-bold text-gray-800">Verbo To Be</h4>
+         <p class="text-sm text-gray-600 comic-font">Gramática en inglés</p>
         </div>
        </div>
        <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-green-200">
@@ -563,8 +726,8 @@
          <div class="text-center text-white"><span class="text-6xl block mb-2">▶️</span><p class="font-bold">Haz clic para ver</p></div>
         </div>
         <div class="p-4 bg-gradient-to-r from-green-50 to-emerald-50">
-         <h4 class="font-bold text-gray-800">Vocabulario del Equipo de Laboratorio</h4>
-         <p class="text-sm text-gray-600 comic-font">Aprende los nombres del equipo de laboratorio en inglés</p>
+         <h4 class="font-bold text-gray-800">Equipo de Laboratorio</h4>
+         <p class="text-sm text-gray-600 comic-font">Vocabulario en inglés</p>
         </div>
        </div>
        <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-purple-200">
@@ -573,7 +736,7 @@
         </div>
         <div class="p-4 bg-gradient-to-r from-purple-50 to-violet-50">
          <h4 class="font-bold text-gray-800">Números en Inglés</h4>
-         <p class="text-sm text-gray-600 comic-font">Aprende a contar y usar números</p>
+         <p class="text-sm text-gray-600 comic-font">Conteo y números</p>
         </div>
        </div>
       </div>
@@ -589,10 +752,9 @@
     </section>
    </main>
    <footer class="relative z-10 mt-8 pb-6 text-center">
-    <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés para Quimica © 2026 | Hecho con ❤️ para estudiantes</p>
+    <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés para Química © 2026 | Hecho con ❤️ para estudiantes</p>
    </footer>
 
-   <!-- Elfsight AI Chatbot -->
    <div class="elfsight-app-908ce0c0-00bf-476d-8199-6a7b2042bd42" data-elfsight-app-lazy></div>
   </div>
 
@@ -622,6 +784,8 @@
     if (section === 'exercises') startQuiz();
     if (section === 'numbers') generateNumberGame();
     if (section === 'verbtobe') generateToBePractice();
+    if (section === 'tobepast') generateToBePassedPractice();
+    if (section === 'gerund') generateGerundPractice();
   }
 
   function speakWord(word) {
@@ -633,6 +797,7 @@
     }
   }
 
+  // 20 EJERCICIOS - VERBO TO BE PRESENTE
   function generateToBePractice() {
     const questions = [
       {sentence: 'I ___ a chemistry student.', answer: 'am'},
@@ -643,14 +808,26 @@
       {sentence: 'He ___ an industrial engineer.', answer: 'is'},
       {sentence: 'You ___ very smart!', answer: 'are'},
       {sentence: 'The chemicals ___ dangerous.', answer: 'are'},
+      {sentence: 'She ___ mixing chemicals.', answer: 'is'},
+      {sentence: 'It ___ not an acid.', answer: 'is'},
+      {sentence: 'I ___ not a physicist.', answer: 'am'},
+      {sentence: 'You ___ not ready.', answer: 'are'},
+      {sentence: 'They ___ not toxic.', answer: 'are'},
+      {sentence: 'This ___ an experiment.', answer: 'is'},
+      {sentence: 'We ___ prepared.', answer: 'are'},
+      {sentence: 'The lab ___ clean.', answer: 'is'},
+      {sentence: 'I ___ interested in chemistry.', answer: 'am'},
+      {sentence: 'You ___ my friend.', answer: 'are'},
+      {sentence: 'They ___ engineers.', answer: 'are'},
+      {sentence: 'She ___ a good student.', answer: 'is'},
     ];
-    const selected = questions.sort(() => Math.random() - 0.5).slice(0, 4);
+    const selected = questions.sort(() => Math.random() - 0.5).slice(0, 10);
     const container = document.getElementById('tobe-practice');
     container.innerHTML = selected.map((q, i) => `
-      <div class="flex flex-wrap items-center gap-2 bg-white rounded-xl p-3 shadow-sm">
-        <span class="comic-font text-gray-700">${q.sentence.replace('___', '<input type="text" id="tobe-${i}" class="w-20 px-2 py-1 border-2 border-purple-200 rounded-lg text-center font-bold focus:outline-none" />')}</span>
-        <button onclick="checkToBe(${i},'${q.answer}')" class="px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">Check ✓</button>
-        <span id="tobe-result-${i}" class="text-sm font-bold"></span>
+      <div class="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple/5 to-pink/5 rounded-lg p-3 shadow-sm border border-purple/20">
+        <span class="comic-font text-gray-700 flex-1">${q.sentence.replace('___', `<input type="text" id="tobe-${i}" class="w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center font-bold focus:outline-none focus:border-purple" placeholder="${q.answer[0]}" />`)}</span>
+        <button onclick="checkToBe(${i},'${q.answer}')" class="px-3 py-1 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">✓</button>
+        <span id="tobe-result-${i}" class="text-sm font-bold min-w-[50px]"></span>
       </div>
     `).join('');
   }
@@ -658,15 +835,127 @@
   function checkToBe(index, answer) {
     const input = document.getElementById('tobe-' + index);
     const result = document.getElementById('tobe-result-' + index);
-    if (input.value.toLowerCase().trim() === answer) {
-      result.textContent = '✅ Correct!';
-      result.className = 'text-sm font-bold text-green-600';
+    const userAnswer = input.value.toLowerCase().trim();
+    
+    if (userAnswer === answer) {
+      result.textContent = '✅ Correcto';
+      result.className = 'text-sm font-bold text-green-600 min-w-[50px]';
       input.classList.add('border-green-400', 'bg-green-50');
+      input.disabled = true;
       addScore(5);
     } else {
-      result.textContent = `❌ It's "${answer}"`;
-      result.className = 'text-sm font-bold text-red-500';
+      result.textContent = `❌ "${answer}"`;
+      result.className = 'text-sm font-bold text-red-500 min-w-[50px]';
       input.classList.add('border-red-400', 'bg-red-50');
+      input.disabled = true;
+    }
+  }
+
+  // 20 EJERCICIOS - VERBO TO BE PASADO
+  function generateToBePassedPractice() {
+    const questions = [
+      {sentence: 'I ___ happy yesterday.', answer: 'was'},
+      {sentence: 'You ___ in the lab.', answer: 'were'},
+      {sentence: 'He ___ a good student.', answer: 'was'},
+      {sentence: 'She ___ studying chemistry.', answer: 'was'},
+      {sentence: 'It ___ an experiment.', answer: 'was'},
+      {sentence: 'We ___ preparing the solution.', answer: 'were'},
+      {sentence: 'They ___ mixing chemicals.', answer: 'were'},
+      {sentence: 'I ___ not ready.', answer: 'was'},
+      {sentence: 'You ___ not here.', answer: 'were'},
+      {sentence: 'He ___ not a physicist.', answer: 'was'},
+      {sentence: 'The reaction ___ intense.', answer: 'was'},
+      {sentence: 'The chemicals ___ dangerous.', answer: 'were'},
+      {sentence: 'We ___ not done with the experiment.', answer: 'were'},
+      {sentence: 'She ___ not in the laboratory.', answer: 'was'},
+      {sentence: 'It ___ not a base.', answer: 'was'},
+      {sentence: 'They ___ not engineers.', answer: 'were'},
+      {sentence: 'I ___ confused about the formula.', answer: 'was'},
+      {sentence: 'You ___ very focused.', answer: 'were'},
+      {sentence: 'The solution ___ clear.', answer: 'was'},
+      {sentence: 'The results ___ excellent.', answer: 'were'},
+    ];
+    const selected = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+    const container = document.getElementById('tobepast-practice');
+    container.innerHTML = selected.map((q, i) => `
+      <div class="flex flex-wrap items-center gap-2 bg-gradient-to-r from-amber/5 to-orange/5 rounded-lg p-3 shadow-sm border border-amber/20">
+        <span class="comic-font text-gray-700 flex-1">${q.sentence.replace('___', `<input type="text" id="tobepast-${i}" class="w-16 px-2 py-1 border-2 border-amber-300 rounded-lg text-center font-bold focus:outline-none focus:border-amber" placeholder="${q.answer[0]}" />`)}</span>
+        <button onclick="checkToBePast(${i},'${q.answer}')" class="px-3 py-1 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">✓</button>
+        <span id="tobepast-result-${i}" class="text-sm font-bold min-w-[50px]"></span>
+      </div>
+    `).join('');
+  }
+
+  function checkToBePast(index, answer) {
+    const input = document.getElementById('tobepast-' + index);
+    const result = document.getElementById('tobepast-result-' + index);
+    const userAnswer = input.value.toLowerCase().trim();
+    
+    if (userAnswer === answer) {
+      result.textContent = '✅ Correcto';
+      result.className = 'text-sm font-bold text-green-600 min-w-[50px]';
+      input.classList.add('border-green-400', 'bg-green-50');
+      input.disabled = true;
+      addScore(5);
+    } else {
+      result.textContent = `❌ "${answer}"`;
+      result.className = 'text-sm font-bold text-red-500 min-w-[50px]';
+      input.classList.add('border-red-400', 'bg-red-50');
+      input.disabled = true;
+    }
+  }
+
+  // 20 EJERCICIOS - GERUNDIO (-ING)
+  function generateGerundPractice() {
+    const questions = [
+      {sentence: 'I enjoy ___ (study) chemistry.', answer: 'studying'},
+      {sentence: 'She is ___ (mix) the chemicals.', answer: 'mixing'},
+      {sentence: 'They like ___ (prepare) experiments.', answer: 'preparing'},
+      {sentence: 'We are ___ (heat) the solution.', answer: 'heating'},
+      {sentence: 'He loves ___ (work) in the lab.', answer: 'working'},
+      {sentence: 'The purpose of ___ (filter) is to separate solids.', answer: 'filtering'},
+      {sentence: 'I finished ___ (measure) the acid.', answer: 'measuring'},
+      {sentence: 'She is ___ (read) the lab manual.', answer: 'reading'},
+      {sentence: 'They are ___ (dissolve) the salt.', answer: 'dissolving'},
+      {sentence: 'We start ___ (boil) water at 100°C.', answer: 'boiling'},
+      {sentence: '___ (Study) is important for chemists.', answer: 'Studying'},
+      {sentence: 'I dislike ___ (wear) safety goggles.', answer: 'wearing'},
+      {sentence: 'The process of ___ (oxidize) is important.', answer: 'oxidizing'},
+      {sentence: 'She is ___ (calculate) the pH.', answer: 'calculating'},
+      {sentence: 'They enjoy ___ (experiment) with reactions.', answer: 'experimenting'},
+      {sentence: 'We stop ___ (work) at 5 PM.', answer: 'working'},
+      {sentence: 'The technique of ___ (titrate) is useful.', answer: 'titrating'},
+      {sentence: 'I practice ___ (formulate) chemical equations.', answer: 'formulating'},
+      {sentence: 'She is ___ (analyze) the results.', answer: 'analyzing'},
+      {sentence: 'They are ___ (identify) unknown compounds.', answer: 'identifying'},
+    ];
+    const selected = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+    const container = document.getElementById('gerund-practice');
+    container.innerHTML = selected.map((q, i) => `
+      <div class="flex flex-wrap items-center gap-2 bg-gradient-to-r from-teal/5 to-cyan/5 rounded-lg p-3 shadow-sm border border-teal/20">
+        <span class="comic-font text-gray-700 flex-1">${q.sentence.replace(/___/, `<input type="text" id="gerund-${i}" class="w-24 px-2 py-1 border-2 border-teal-300 rounded-lg text-center font-bold focus:outline-none focus:border-teal" placeholder="verb+ing" />`)}</span>
+        <button onclick="checkGerund(${i},'${q.answer}')" class="px-3 py-1 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg text-sm font-bold hover:scale-105 transition-all">✓</button>
+        <span id="gerund-result-${i}" class="text-sm font-bold min-w-[50px]"></span>
+      </div>
+    `).join('');
+  }
+
+  function checkGerund(index, answer) {
+    const input = document.getElementById('gerund-' + index);
+    const result = document.getElementById('gerund-result-' + index);
+    const userAnswer = input.value.toLowerCase().trim();
+    
+    if (userAnswer === answer) {
+      result.textContent = '✅ Correcto';
+      result.className = 'text-sm font-bold text-green-600 min-w-[50px]';
+      input.classList.add('border-green-400', 'bg-green-50');
+      input.disabled = true;
+      addScore(5);
+    } else {
+      result.textContent = `❌ "${answer}"`;
+      result.className = 'text-sm font-bold text-red-500 min-w-[50px]';
+      input.classList.add('border-red-400', 'bg-red-50');
+      input.disabled = true;
     }
   }
 
@@ -683,7 +972,7 @@
       const options = [q.word, ...nums.filter(n => n.word !== q.word).sort(() => Math.random() - 0.5).slice(0,2).map(n => n.word)].sort(() => Math.random() - 0.5);
       return `<div class="bg-white rounded-xl p-4 shadow-sm flex flex-wrap items-center gap-3">
         <span class="text-3xl font-bold text-orange w-16">${q.num}</span>
-        ${options.map(o => `<button onclick="checkNumber(this,'${o}','${q.word}')" class="quiz-option px-4 py-2 bg-orange/10 border-2 border-orange/30 rounded-xl font-medium">${o}</button>`).join('')}
+        ${options.map(o => `<button onclick="checkNumber(this,'${o}','${q.word}')" class="quiz-option px-4 py-2 bg-orange/10 border-2 border-orange/30 rounded-xl font-medium hover:bg-orange/20 transition-all">${o}</button>`).join('')}
       </div>`;
     }).join('');
   }
@@ -715,16 +1004,16 @@
     const a = document.getElementById('substanceA').value;
     const b = document.getElementById('substanceB').value;
     const reactions = {
-      'acid+base': {result: '💧 Salt + Water (NaCl + H₂O)', desc: 'This is a NEUTRALIZATION reaction! An acid and a base produce salt and water.', color: 'from-green-100 to-blue-100'},
-      'acid+water': {result: '🧪 Diluted Acid', desc: 'Adding water to acid creates a DILUTED SOLUTION. Always add acid to water, never water to acid!', color: 'from-blue-100 to-cyan-100'},
-      'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen Gas', desc: 'This is a very EXOTHERMIC reaction! Sodium reacts violently with water producing heat and hydrogen gas.', color: 'from-red-100 to-orange-100'},
-      'iron+oxygen': {result: '🟤 Iron Oxide (Rust)', desc: 'This is an OXIDATION reaction! Iron combines with oxygen to form rust (Fe₂O₃).', color: 'from-amber-100 to-red-100'},
+      'acid+base': {result: '💧 Salt + Water', desc: 'NEUTRALIZATION! An acid and base make salt and water.', color: 'from-green-100 to-blue-100'},
+      'acid+water': {result: '🧪 Diluted Acid', desc: 'Adding water to acid creates a DILUTED SOLUTION!', color: 'from-blue-100 to-cyan-100'},
+      'sodium+water': {result: '💥 NaOH + H₂ Gas', desc: 'EXOTHERMIC reaction! Sodium reacts violently with water.', color: 'from-red-100 to-orange-100'},
+      'iron+oxygen': {result: '🟤 Iron Oxide (Rust)', desc: 'OXIDATION! Iron combines with oxygen to form rust.', color: 'from-amber-100 to-red-100'},
     };
     const key = a + '+' + b;
-    const reaction = reactions[key] || {result: '🔬 No visible reaction', desc: 'These substances do not react under normal conditions. Try a different combination!', color: 'from-gray-100 to-gray-200'};
+    const reaction = reactions[key] || {result: '🔬 No visible reaction', desc: 'These substances do not react under normal conditions.', color: 'from-gray-100 to-gray-200'};
     const resultDiv = document.getElementById('mix-result');
     resultDiv.classList.remove('hidden');
-    resultDiv.innerHTML = `<div class="bg-gradient-to-r ${reaction.color} rounded-xl p-4 bounce-in">
+    resultDiv.innerHTML = `<div class="bg-gradient-to-r ${reaction.color} rounded-xl p-4 bounce-in border-2 border-gray-300">
       <p class="text-xl font-bold text-gray-800">${reaction.result}</p>
       <p class="comic-font text-gray-600 mt-2">${reaction.desc}</p>
     </div>`;
@@ -733,20 +1022,23 @@
 
   function generateMatchingGame() {
     const pairs = [
-      {eng: 'Acid', esp: 'Sustancia con pH < 7'},
-      {eng: 'Base', esp: 'Sustancia con pH > 7'},
-      {eng: 'Molecule', esp: 'Dos o más átomos unidos'},
-      {eng: 'Reaction', esp: 'Transformación de sustancias'},
-      {eng: 'pH', esp: 'Medida de acidez/alcalinidad'},
+      {eng: 'Acid', esp: 'pH < 7'},
+      {eng: 'Base', esp: 'pH > 7'},
+      {eng: 'Molecule', esp: 'Átomos unidos'},
+      {eng: 'Reaction', esp: 'Transformación'},
+      {eng: 'pH', esp: 'Medida acídez'},
+      {eng: 'Catalyst', esp: 'Acelera reacción'},
+      {eng: 'Solution', esp: 'Mezcla disuelta'},
+      {eng: 'Filtration', esp: 'Separar sólidos'},
     ];
     
     const shuffled = pairs.sort(() => Math.random() - 0.5);
     const container = document.getElementById('matching-game');
     
     container.innerHTML = pairs.map((p, i) => `
-      <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
-        <span class="font-bold text-blue-600">${p.eng}</span>
-        <select class="px-3 py-1 border-2 border-blue-200 rounded-lg" id="match-${i}">
+      <div class="bg-white rounded-lg p-3 flex justify-between items-center shadow-sm border border-pink/20">
+        <span class="font-bold text-pink-600 text-sm">${p.eng}</span>
+        <select class="px-3 py-1 border-2 border-pink-200 rounded-lg text-sm" id="match-${i}">
           <option value="">Selecciona...</option>
           ${shuffled.map(s => `<option value="${s.esp}">${s.esp}</option>`).join('')}
         </select>
@@ -755,55 +1047,61 @@
     
     setTimeout(() => {
       const button = document.querySelector('#matching-game').nextElementSibling;
-      button.textContent = '✓ Verificar Respuestas';
-      button.onclick = () => verifyMatching(pairs);
+      if(button) {
+        button.textContent = '✓ Verificar';
+        button.onclick = () => verifyMatching(pairs);
+      }
     }, 100);
   }
 
   function verifyMatching(pairs) {
     let correct = 0;
+    let results = [];
     pairs.forEach((p, i) => {
       const select = document.getElementById('match-' + i);
       if (select.value === p.esp) {
         select.parentElement.classList.add('bg-green-100');
         correct++;
         addScore(10);
+        results.push('✅');
       } else {
         select.parentElement.classList.add('bg-red-100');
+        results.push('❌');
       }
       select.disabled = true;
     });
-    alert(`¡Acertaste ${correct} de ${pairs.length}!`);
+    showGameResult(`¡Acertaste ${correct} de ${pairs.length}!`, correct === pairs.length);
   }
 
   function generateScrambleGame() {
-    const words = ['ACID', 'WATER', 'MOLECULE', 'REACTION', 'CHEMISTRY'];
-    const selected = words.sort(() => Math.random() - 0.5).slice(0, 3);
+    const words = ['ACID', 'WATER', 'MOLECULE', 'REACTION', 'CHEMISTRY', 'MIXTURE', 'ELEMENT', 'COMPOUND'];
+    const selected = words.sort(() => Math.random() - 0.5).slice(0, 4);
     const container = document.getElementById('scramble-game');
     
     container.innerHTML = selected.map((word, i) => {
       const scrambled = word.split('').sort(() => Math.random() - 0.5).join('');
       return `
-        <div class="bg-white rounded-xl p-3 shadow-sm">
-          <p class="font-bold text-lg text-purple mb-2">${scrambled}</p>
-          <input type="text" id="scramble-${i}" placeholder="Escribe la palabra" class="w-full px-3 py-2 border-2 border-purple-200 rounded-lg" />
-          <button onclick="checkScramble(${i}, '${word}')" class="mt-2 px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold">Verificar</button>
+        <div class="bg-white rounded-lg p-3 shadow-sm border border-blue/20">
+          <p class="font-bold text-lg text-blue-600 mb-2">${scrambled}</p>
+          <input type="text" id="scramble-${i}" placeholder="Escribe la palabra" class="w-full px-3 py-2 border-2 border-blue-200 rounded-lg text-sm" />
+          <button onclick="checkScrambleGame(${i}, '${word}')" class="mt-2 w-full px-3 py-1 bg-blue-500 text-white rounded-lg text-sm font-bold">Verificar</button>
         </div>
       `;
     }).join('');
   }
 
-  function checkScramble(index, correct) {
+  function checkScrambleGame(index, correct) {
     const input = document.getElementById('scramble-' + index);
     if (input.value.toUpperCase() === correct) {
       input.classList.add('border-green-500', 'bg-green-50');
+      input.disabled = true;
       addScore(15);
-      alert('¡Correcto!');
+      showGameResult('¡Correcto!', true);
     } else {
       input.classList.add('border-red-500', 'bg-red-50');
-      alert(`Incorrecto. La respuesta es: ${correct}`);
+      input.disabled = true;
+      showGameResult(`Incorrecto. Es: ${correct}`, false);
     }
-    input.disabled = true;
   }
 
   function generateSentenceGame() {
@@ -811,57 +1109,84 @@
       {sentence: 'Water ___ a compound.', answer: 'is', options: ['is', 'are', 'am']},
       {sentence: 'Acids ___ dangerous.', answer: 'are', options: ['are', 'is', 'am']},
       {sentence: 'Chemistry ___ interesting.', answer: 'is', options: ['is', 'are', 'am']},
+      {sentence: 'Experiments ___ fun.', answer: 'are', options: ['are', 'is', 'am']},
+      {sentence: 'I ___ learning English.', answer: 'am', options: ['am', 'are', 'is']},
+      {sentence: 'The lab ___ clean.', answer: 'is', options: ['is', 'are', 'am']},
     ];
     
     const container = document.getElementById('sentence-game');
     container.innerHTML = sentences.map((s, i) => `
-      <div class="bg-white rounded-xl p-3 shadow-sm">
-        <p class="mb-2 text-gray-700">${s.sentence}</p>
-        ${s.options.map(opt => `
-          <button onclick="checkSentence(${i}, '${opt}', '${s.answer}')" class="mr-2 px-3 py-1 bg-blue-100 border-2 border-blue-200 rounded-lg hover:bg-blue-200 transition-all">${opt}</button>
-        `).join('')}
+      <div class="bg-white rounded-lg p-3 shadow-sm border border-green/20">
+        <p class="mb-2 text-gray-700 text-sm">${s.sentence}</p>
+        <div class="flex gap-2 flex-wrap">
+          ${s.options.map(opt => `
+            <button onclick="checkSentenceGame(${i}, '${opt}', '${s.answer}')" class="px-3 py-1 bg-green-100 border-2 border-green-200 rounded-lg text-sm hover:bg-green-200 transition-all">${opt}</button>
+          `).join('')}
+        </div>
       </div>
     `).join('');
   }
 
-  function checkSentence(index, selected, correct) {
+  function checkSentenceGame(index, selected, correct) {
     if (selected === correct) {
       addScore(10);
-      alert('¡Correcto!');
+      showGameResult('¡Correcto!', true);
     } else {
-      alert(`Incorrecto. La respuesta correcta es: ${correct}`);
+      showGameResult(`Incorrecto. La respuesta es: ${correct}`, false);
     }
   }
 
   function generateTranslationGame() {
     const translations = [
-      {esp: 'Oxígeno', eng: 'Oxygen'},
-      {esp: 'Hidrógeno', eng: 'Hydrogen'},
-      {esp: 'Carbono', eng: 'Carbon'},
-      {esp: 'Nitrógeno', eng: 'Nitrogen'},
-      {esp: 'Azufre', eng: 'Sulfur'},
+      {esp: 'Oxígeno', eng: 'oxygen'},
+      {esp: 'Hidrógeno', eng: 'hydrogen'},
+      {esp: 'Carbono', eng: 'carbon'},
+      {esp: 'Nitrógeno', eng: 'nitrogen'},
+      {esp: 'Azufre', eng: 'sulfur'},
+      {esp: 'Hierro', eng: 'iron'},
+      {esp: 'Oro', eng: 'gold'},
+      {esp: 'Plata', eng: 'silver'},
     ];
     
     const container = document.getElementById('translation-game');
     container.innerHTML = translations.map((t, i) => `
-      <div class="bg-white rounded-xl p-3 shadow-sm flex items-center gap-3">
-        <span class="font-bold text-green-600 w-20">${t.esp}</span>
-        <input type="text" id="trans-${i}" placeholder="Traduce..." class="flex-1 px-3 py-2 border-2 border-green-200 rounded-lg" />
-        <button onclick="checkTranslation(${i}, '${t.eng}')" class="px-3 py-1 bg-green-500 text-white rounded-lg text-sm font-bold">✓</button>
+      <div class="bg-white rounded-lg p-3 shadow-sm flex items-center gap-3 border border-purple/20">
+        <span class="font-bold text-purple-600 w-20 text-sm">${t.esp}</span>
+        <input type="text" id="trans-${i}" placeholder="Traduce..." class="flex-1 px-3 py-2 border-2 border-purple-200 rounded-lg text-sm" />
+        <button onclick="checkTranslationGame(${i}, '${t.eng}')" class="px-3 py-1 bg-purple text-white rounded-lg text-sm font-bold">✓</button>
       </div>
     `).join('');
   }
 
-  function checkTranslation(index, correct) {
+  function checkTranslationGame(index, correct) {
     const input = document.getElementById('trans-' + index);
-    if (input.value.toLowerCase() === correct.toLowerCase()) {
+    if (input.value.toLowerCase() === correct) {
       input.classList.add('border-green-500', 'bg-green-50');
+      input.disabled = true;
       addScore(10);
+      showGameResult('¡Correcto!', true);
     } else {
       input.classList.add('border-red-500', 'bg-red-50');
-      alert(`Incorrecto. La respuesta es: ${correct}`);
+      input.disabled = true;
+      showGameResult(`Incorrecto. Es: ${correct}`, false);
     }
-    input.disabled = true;
+  }
+
+  function showGameResult(message, isCorrect) {
+    const overlay = document.createElement('div');
+    overlay.className = 'result-overlay';
+    overlay.onclick = () => { overlay.remove(); modal.remove(); };
+    
+    const modal = document.createElement('div');
+    modal.className = 'result-modal';
+    modal.innerHTML = `
+      <div class="text-6xl mb-4">${isCorrect ? '✅' : '❌'}</div>
+      <p class="text-xl font-bold text-gray-800 mb-4">${message}</p>
+      <button onclick="this.closest('.result-modal').parentElement.remove(); this.closest('.result-modal').remove()" class="px-4 py-2 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg font-bold hover:scale-105 transition-all">Continuar</button>
+    `;
+    
+    document.body.appendChild(overlay);
+    document.body.appendChild(modal);
   }
 
   const quizBank = [
@@ -939,7 +1264,6 @@
     document.getElementById('video-frame').src = '';
   }
 
-  // Inicializar al cargar
   document.addEventListener('DOMContentLoaded', () => {
     generateToBePractice();
     generateNumberGame();
