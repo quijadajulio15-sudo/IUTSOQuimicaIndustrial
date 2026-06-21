@@ -1,431 +1,723 @@
-<script>
-/*
-  Enhancements script:
-  - localStorage persistence (key: labEngState)
-  - fixes for scramble verify-all
-  - matching stores expected mapping and supports verify-all
-  - ordering uses drag & drop and verify
-  - restore state on load
-*/
+<!doctype html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Laboratorio de Inglés Químico — Ejercicios</title>
 
-/* Persistence helpers */
-const STORAGE_KEY = 'labEngState_v1';
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 
-function saveState(state) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) { console.warn('Could not save state', e); }
-}
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
-function loadState() {
-  try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; } catch(e){ console.warn('Could not load state', e); return null; }
-}
-
-/* General state object builder & saver */
-function getCurrentState() {
-  const state = { gamesScore: window.gamesScore || 0, matching: null, scramble: null, sentence: null, translation: null, mcq: null, ordering: null, tobe: null };
-  // matching
-  const matchContainer = document.getElementById('matching-game');
-  if (matchContainer && matchContainer.dataset.expected) {
-    state.matching = { expected: JSON.parse(matchContainer.dataset.expected), selections: [] };
-    const selects = matchContainer.querySelectorAll('select');
-    selects.forEach(s => state.matching.selections.push(s.value || ''));
-  }
-  // scramble
-  const scrambleContainer = document.getElementById('scramble-game');
-  if (scrambleContainer && scrambleContainer.dataset.expected) {
-    state.scramble = { expected: JSON.parse(scrambleContainer.dataset.expected), answers: [] };
-    scrambleContainer.querySelectorAll('input').forEach(inp => state.scramble.answers.push(inp.value || ''));
-  }
-  // sentence
-  const sentenceContainer = document.getElementById('sentence-game');
-  if (sentenceContainer && sentenceContainer.dataset.answers) {
-    state.sentence = { answers: JSON.parse(sentenceContainer.dataset.answers), selections: [] };
-    const selects = sentenceContainer.querySelectorAll('button[data-sel]');
-    // we track selections separately using window.sentenceSelections if present
-    state.sentence.selections = window.sentenceSelections ? {...window.sentenceSelections} : [];
-  }
-  // translation
-  const transContainer = document.getElementById('translation-game');
-  if (transContainer && transContainer.dataset.answers) {
-    state.translation = { answers: JSON.parse(transContainer.dataset.answers), inputs: [] };
-    transContainer.querySelectorAll('input').forEach(inp => state.translation.inputs.push(inp.value || ''));
-  }
-  // MCQ
-  const mcqContainer = document.getElementById('mcq-game');
-  if (mcqContainer && mcqContainer.dataset.answers) {
-    state.mcq = { answers: JSON.parse(mcqContainer.dataset.answers), selections: window.mcqSelections ? {...window.mcqSelections} : {} };
-  }
-  // ordering
-  const ordContainer = document.getElementById('ordering-game');
-  if (ordContainer && ordContainer.dataset.correct) {
-    const items = Array.from(ordContainer.querySelectorAll('.ordering-item')).map(div => div.dataset.step || '');
-    state.ordering = { correct: JSON.parse(ordContainer.dataset.correct), order: items };
-  }
-  // ToBe (save inputs from all tobe inputs)
-  const tobeInputs = document.querySelectorAll('input[data-expected]');
-  if (tobeInputs.length) {
-    state.tobe = {};
-    tobeInputs.forEach(inp => { state.tobe[inp.id] = { value: inp.value || '', expected: inp.dataset.expected || '' }; });
-  }
-
-  state.timestamp = Date.now();
-  return state;
-}
-
-function persistCurrentState() {
-  const state = getCurrentState();
-  saveState(state);
-}
-
-/* Restore UI from state (best-effort) */
-function restoreState() {
-  const state = loadState();
-  if (!state) return;
-  // restore games score
-  if (typeof state.gamesScore === 'number') {
-    window.gamesScore = state.gamesScore;
-    const el = document.getElementById('games-score');
-    if (el) el.textContent = window.gamesScore;
-    const totalEl = document.getElementById('score-text');
-    if (totalEl) totalEl.textContent = parseInt(totalEl.textContent || '0') + window.gamesScore;
-  }
-  // matching
-  if (state.matching && state.matching.expected) {
-    // regenerate matching using expected as left order
-    const container = document.getElementById('matching-game');
-    if (container) {
-      container.innerHTML = '';
-      const left = state.matching.expected.map(def => {
-        // find eng for def if possible by matching original pairs
-        // We'll show def on the right; left label show English from matchingPairs if available
-        return def;
-      });
-      // To regenerate exactly as before, call generateMatching but then overwrite expected
-      if (typeof generateMatching === 'function') generateMatching();
-      // store expected in dataset (if not present)
-      container.dataset.expected = JSON.stringify(state.matching.expected);
-      // restore selections
-      state.matching.selections.forEach((val, i) => {
-        const sel = document.getElementById('match-select-'+i);
-        if (sel) { sel.value = val; if (val) sel.parentElement.classList.add(val === (JSON.parse(container.dataset.expected)[i]) ? 'bg-green-50' : 'bg-red-50'); sel.disabled = true; }
-      });
-      document.getElementById('matching-summary').textContent = `Restaurado (${state.matching.selections.filter(s=>s).length}/${state.matching.expected.length})`;
+  <style>
+    :root{
+      --primary:#ff6b6b;
+      --accent:#48dbfb;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --glass-2: rgba(255,255,255,0.85);
+      --focus-color: #2563eb;
     }
-  }
-  // scramble
-  if (state.scramble && state.scramble.expected) {
-    if (typeof generateScramble === 'function') generateScramble();
-    const container = document.getElementById('scramble-game');
-    container.dataset.expected = JSON.stringify(state.scramble.expected);
-    state.scramble.answers.forEach((ans,i) => {
-      const inp = document.getElementById('scramble-in-'+i);
-      const res = document.getElementById('scramble-res-'+i);
-      if (inp) { inp.value = ans; // verify if matches expected
-        const expected = state.scramble.expected[i] || '';
-        if (ans && ans.trim().toUpperCase() === expected) { res.textContent = '✅'; inp.classList.add('border-green-400','bg-green-50'); inp.disabled = true; }
-      }
-    });
-    document.getElementById('scramble-summary').textContent = 'Restaurado';
-  }
-  // sentence
-  if (state.sentence && state.sentence.answers) {
-    if (typeof generateSentence === 'function') generateSentence();
-    const container = document.getElementById('sentence-game');
-    container.dataset.answers = JSON.stringify(state.sentence.answers);
-    if (state.sentence.selections) {
-      window.sentenceSelections = {...state.sentence.selections};
-      Object.entries(window.sentenceSelections).forEach(([idx,val])=>{
-        const res = document.getElementById('sentence-res-'+idx);
-        if (res) { res.textContent = (val === state.sentence.answers[idx]) ? '✅' : `❌ ${state.sentence.answers[idx]}`; const parent = container.children[idx]; if (parent) parent.querySelectorAll('button').forEach(b=>b.disabled=true); }
-      });
+    *{box-sizing:border-box}
+    html,body,#app{height:100%}
+    body{
+      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(180deg,#f3f7ff 0%, #fff7fb 100%);
+      color:#0f172a;
+      margin:0;
     }
-    document.getElementById('sentence-summary').textContent = 'Restaurado';
-  }
-  // translation
-  if (state.translation && state.translation.answers) {
-    if (typeof generateTranslation === 'function') generateTranslation();
-    const container = document.getElementById('translation-game');
-    container.dataset.answers = JSON.stringify(state.translation.answers);
-    state.translation.inputs.forEach((val,i)=>{
-      const inp = document.getElementById('trans-in-'+i);
-      const res = document.getElementById('trans-res-'+i);
-      if (inp) { inp.value = val; const correct = state.translation.answers[i]; if (val.trim().toLowerCase() === (correct||'').toLowerCase()) { res.textContent='✅'; inp.classList.add('border-green-400','bg-green-50'); } }
-    });
-    document.getElementById('translation-summary').textContent = 'Restaurado';
-  }
-  // mcq
-  if (state.mcq && state.mcq.answers) {
-    if (typeof generateMCQ === 'function') generateMCQ();
-    window.mcqSelections = {...(state.mcq.selections||{})};
-    // mark selections UI (best-effort)
-    const container = document.getElementById('mcq-game');
-    if (container) {
-      container.querySelectorAll('div').forEach((div,i)=>{
-        const sel = window.mcqSelections && window.mcqSelections[i];
-        if (typeof sel !== 'undefined') {
-          // disable buttons and highlight chosen
-          div.querySelectorAll('button').forEach(b => b.disabled = true);
-          const res = document.getElementById('mcq-res-'+i);
-          if (res) res.textContent = (sel === JSON.parse(container.dataset.answers||'[]')[i]) ? '✅' : '❌';
-        }
-      });
+
+    .comic-font{ font-family:'Fredoka', 'Comic Neue', cursive; }
+    h1,h2,h3,h4{ font-weight:700; letter-spacing:-0.2px }
+    .card { background: var(--card); border-radius:1rem; box-shadow: 0 8px 30px rgba(2,6,23,0.08); }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .9rem; border-radius:.9rem; font-weight:600; cursor:pointer; transition:all .18s ease; }
+    .btn-primary { background: linear-gradient(90deg,var(--accent), #60a5fa); color:white; box-shadow: 0 6px 18px rgba(72,219,251,0.18); }
+    .btn-accent { background: linear-gradient(90deg, #ff7b7b, var(--primary)); color:white; box-shadow:0 6px 18px rgba(255,107,107,0.12) }
+    .btn-ghost { background:transparent; border:1px solid rgba(15,23,42,0.06); color: #0f172a; }
+    .small { padding:.35rem .6rem; font-size:.9rem; border-radius:.7rem }
+
+    .nav-item-styled { position:relative; overflow:hidden; border-radius:.9rem; }
+    .nav-item-styled:hover{ transform:translateX(6px); }
+
+    /* Games specific styling and exercise rows */
+    .game-card { border-radius:1rem; padding:1rem; background:linear-gradient(180deg,#ffffff, #fbfdff); border:1px solid rgba(2,6,23,0.04); }
+    .game-actions button{ min-width:110px; }
+
+    .section-exercise { margin-top: 1rem; padding: 1rem; background: #fff; border-radius: .8rem; box-shadow: 0 6px 18px rgba(2,6,23,0.04); border: 1px solid rgba(2,6,23,0.02); }
+    .section-exercise h4 { margin-bottom: .5rem; font-size: 1.05rem; }
+    .exercise-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; background: #fbfdff; padding:.5rem; border-radius:.6rem; }
+    .exercise-row input[type="text"]{ padding:.4rem .6rem; border-radius:.5rem; border:1px solid rgba(15,23,42,0.06); }
+    .exercise-row button.small{ font-size:.9rem; padding:.4rem .6rem; border-radius:.6rem; }
+    .exercise-feedback { font-weight:700; min-width:6rem; text-align:left; }
+    .controls { margin-top:.6rem; display:flex; gap:.6rem; flex-wrap:wrap; }
+
+    /* focus accessible */
+    :focus {
+      outline: 3px solid var(--focus-color);
+      outline-offset: 3px;
+      box-shadow: 0 6px 18px rgba(37,99,235,0.12);
     }
-    document.getElementById('mcq-summary').textContent = 'Restaurado';
-  }
-  // ordering
-  if (state.ordering && state.ordering.correct) {
-    // regenerate ordering and then set item order if possible
-    if (typeof generateOrdering === 'function') generateOrdering();
-    const container = document.getElementById('ordering-game');
-    // if ordering UI uses draggable items with class ordering-item, we attempt to reorder them according to state.ordering.order
-    if (state.ordering.order && state.ordering.order.length) {
-      // try to place items in that order (best-effort)
-      const items = Array.from(container.querySelectorAll('.ordering-item'));
-      if (items.length) {
-        // build map text->element
-        const map = {};
-        items.forEach(it => map[it.dataset.step] = it);
-        container.innerHTML = '';
-        state.ordering.order.forEach(stepText => {
-          if (map[stepText]) container.appendChild(map[stepText]);
-        });
-        document.getElementById('ordering-summary').textContent = 'Restaurado';
-      }
+    button:focus, input:focus, select:focus {
+      transform: translateY(-1px);
     }
-  }
-  // tobe inputs
-  if (state.tobe) {
-    Object.entries(state.tobe).forEach(([id,obj])=>{
-      const input = document.getElementById(id);
-      if (input) { input.value = obj.value || ''; if (obj.value) { const res = document.getElementById(id+'-res'); if (res) { res.textContent = (obj.value.toLowerCase().trim() === (obj.expected||'').toLowerCase()) ? '✅' : `❌ ${(obj.expected||'')}`; } } }
-    });
-  }
 
-  // done
-}
-
-/* Hook persistence to major actions:
-   - After generate functions run, we save the expected arrays as dataset.* and call persistCurrentState
-   - After verify functions run, we persist state
-*/
-
-/* Fix/augment generateMatching to store expected mapping reliably (overwrites previous if existed) */
-function generateMatching(){
-  // draw a set of pairs (use matchingPairs if present globally)
-  const pairs = window.matchingPairs || [
-    {eng:'Acid', def:'pH < 7'},{eng:'Base', def:'pH > 7'},{eng:'Molecule', def:'Two or more atoms bonded'},
-    {eng:'Reaction', def:'Transformation of substances'},{eng:'Solvent', def:'Liquid that dissolves a solute'},{eng:'Catalyst', def:'Speeds up a reaction without being consumed'},
-    {eng:'Distillation', def:'Separation by boiling point'},{eng:'Filtration', def:'Separation of solids from liquids'},{eng:'Reactor', def:'Vessel for chemical reactions'},{eng:'Oxidation', def:'Loss of electrons'}
-  ];
-  const left = pairs.map(p => p.eng).sort(()=>Math.random()-0.5).slice(0,6);
-  const rightPool = pairs.filter(p=> left.includes(p.eng) ? false : true).concat(pairs.filter(p=> left.includes(p.eng))); // ensure pool contains defs
-  const right = left.map(l => pairs.find(p => p.eng === l).def).sort(()=>Math.random()-0.5);
-
-  const container = document.getElementById('matching-game');
-  container.innerHTML = '';
-  left.forEach((eng,i)=>{
-    const div = document.createElement('div');
-    div.className = 'flex items-center justify-between gap-4 bg-white p-3 rounded-lg';
-    div.innerHTML = `<div class="font-semibold">${eng}</div>
-      <select id="match-select-${i}" class="px-2 py-1" aria-label="Emparejar para ${eng}">
-        <option value="">Selecciona...</option>
-        ${right.map(r=>`<option value="${r}">${r}</option>`).join('')}
-      </select>`;
-    container.appendChild(div);
-  });
-  // store expected mapping (in same left order)
-  const expected = left.map(l => pairs.find(p => p.eng === l).def);
-  container.dataset.expected = JSON.stringify(expected);
-  document.getElementById('matching-summary').textContent = '';
-  persistCurrentState();
-}
-
-/* verifyMatchingAll: uses dataset.expected */
-function verifyMatchingAll(){
-  const container = document.getElementById('matching-game');
-  if (!container || !container.dataset.expected) return;
-  const expected = JSON.parse(container.dataset.expected);
-  let correct = 0;
-  expected.forEach((exp, i)=>{
-    const sel = document.getElementById('match-select-'+i);
-    if(!sel) return;
-    const val = sel.value || '';
-    if (val === exp) {
-      sel.parentElement.classList.add('bg-green-50');
-      correct++;
-      updateGamesScore(2);
-    } else {
-      sel.parentElement.classList.add('bg-red-50');
-      if (val) {
-        // highlight correct option
-        for (let opt of sel.options) { if (opt.value === exp) opt.style.fontWeight = '700'; }
-      }
+    @media (max-width:768px){
+      .desktop-only { display:none }
     }
-    sel.disabled = true;
-  });
-  document.getElementById('matching-summary').textContent = `Resultado: ${correct}/${expected.length}`;
-  persistCurrentState();
-}
+  </style>
+</head>
+<body>
+  <div id="app" class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/60 backdrop-blur-md border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <button id="menu-btn" onclick="toggleSidebar()" class="p-2 rounded-lg bg-white shadow-sm" aria-label="Abrir menú">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="flex items-center gap-3">
+            <div class="rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 p-3 text-white shadow-md">
+              <span style="font-size:1.4rem">⚗️</span>
+            </div>
+            <div>
+              <h1 class="text-lg font-extrabold leading-tight">Laboratorio de Inglés Químico</h1>
+              <p class="text-xs text-gray-500">Inglés técnico aplicado a química industrial</p>
+            </div>
+          </div>
+        </div>
 
-/* Scramble: generate and store expected words on dataset; allow verify-all */
-function generateScramble(){
-  const words = window.scrambleWords || ['ACID','WATER','MOLECULE','REACTION','SOLVENT','CATALYST','DISTILLATION','FILTRATION','REACTOR','OXIDATION'];
-  const selected = words.sort(()=>Math.random()-0.5).slice(0,5);
-  const container = document.getElementById('scramble-game');
-  container.innerHTML = '';
-  container.dataset.expected = JSON.stringify(selected);
-  selected.forEach((w,i) => {
-    const scrambled = w.split('').sort(()=>Math.random()-0.5).join('');
-    const div = document.createElement('div');
-    div.className = 'bg-white p-3 rounded-lg';
-    div.innerHTML = `<div class="font-medium">${scrambled}</div>
-      <div class="mt-2 flex gap-2">
-        <input id="scramble-in-${i}" type="text" aria-label="Respuesta scrambled ${i}" class="flex-1" placeholder="Escribe la palabra">
-        <button class="btn small btn-ghost" onclick="checkScrambleSingle(${i}, '${w}')">Verificar</button>
+        <div class="flex items-center gap-3">
+          <div id="score-display" class="hidden md:flex items-center gap-2 bg-white rounded-full px-3 py-1 border border-gray-100">
+            <span class="text-yellow-500">⭐</span>
+            <strong id="score-text">0</strong>
+          </div>
+          <button class="btn btn-ghost" onclick="navigateTo('home')">Inicio</button>
+        </div>
       </div>
-      <div id="scramble-res-${i}" class="mt-2 text-sm font-medium"></div>`;
-    container.appendChild(div);
-  });
-  document.getElementById('scramble-summary').textContent = '';
-  persistCurrentState();
-}
+    </header>
 
-function checkScrambleSingle(i, correct){
-  const inp = document.getElementById('scramble-in-'+i);
-  const res = document.getElementById('scramble-res-'+i);
-  if (!inp) return;
-  const val = (inp.value || '').trim().toUpperCase();
-  if (val === correct) {
-    res.textContent = '✅ Correct';
-    inp.classList.add('border-green-400','bg-green-50');
-    updateGamesScore(3);
-  } else {
-    res.textContent = `❌ ${correct}`;
-    inp.classList.add('border-red-400','bg-red-50');
-  }
-  inp.disabled = true;
-  persistCurrentState();
-}
+    <!-- Sidebar (offcanvas) -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-72 transform -translate-x-full z-50 transition-transform bg-white/95 border-r border-gray-100 p-6" aria-hidden="true">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🧪</span>
+          <h2 class="text-lg font-bold">Menú</h2>
+        </div>
+        <button onclick="toggleSidebar()" class="p-2 rounded-lg" aria-label="Cerrar menú">✕</button>
+      </div>
+      <nav class="space-y-2" aria-label="Navegación principal">
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('home')">Inicio</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('verbtobe')">Verbo To Be</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('gerund')">Gerundio (-ING)</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('possessives')">Pronombres Posesivos</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('modals')">Verbos Modales</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('games')">Juegos Educativos</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('lab')">Laboratorio</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('exercises')">Ejercicios</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('vocabulary')">Vocabulario</button>
+        <button class="w-full text-left nav-item-styled p-3" onclick="navigateTo('videos')">Videos</button>
+      </nav>
+    </aside>
 
-function verifyScrambleAll(){
-  const container = document.getElementById('scramble-game');
-  if (!container || !container.dataset.expected) return;
-  const expected = JSON.parse(container.dataset.expected);
-  let correct=0;
-  expected.forEach((word,i)=>{
-    const inp = document.getElementById('scramble-in-'+i);
-    const res = document.getElementById('scramble-res-'+i);
-    if (!inp) return;
-    const val = (inp.value || '').trim().toUpperCase();
-    if (val === word) {
-      if (!res.textContent.includes('✅')) updateGamesScore(3);
-      res.textContent = '✅ Correct';
-      inp.classList.add('border-green-400','bg-green-50');
-      correct++;
-    } else {
-      res.textContent = `❌ ${word}`;
-      inp.classList.add('border-red-400','bg-red-50');
+    <!-- Main content -->
+    <main id="main-content" role="main" class="max-w-7xl mx-auto px-4 py-8">
+      <!-- HOME -->
+      <section id="section-home" class="mb-8">
+        <div class="card p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h2 class="text-3xl font-extrabold">Bienvenido al Laboratorio de Inglés Químico</h2>
+            <p class="mt-3 text-gray-600">Aprende gramática, vocabulario y procedimientos en inglés aplicados a la química industrial con ejercicios interactivos y prácticas de laboratorio virtual.</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <button class="btn btn-accent" onclick="navigateTo('verbtobe')">Empezar: Verbo To Be</button>
+              <button class="btn btn-primary" onclick="navigateTo('games')">Ir a Juegos</button>
+              <button class="btn btn-ghost" onclick="navigateTo('lab')">Laboratorio Virtual</button>
+            </div>
+          </div>
+          <div class="rounded-xl overflow-hidden">
+            <iframe class="w-full h-56 rounded-xl" src="https://www.youtube.com/embed/LY0N59T0zFk" title="Intro" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- VERBO TO BE (REEMPLAZADA COMPLETA) -->
+      <section id="section-verbtobe" class="hidden space-y-6">
+        <div class="section-exercise" aria-labelledby="tobe-title">
+          <h2 id="tobe-title" class="text-2xl font-bold">El Verbo "To Be" — Presente y Pasado</h2>
+          <p class="text-gray-600">Explicaciones y ejercicios por bloque. Cada bloque tiene su propio generador, verificador y reset.</p>
+
+          <!-- PRESENT AFFIRMATIVE -->
+          <div id="tobe-present-affirm" class="mt-4">
+            <h3 class="text-lg font-semibold">Presente Afirmativo (am / is / are)</h3>
+            <p class="text-gray-700">Uso: identidad, estados, ubicaciones. Ej.: "I am the operator", "The solution is acidic", "They are in the lab".</p>
+            <div id="tobe-present-affirm-practice" class="mt-3"></div>
+            <div class="controls">
+              <button class="small btn-primary" onclick="generateToBePresentAffirm()">Generar ejercicios</button>
+              <button class="small btn-accent" onclick="verifyToBePresentAffirmAll()">Verificar todo</button>
+              <button class="small btn-ghost" onclick="resetToBePresentAffirm()">Resetear</button>
+            </div>
+            <div id="tobe-present-affirm-summary" class="mt-2 text-sm"></div>
+          </div>
+
+          <!-- PRESENT NEGATIVE -->
+          <div id="tobe-present-neg" class="mt-6">
+            <h3 class="text-lg font-semibold">Presente Negativo (am not / is not / are not)</h3>
+            <p class="text-gray-700">Uso: negar estados o identidades. Contracciones: "isn't", "aren't". Ej.: "It isn't stable".</p>
+            <div id="tobe-present-neg-practice" class="mt-3"></div>
+            <div class="controls">
+              <button class="small btn-primary" onclick="generateToBePresentNeg()">Generar ejercicios</button>
+              <button class="small btn-accent" onclick="verifyToBePresentNegAll()">Verificar todo</button>
+              <button class="small btn-ghost" onclick="resetToBePresentNeg()">Resetear</button>
+            </div>
+            <div id="tobe-present-neg-summary" class="mt-2 text-sm"></div>
+          </div>
+
+          <!-- PAST AFFIRMATIVE -->
+          <div id="tobe-past-affirm" class="mt-6">
+            <h3 class="text-lg font-semibold">Pasado Afirmativo (was / were)</h3>
+            <p class="text-gray-700">Uso: situaciones o estados en el pasado. Ej.: "I was present yesterday", "They were on shift".</p>
+            <div id="tobe-past-affirm-practice" class="mt-3"></div>
+            <div class="controls">
+              <button class="small btn-primary" onclick="generateToBePastAffirm()">Generar ejercicios</button>
+              <button class="small btn-accent" onclick="verifyToBePastAffirmAll()">Verificar todo</button>
+              <button class="small btn-ghost" onclick="resetToBePastAffirm()">Resetear</button>
+            </div>
+            <div id="tobe-past-affirm-summary" class="mt-2 text-sm"></div>
+          </div>
+
+          <!-- PAST NEGATIVE -->
+          <div id="tobe-past-neg" class="mt-6">
+            <h3 class="text-lg font-semibold">Pasado Negativo (was not / were not)</h3>
+            <p class="text-gray-700">Uso: negar en pasado. Contracciones: "wasn't", "weren't". Ej.: "The reactor wasn't operational".</p>
+            <div id="tobe-past-neg-practice" class="mt-3"></div>
+            <div class="controls">
+              <button class="small btn-primary" onclick="generateToBePastNeg()">Generar ejercicios</button>
+              <button class="small btn-accent" onclick="verifyToBePastNegAll()">Verificar todo</button>
+              <button class="small btn-ghost" onclick="resetToBePastNeg()">Resetear</button>
+            </div>
+            <div id="tobe-past-neg-summary" class="mt-2 text-sm"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VERBOS MODALES (NUEVO) -->
+      <section id="section-modals" class="hidden section-exercise" aria-labelledby="modals-title">
+        <h2 id="modals-title" class="text-xl font-bold">Verbos Modales (aplicados a Química Industrial)</h2>
+        <p class="text-gray-600">Can / Could / May / Might / Must / Should — ejercicios aplicados a procedimientos y seguridad.</p>
+        <div id="modals-exercises" class="mt-3"></div>
+        <div class="controls">
+          <button class="small btn-primary" onclick="generateModalExercises()">Generar 20 ejercicios</button>
+          <button class="small btn-accent" onclick="verifyModalExercises()">Verificar todo</button>
+          <button class="small btn-ghost" onclick="resetModalExercises()">Resetear</button>
+        </div>
+        <div id="modals-summary" class="mt-2 text-sm"></div>
+      </section>
+
+      <!-- GERUNDIO (-ING) (NUEVO) -->
+      <section id="section-gerund" class="hidden section-exercise" aria-labelledby="gerund-title">
+        <h2 id="gerund-title" class="text-xl font-bold">Gerundio (-ING) aplicado a Química</h2>
+        <p class="text-gray-600">Uso del gerundio (acciones, sujeto nominal, después de preposiciones y ciertos verbos).</p>
+        <div id="gerund-exercises" class="mt-3"></div>
+        <div class="controls">
+          <button class="small btn-primary" onclick="generateGerundExercises()">Generar 20 ejercicios</button>
+          <button class="small btn-accent" onclick="verifyGerundExercises()">Verificar todo</button>
+          <button class="small btn-ghost" onclick="resetGerundExercises()">Resetear</button>
+        </div>
+        <div id="gerund-summary" class="mt-2 text-sm"></div>
+      </section>
+
+      <!-- POSSESSIVES (NUEVO) -->
+      <section id="section-possessives" class="hidden section-exercise" aria-labelledby="poss-title">
+        <h2 id="poss-title" class="text-xl font-bold">Pronombres Posesivos</h2>
+        <p class="text-gray-600">My / Your / His / Her / Its / Our / Their (y pronombres suyos: mine, yours etc.) aplicados a equipos y documentos del laboratorio.</p>
+        <div id="possessives-exercises" class="mt-3"></div>
+        <div class="controls">
+          <button class="small btn-primary" onclick="generatePossessiveExercises()">Generar 20 ejercicios</button>
+          <button class="small btn-accent" onclick="verifyPossessiveExercises()">Verificar todo</button>
+          <button class="small btn-ghost" onclick="resetPossessiveExercises()">Resetear</button>
+        </div>
+        <div id="possessives-summary" class="mt-2 text-sm"></div>
+      </section>
+
+      <!-- LAB (simplificado) -->
+      <section id="section-lab" class="hidden mt-6">
+        <div class="card p-6">
+          <h2 class="text-xl font-bold">🔬 Laboratorio Virtual</h2>
+          <p class="text-gray-600 mt-2">Prácticas de pH y mezclas.</p>
+          <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 card">
+              <h4 class="font-semibold">Prueba de pH</h4>
+              <div class="flex gap-2 mt-3 flex-wrap">
+                <button class="btn btn-ghost small" onclick="testPH('lemon',2,'Lemon is acidic')">🍋 Lemon</button>
+                <button class="btn btn-ghost small" onclick="testPH('water',7,'Water is neutral')">💧 Water</button>
+                <button class="btn btn-ghost small" onclick="testPH('soap',13,'Soap is basic')">🧼 Soap</button>
+                <button class="btn btn-ghost small" onclick="testPH('vinegar',3,'Vinegar is acidic')">🫙 Vinegar</button>
+              </div>
+              <div id="ph-result" class="mt-4"></div>
+            </div>
+
+            <div class="p-4 card">
+              <h4 class="font-semibold">Mezcla Química</h4>
+              <div class="mt-3 grid grid-cols-1 gap-3">
+                <div>
+                  <select id="substanceA_lab" class="w-full">
+                    <option value="">Sustancia A</option>
+                    <option value="acid">Ácido</option>
+                    <option value="sodium">Sodio</option>
+                    <option value="iron">Hierro</option>
+                  </select>
+                </div>
+                <div>
+                  <select id="substanceB_lab" class="w-full">
+                    <option value="">Sustancia B</option>
+                    <option value="water">Agua</option>
+                    <option value="base">Base</option>
+                    <option value="oxygen">Oxígeno</option>
+                  </select>
+                </div>
+                <div class="flex gap-2">
+                  <button class="btn btn-primary small" onclick="mixSubstancesLab()">Mezclar</button>
+                  <button class="btn btn-ghost small" onclick="document.getElementById('mix-result').innerHTML=''">Reset</button>
+                </div>
+              </div>
+              <div id="mix-result" class="mt-3"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAMES (placeholder simple) -->
+      <section id="section-games" class="hidden mt-6">
+        <div class="card p-6">
+          <h2 class="text-xl font-bold">🎮 Juegos Educativos</h2>
+          <p class="text-gray-600 mt-2">Los juegos están en la sección correspondiente; usa las secciones de gramática para ejercicios de práctica.</p>
+        </div>
+      </section>
+
+      <!-- Exercises / Vocabulary / Videos placeholders -->
+      <section id="section-exercises" class="hidden mt-6">
+        <div class="card p-6">
+          <h2 class="text-xl font-bold">✏️ Ejercicios de Práctica</h2>
+          <p class="text-gray-600 mt-2">Aquí encontrarás quizzes y ejercicios de repaso.</p>
+        </div>
+      </section>
+
+      <section id="section-vocabulary" class="hidden mt-6">
+        <div class="card p-6">
+          <h2 class="text-xl font-bold">🧬 Vocabulario</h2>
+          <p class="text-gray-600 mt-2">Términos esenciales de química industrial.</p>
+        </div>
+      </section>
+
+      <section id="section-videos" class="hidden mt-6">
+        <div class="card p-6">
+          <h2 class="text-xl font-bold">🎬 Videos</h2>
+          <p class="text-gray-600 mt-2">Clases y demostraciones.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="mt-12 mb-8 text-center text-sm text-gray-500">
+      🧪 Laboratorio de Inglés para Química © 2026
+    </footer>
+  </div>
+
+  <!-- SCRIPTS: navegación y funciones de laboratorio simples + ejercicios solicitados -->
+  <script>
+    /* Navigation & sidebar */
+    const sidebar = document.getElementById('sidebar');
+    function toggleSidebar(){
+      sidebar.classList.toggle('-translate-x-full');
+      const hidden = sidebar.getAttribute('aria-hidden') === 'true';
+      sidebar.setAttribute('aria-hidden', hidden ? 'false' : 'true');
     }
-    inp.disabled = true;
-  });
-  document.getElementById('scramble-summary').textContent = `Resultado: ${correct}/${expected.length}`;
-  persistCurrentState();
-}
+    function hideAllSections(){
+      document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
+    }
+    function navigateTo(key){
+      hideAllSections();
+      const id = 'section-' + key;
+      // special mapping for verbtobe etc.
+      const mapping = {
+        'verbtobe':'section-verbtobe',
+        'modals':'section-modals',
+        'gerund':'section-gerund',
+        'possessives':'section-possessives',
+        'lab':'section-lab',
+        'games':'section-games',
+        'exercises':'section-exercises',
+        'vocabulary':'section-vocabulary',
+        'videos':'section-videos',
+        'home':'section-home'
+      };
+      const el = document.getElementById(mapping[key] || id);
+      if (el) el.classList.remove('hidden');
+      // close sidebar on navigate
+      if (!sidebar.classList.contains('-translate-x-full')) toggleSidebar();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
 
-/* Ordering: implement drag & drop ordering UI */
-function generateOrdering(){
-  const examples = window.orderingExamples || [
-    {title:'Procedure: pH test', steps:['Collect sample','Add indicator','Compare with chart','Record pH']},
-    {title:'Safety check', steps:['Wear PPE','Check valves closed','Verify alarms','Obtain permit']}
+    /* Simple lab helpers */
+    function testPH(substance, ph, description){
+      const el = document.getElementById('ph-result');
+      el.innerHTML = `<div class="text-center"><div style="width:64px;height:64px;border-radius:999px;background:#f59e0b;margin:0 auto 8px;box-shadow:0 6px 18px rgba(245,158,11,0.16)"></div><div class="font-semibold">pH = ${ph}</div><div class="text-sm text-gray-600 mt-1">${description}</div></div>`;
+    }
+    function mixSubstancesLab(){
+      const a = document.getElementById('substanceA_lab').value;
+      const b = document.getElementById('substanceB_lab').value;
+      const el = document.getElementById('mix-result');
+      if(!a || !b){ el.innerHTML = '<div class="text-sm text-red-500">Selecciona ambas sustancias.</div>'; return; }
+      const combos = {
+        'acid+water':'Acid + Water → Diluted acid (always add acid to water).',
+        'sodium+water':'Sodium + Water → NaOH + H₂ (vigorous).',
+        'iron+oxygen':'Iron + Oxygen → Rust (Fe₂O₃).'
+      };
+      const key = a+'+'+b;
+      el.innerHTML = `<div class="p-3 bg-white rounded-lg">${combos[key]||'No visible reaction under normal conditions.'}</div>`;
+    }
+  </script>
+
+  <!-- JS para ejercicios (ToBe, Modals, Gerund, Possessives) -->
+  <script>
+  /* ---------------------------
+    JS para ToBe, Modals, Gerund, Possessives
+    - Generar/verificar/resetear ejercicios
+    --------------------------- */
+
+  /* Helper: create a single exercise row with input + verify button */
+  function createFillBlankRow(idPrefix, index, promptHTML, expected) {
+    const id = `${idPrefix}-${index}`;
+    const row = document.createElement('div');
+    row.className = 'exercise-row';
+    // escape single quotes in expected for inline onclick
+    const escapedExpected = (expected||'').replace(/'/g,"\\'");
+    row.innerHTML = `
+      <div style="flex:1">${promptHTML.replace('___', `<input aria-label="${id}-input" id="${id}" type="text" />`)}</div>
+      <div><button class="small btn-ghost" type="button" onclick="verifySingle('${id}','${escapedExpected}')">Verificar</button></div>
+      <div id="${id}-fb" class="exercise-feedback"></div>
+    `;
+    return row;
+  }
+
+  /* Generic single verify (used by many sections) */
+  function verifySingle(inputId, expected) {
+    const inp = document.getElementById(inputId);
+    const fb = document.getElementById(inputId + '-fb');
+    if (!inp || !fb) return;
+    const val = (inp.value || '').trim().toLowerCase();
+    const exp = (expected || '').trim().toLowerCase();
+    if (val === exp) {
+      fb.textContent = '✅ Correcto';
+      fb.style.color = '#059669';
+      inp.disabled = true;
+    } else {
+      fb.textContent = `❌ ${expected}`;
+      fb.style.color = '#dc2626';
+      inp.disabled = true;
+    }
+  }
+
+  /* =========================
+     VERBO TO BE
+     ========================= */
+  const toBePresentAff = [
+    {q:'I ___ a lab technician.', a:'am'},{q:'You ___ part of the team.', a:'are'},{q:'He ___ the lead engineer.', a:'is'},
+    {q:'We ___ ready for the test.', a:'are'},{q:'They ___ in the control room.', a:'are'},{q:'It ___ a hazardous material.', a:'is'},
+    {q:'She ___ very experienced.', a:'is'},{q:'The solution ___ acidic.', a:'is'},{q:'These chemicals ___ dangerous.', a:'are'},{q:'The reactor ___ operational.', a:'is'},
+    {q:'I ___ the process operator.', a:'am'},{q:'You ___ responsible.', a:'are'},{q:'The staff ___ here.', a:'are'},{q:'This ___ a sample.', a:'is'},{q:'We ___ conducting tests.', a:'are'},
+    {q:'They ___ technicians.', a:'are'},{q:'He ___ an engineer.', a:'is'},{q:'She ___ in the control room.', a:'is'},{q:'It ___ the correct pH.', a:'is'},{q:'You ___ on the team.', a:'are'}
   ];
-  const ex = examples[Math.floor(Math.random()*examples.length)];
-  const container = document.getElementById('ordering-game');
-  container.innerHTML = `<div class="font-semibold">${ex.title}</div>`;
-  const steps = ex.steps.slice();
-  const shuffled = steps.sort(()=>Math.random()-0.5);
-  const list = document.createElement('ul');
-  list.className = 'mt-3 space-y-2';
-  shuffled.forEach((step,i)=>{
-    const li = document.createElement('li');
-    li.className = 'ordering-item bg-white p-3 rounded-lg flex items-center gap-3';
-    li.draggable = true;
-    li.dataset.step = step;
-    li.id = 'order-item-' + i;
-    li.innerHTML = `<span class="drag-handle" aria-hidden="true">☰</span><div class="flex-1">${step}</div>`;
-    // drag events
-    li.addEventListener('dragstart', (e) => { li.classList.add('opacity-60'); e.dataTransfer.setData('text/plain', li.id); });
-    li.addEventListener('dragend', () => li.classList.remove('opacity-60'));
-    list.appendChild(li);
-  });
-  // allow drop reordering
-  list.addEventListener('dragover', e => { e.preventDefault(); const after = getDragAfterElement(list, e.clientY); list.style.border = '1px dashed #e2e8f0'; });
-  list.addEventListener('dragleave', e => list.style.border = 'none');
-  list.addEventListener('drop', e => {
-    e.preventDefault();
-    const id = e.dataTransfer.getData('text/plain');
-    const dragged = document.getElementById(id);
-    if (!dragged) return;
-    const after = getDragAfterElement(list, e.clientY);
-    if (after == null) list.appendChild(dragged);
-    else list.insertBefore(dragged, after);
-    list.style.border = 'none';
-    persistCurrentState();
-  });
-  container.appendChild(list);
-  // store correct mapping and persist
-  container.dataset.correct = JSON.stringify(ex.steps);
-  document.getElementById('ordering-summary').textContent = '';
-  persistCurrentState();
-}
-function getDragAfterElement(container, y) {
-  const draggableElements = [...container.querySelectorAll('.ordering-item:not(.dragging)')];
-  return draggableElements.reduce((closest, child) => {
-    const box = child.getBoundingClientRect();
-    const offset = y - box.top - box.height / 2;
-    if (offset < 0 && offset > closest.offset) {
-      return { offset: offset, element: child };
-    } else {
-      return closest;
-    }
-  }, { offset: Number.NEGATIVE_INFINITY }).element;
-}
-function verifyOrdering(){
-  const container = document.getElementById('ordering-game');
-  if (!container || !container.dataset.correct) { document.getElementById('ordering-summary').textContent = 'Genera primero el ejercicio.'; return; }
-  const correct = JSON.parse(container.dataset.correct);
-  const current = Array.from(container.querySelectorAll('.ordering-item')).map(it => it.dataset.step);
-  let score = 0;
-  for (let i=0;i<correct.length;i++){
-    if (current[i] === correct[i]) score++;
+
+  const toBePresentNeg = [
+    {q:'I ___ not the supervisor.', a:"am not"},{q:'You ___ not on duty.', a:"are not"},{q:'He ___ not available.', a:"is not"},
+    {q:'We ___ not finished.', a:"are not"},{q:'They ___ not present.', a:"are not"},{q:'It ___ not stable.', a:"is not"},
+    {q:'This ___ not a base.', a:"is not"},{q:'These samples ___ not ready.', a:"are not"},{q:'The equipment ___ not working.', a:"is not"},{q:'You ___ not trained.', a:"are not"},
+    {q:'She ___ not here.', a:"is not"},{q:'I ___ not allowed.', a:"am not"},{q:'We ___ not scheduled.', a:"are not"},{q:'They ___ not certified.', a:"are not"},{q:'It ___ not labeled.', a:"is not"},
+    {q:'The batch ___ not complete.', a:"is not"},{q:'You ___ not present.', a:"are not"},{q:'He ___ not ready.', a:"is not"},{q:'She ___ not on shift.', a:"is not"},{q:'We ___ not finished.', a:"are not"}
+  ];
+
+  const toBePastAff = [
+    {q:'I ___ in the lab yesterday.', a:'was'},{q:'You ___ assigned last month.', a:'were'},{q:'He ___ the lead chemist.', a:'was'},
+    {q:'We ___ on shift earlier.', a:'were'},{q:'They ___ at the inspection.', a:'were'},{q:'It ___ the correct temperature.', a:'was'},
+    {q:'The equipment ___ calibrated.', a:'was'},{q:'The technicians ___ busy.', a:'were'},{q:'She ___ the operator.', a:'was'},{q:'We ___ analyzing the sample.', a:'were'},
+    {q:'I ___ present at the test.', a:'was'},{q:'They ___ available yesterday.', a:'were'},{q:'He ___ the supervisor.', a:'was'},{q:'You ___ on leave.', a:'were'},{q:'It ___ a stable reading.', a:'was'},
+    {q:'The system ___ online.', a:'was'},{q:'The valves ___ closed.', a:'were'},{q:'She ___ on duty.', a:'was'},{q:'We ___ notified.', a:'were'},{q:'The sample ___ collected.', a:'was'}
+  ];
+
+  const toBePastNeg = [
+    {q:'I ___ not present during the test.', a:"was not"},{q:'You ___ not on schedule.', a:"were not"},{q:'He ___ not available.', a:"was not"},
+    {q:'We ___ not ready.', a:"were not"},{q:'They ___ not allowed.', a:"were not"},{q:'It ___ not stable.', a:"was not"},
+    {q:'The sample ___ not labeled.', a:"was not"},{q:'The instruments ___ not calibrated.', a:"were not"},{q:'She ___ not trained.', a:"was not"},{q:'We ___ not informed.', a:"were not"},
+    {q:'It ___ not inspected.', a:"was not"},{q:'They ___ not present.', a:"were not"},{q:'He ___ not on shift.', a:"was not"},{q:'You ___ not authorized.', a:"were not"},{q:'The system ___ not online.', a:"was not"},
+    {q:'The reactor ___ not stable.', a:"was not"},{q:'She ___ not certified.', a:"was not"},{q:'We ___ not scheduled.', a:"were not"},{q:'They ___ not compliant.', a:"were not"},{q:'It ___ not validated.', a:"was not"}
+  ];
+
+  /* GENERATE / VERIFY / RESET ToBe - pres aff */
+  function generateToBePresentAffirm(){
+    const container = document.getElementById('tobe-present-affirm-practice');
+    container.innerHTML = '';
+    toBePresentAff.slice(0, 10).forEach((item, i) => {
+      const row = createFillBlankRow('tba', i, item.q, item.a);
+      container.appendChild(row);
+    });
+    document.getElementById('tobe-present-affirm-summary').textContent = '';
   }
-  updateGamesScore(score * 2);
-  document.getElementById('ordering-summary').textContent = `Resultado: ${score}/${correct.length}`;
-  // lock drag
-  container.querySelectorAll('.ordering-item').forEach(it => { it.draggable = false; });
-  persistCurrentState();
-}
+  function verifyToBePresentAffirmAll(){
+    const container = document.getElementById('tobe-present-affirm-practice');
+    const inputs = container.querySelectorAll('input');
+    let correct = 0, total = 0;
+    inputs.forEach(inp => {
+      total++;
+      const id = inp.id; const idx = parseInt(id.split('-')[1],10);
+      const exp = (toBePresentAff[idx] && toBePresentAff[idx].a) || '';
+      const val = (inp.value||'').trim().toLowerCase();
+      if (val === exp.toLowerCase()) { document.getElementById(id+'-fb').textContent = '✅ Correcto'; document.getElementById(id+'-fb').style.color='#059669'; correct++; }
+      else { document.getElementById(id+'-fb').textContent = `❌ ${exp}`; document.getElementById(id+'-fb').style.color='#dc2626'; }
+      inp.disabled = true;
+    });
+    document.getElementById('tobe-present-affirm-summary').textContent = `Resultado: ${correct}/${total}`;
+  }
+  function resetToBePresentAffirm(){ document.getElementById('tobe-present-affirm-practice').innerHTML = ''; document.getElementById('tobe-present-affirm-summary').textContent = ''; }
 
-/* Hook to save state on window unload */
-window.addEventListener('beforeunload', persistCurrentState);
+  /* PRES NEG */
+  function generateToBePresentNeg(){
+    const container = document.getElementById('tobe-present-neg-practice');
+    container.innerHTML = '';
+    toBePresentNeg.slice(0, 10).forEach((item,i) => {
+      const row = createFillBlankRow('tbn', i, item.q, item.a);
+      container.appendChild(row);
+    });
+    document.getElementById('tobe-present-neg-summary').textContent = '';
+  }
+  function verifyToBePresentNegAll(){
+    const container = document.getElementById('tobe-present-neg-practice');
+    const inputs = container.querySelectorAll('input');
+    let correct = 0, total = 0;
+    inputs.forEach(inp => {
+      total++;
+      const id = inp.id; const idx = parseInt(id.split('-')[1],10);
+      const exp = (toBePresentNeg[idx] && toBePresentNeg[idx].a) || '';
+      const val = (inp.value||'').trim().toLowerCase();
+      const alt = exp.replace(' not', "n't");
+      if (val === exp.toLowerCase() || val === alt.toLowerCase()) { document.getElementById(id+'-fb').textContent='✅ Correcto'; document.getElementById(id+'-fb').style.color='#059669'; correct++; }
+      else { document.getElementById(id+'-fb').textContent=`❌ ${exp}`; document.getElementById(id+'-fb').style.color='#dc2626'; }
+      inp.disabled = true;
+    });
+    document.getElementById('tobe-present-neg-summary').textContent = `Resultado: ${correct}/${total}`;
+  }
+  function resetToBePresentNeg(){ document.getElementById('tobe-present-neg-practice').innerHTML=''; document.getElementById('tobe-present-neg-summary').textContent=''; }
 
-/* Restore saved state on load */
-document.addEventListener('DOMContentLoaded', () => {
-  // call existing initializers if present (generate matching/scramble etc.)
-  try {
-    if (typeof generateMatching === 'function') generateMatching();
-    if (typeof generateScramble === 'function') generateScramble();
-    if (typeof generateSentence === 'function') generateSentence();
-    if (typeof generateTranslation === 'function') generateTranslation();
-    if (typeof generateMCQ === 'function') generateMCQ();
-  } catch(e){ /* ignore */ }
-  // load saved state and attempt to restore UI
-  restoreState();
-});
+  /* PAST AFF */
+  function generateToBePastAffirm(){
+    const container = document.getElementById('tobe-past-affirm-practice');
+    container.innerHTML = '';
+    toBePastAff.slice(0,10).forEach((item,i) => {
+      const row = createFillBlankRow('tpba', i, item.q, item.a);
+      container.appendChild(row);
+    });
+    document.getElementById('tobe-past-affirm-summary').textContent = '';
+  }
+  function verifyToBePastAffirmAll(){
+    const container = document.getElementById('tobe-past-affirm-practice'); const inputs = container.querySelectorAll('input');
+    let correct=0,total=0;
+    inputs.forEach(inp => {
+      total++; const id=inp.id; const idx=parseInt(id.split('-')[1],10); const exp=(toBePastAff[idx]&&toBePastAff[idx].a)||''; const val=(inp.value||'').trim().toLowerCase();
+      if (val===exp.toLowerCase()){ document.getElementById(id+'-fb').textContent='✅ Correcto'; document.getElementById(id+'-fb').style.color='#059669'; correct++; } else { document.getElementById(id+'-fb').textContent=`❌ ${exp}`; document.getElementById(id+'-fb').style.color='#dc2626'; }
+      inp.disabled=true;
+    });
+    document.getElementById('tobe-past-affirm-summary').textContent = `Resultado: ${correct}/${total}`;
+  }
+  function resetToBePastAffirm(){ document.getElementById('tobe-past-affirm-practice').innerHTML=''; document.getElementById('tobe-past-affirm-summary').textContent=''; }
 
-/* Utility: small wrapper to ensure save after key actions */
-const orig_updateGamesScore = window.updateGamesScore;
-window.updateGamesScore = function(delta){
-  if (typeof orig_updateGamesScore === 'function') orig_updateGamesScore(delta);
-  saveState(getCurrentState());
-};
+  /* PAST NEG */
+  function generateToBePastNeg(){
+    const container = document.getElementById('tobe-past-neg-practice');
+    container.innerHTML = '';
+    toBePastNeg.slice(0,10).forEach((item,i) => {
+      const row = createFillBlankRow('tpbn', i, item.q, item.a);
+      container.appendChild(row);
+    });
+    document.getElementById('tobe-past-neg-summary').textContent = '';
+  }
+  function verifyToBePastNegAll(){
+    const container = document.getElementById('tobe-past-neg-practice'); const inputs = container.querySelectorAll('input');
+    let correct=0,total=0;
+    inputs.forEach(inp => {
+      total++; const id=inp.id; const idx=parseInt(id.split('-')[1],10); const exp=(toBePastNeg[idx] && toBePastNeg[idx].a)||''; const alt = exp.replace(' not', "n't"); const val=(inp.value||'').trim().toLowerCase();
+      if (val===exp.toLowerCase()||val===alt.toLowerCase()){ document.getElementById(id+'-fb').textContent='✅ Correcto'; document.getElementById(id+'-fb').style.color='#059669'; correct++; } else { document.getElementById(id+'-fb').textContent=`❌ ${exp}`; document.getElementById(id+'-fb').style.color='#dc2626'; }
+      inp.disabled=true;
+    });
+    document.getElementById('tobe-past-neg-summary').textContent = `Resultado: ${correct}/${total}`;
+  }
+  function resetToBePastNeg(){ document.getElementById('tobe-past-neg-practice').innerHTML=''; document.getElementById('tobe-past-neg-summary').textContent=''; }
 
-</script>
+  /* =========================
+     VERBOS MODALES (20 ejercicios)
+     ========================= */
+  const modalBank = [
+    {q:'You ___ wear goggles in the lab.', a:'must'},
+    {q:'Operators ___ adjust the flow if needed.', a:'can'},
+    {q:'You ___ not smoke near solvents.', a:'must'},
+    {q:'Scientists ___ repeat the measurement.', a:'should'},
+    {q:'This reaction ___ be dangerous.', a:'can'},
+    {q:'You ___ ask permission before entering the area.', a:'must'},
+    {q:'Technicians ___ check the valves regularly.', a:'must'},
+    {q:'You ___ use the emergency stop in case of hazard.', a:'must'},
+    {q:'You ___ bring samples to QC with label.', a:'should'},
+    {q:'We ___ follow the SOPs.', a:'must'},
+    {q:'You ___ not enter without PPE.', a:'must'},
+    {q:'You ___ maybe need to clean the spill.', a:'might'},
+    {q:'Engineers ___ be on call tonight.', a:'may'},
+    {q:'You ___ be careful when heating solvent.', a:'should'},
+    {q:'You ___ use only approved containers.', a:'must'},
+    {q:'The team ___ consult the supervisor.', a:'should'},
+    {q:'You ___ handle acids with gloves.', a:'must'},
+    {q:'You ___ use a fume hood when needed.', a:'should'},
+    {q:'Operators ___ shut down if leak detected.', a:'must'},
+    {q:'You ___ carry small samples to the lab.', a:'may'}
+  ];
+
+  function generateModalExercises(){
+    const container = document.getElementById('modals-exercises');
+    container.innerHTML = '';
+    modalBank.forEach((it,i) => {
+      const id = `modal-${i}`;
+      const row = document.createElement('div');
+      row.className = 'exercise-row';
+      row.innerHTML = `<div style="flex:1">${it.q.replace('___', `<input id="${id}" type="text" aria-label="${id}" />`)}</div>
+        <div><button class="small btn-ghost" onclick="verifySingle('${id}','${it.a}')">Verificar</button></div>
+        <div id="${id}-fb" class="exercise-feedback"></div>`;
+      container.appendChild(row);
+    });
+    document.getElementById('modals-summary').textContent = '';
+  }
+  function verifyModalExercises(){
+    let correct=0; const container = document.getElementById('modals-exercises'); modalBank.forEach((it,i) => {
+      const id=`modal-${i}`; const input = document.getElementById(id);
+      const val = (input.value||'').trim().toLowerCase(); const fb=document.getElementById(id+'-fb');
+      if (val === it.a){ fb.textContent='✅'; fb.style.color='#059669'; correct++; } else { fb.textContent=`❌ ${it.a}`; fb.style.color='#dc2626'; }
+      input.disabled=true;
+    });
+    document.getElementById('modals-summary').textContent = `Resultado: ${correct}/${modalBank.length}`;
+  }
+  function resetModalExercises(){ document.getElementById('modals-exercises').innerHTML=''; document.getElementById('modals-summary').textContent=''; }
+
+  /* =========================
+     GERUNDIO (-ING) (20 ejercicios)
+     ========================= */
+  const gerundBank = [
+    {q:'Before ___ the reagent, check the label.', a:'adding'},
+    {q:'___ the sample is necessary to obtain results.', a:'measuring'},
+    {q:'They avoided ___ the contaminated area.', a:'entering'},
+    {q:'He enjoys ___ new techniques.', a:'learning'},
+    {q:'The technician finished ___ the logs.', a:'filing'},
+    {q:'Operators practiced ___ the shutdown.', a:'performing'},
+    {q:'___ the solvent quickly can be dangerous.', a:'evaporating'},
+    {q:'We recommend ___ the filter monthly.', a:'replacing'},
+    {q:'She suggested ___ the sample twice.', a:'testing'},
+    {q:'They postponed ___ the experiment.', a:'conducting'},
+    {q:'Avoid ___ samples without label.', a:'handling'},
+    {q:'___ the equipment improves safety.', a:'checking'},
+    {q:'They considered ___ the procedure again.', a:'revising'},
+    {q:'He admitted ___ the valve accidentally.', a:'opening'},
+    {q:'___ protective equipment is mandatory.', a:'wearing'},
+    {q:'We practice ___ the protocol.', a:'following'},
+    {q:'The team discussed ___ the results.', a:'analyzing'},
+    {q:'They suggested ___ the pressure slowly.', a:'reducing'},
+    {q:'She mentioned ___ the standard daily.', a:'monitoring'},
+    {q:'They enjoy ___ laboratory work.', a:'doing'}
+  ];
+
+  function generateGerundExercises(){
+    const container = document.getElementById('gerund-exercises');
+    container.innerHTML = '';
+    gerundBank.forEach((it,i)=>{
+      const id=`ger-${i}`;
+      const row = document.createElement('div');
+      row.className = 'exercise-row';
+      row.innerHTML = `<div style="flex:1">${it.q.replace('___', `<input id="${id}" type="text" aria-label="${id}" />`)}</div>
+        <div><button class="small btn-ghost" onclick="verifySingle('${id}','${it.a}')">Verificar</button></div>
+        <div id="${id}-fb" class="exercise-feedback"></div>`;
+      container.appendChild(row);
+    });
+    document.getElementById('gerund-summary').textContent='';
+  }
+  function verifyGerundExercises(){
+    let correct=0;
+    gerundBank.forEach((it,i) => {
+      const id=`ger-${i}`; const val=(document.getElementById(id).value||'').trim().toLowerCase(); const fb=document.getElementById(id+'-fb');
+      if (val === it.a){ fb.textContent='✅'; fb.style.color='#059669'; correct++; } else { fb.textContent=`❌ ${it.a}`; fb.style.color='#dc2626'; }
+      document.getElementById(id).disabled=true;
+    });
+    document.getElementById('gerund-summary').textContent = `Resultado: ${correct}/${gerundBank.length}`;
+  }
+  function resetGerundExercises(){ document.getElementById('gerund-exercises').innerHTML=''; document.getElementById('gerund-summary').textContent=''; }
+
+  /* =========================
+     POSSESSIVES (20 ejercicios)
+     ========================= */
+  const possessiveBank = [
+    {q:'This is ___ (de mí) lab certificate.', a:'my'},
+    {q:'It is ___ (de ellos).', a:'theirs'},
+    {q:'Is this ___ (de ella) notebook?', a:'her'},
+    {q:'The safety shoes are ___ (de nosotros).', a:'ours'},
+    {q:'He forgot ___ (su) gloves.', a:'his'},
+    {q:'The company issued ___ (su) report.', a:'its'},
+    {q:'Are these ___ (tuyos) tools?', a:'your'},
+    {q:'The manuals are ___ (de ellos).', a:'theirs'},
+    {q:'That bench is ___ (nuestro).', a:'our'},
+    {q:'The certification is ___ (de ella).', a:'hers'},
+    {q:'They checked ___ (sus) results.', a:'their'},
+    {q:'This ladder is not mine; it is ___.', a:'yours'},
+    {q:'Please bring ___ (tu) ID.', a:'your'},
+    {q:'The sample label is ___ responsibility.', a:'his'},
+    {q:'We confirmed ___ (nuestro) schedule.', a:'our'},
+    {q:'The broken filter is ___. (de ellos)', a:'theirs'},
+    {q:'Is this meter ___ (tu)?', a:'yours'},
+    {q:'The supervisor reviewed ___ (su) notes.', a:'her'},
+    {q:'All devices must be in ___ place (de ellos).', a:'their'},
+    {q:'The toolbox is ___. (de mí)', a:'mine'}
+  ];
+
+  function generatePossessiveExercises(){
+    const container = document.getElementById('possessives-exercises');
+    container.innerHTML = '';
+    possessiveBank.forEach((it,i) => {
+      const id = `pos-${i}`;
+      const row = document.createElement('div');
+      row.className = 'exercise-row';
+      row.innerHTML = `<div style="flex:1">${it.q.replace('___', `<input id="${id}" type="text" aria-label="${id}" />`)}</div>
+        <div><button class="small btn-ghost" onclick="verifySingle('${id}','${it.a}')">Verificar</button></div>
+        <div id="${id}-fb" class="exercise-feedback"></div>`;
+      container.appendChild(row);
+    });
+    document.getElementById('possessives-summary').textContent='';
+  }
+  function verifyPossessiveExercises(){
+    let correct=0; possessiveBank.forEach((it,i)=>{
+      const id=`pos-${i}`; const val=(document.getElementById(id).value||'').trim().toLowerCase(); const fb=document.getElementById(id+'-fb');
+      if (val === it.a){ fb.textContent='✅'; fb.style.color='#059669'; correct++; } else { fb.textContent=`❌ ${it.a}`; fb.style.color='#dc2626'; }
+      document.getElementById(id).disabled=true;
+    });
+    document.getElementById('possessives-summary').textContent = `Resultado: ${correct}/${possessiveBank.length}`;
+  }
+  function resetPossessiveExercises(){ document.getElementById('possessives-exercises').innerHTML=''; document.getElementById('possessives-summary').textContent=''; }
+
+  /* Auto-generation light: create initial ToBe examples on load */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Show Home
+    hideAllSections();
+    document.getElementById('section-home').classList.remove('hidden');
+    // generate small sets for ToBe so user sees content immediately
+    generateToBePresentAffirm();
+    generateToBePresentNeg();
+    generateToBePastAffirm();
+    generateToBePastNeg();
+  });
+  </script>
+</body>
+</html>
