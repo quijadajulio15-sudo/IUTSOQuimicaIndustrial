@@ -17,8 +17,10 @@
       --card:#ffffff;
       --glass: rgba(255,255,255,0.6);
       --glass-2: rgba(255,255,255,0.85);
-      --success: #059669;
-      --danger: #dc2626;
+      --success:#059669;
+      --danger:#dc2626;
+      --school-blue: #2563eb;
+      --school-yellow: #f59e0b;
     }
 
     html,body,#app{height:100%}
@@ -38,7 +40,7 @@
     .card { background: var(--card); border-radius:1rem; box-shadow: 0 8px 30px rgba(2,6,23,0.08); }
     .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .9rem; border-radius:.9rem; font-weight:600; cursor:pointer; transition:all .18s ease; border: none; }
     .btn-primary { background: linear-gradient(90deg,var(--accent), #60a5fa); color:white; box-shadow: 0 6px 18px rgba(72,219,251,0.18); }
-    .btn-accent { background: linear-gradient(90deg, #ff7b7b, var(--primary)); color:white; box-shadow:0 6px 18px rgba(255,107,107,0.12) }
+    .btn-accent { background: linear-gradient(90deg, #ff9ff3, var(--primary)); color:white; box-shadow:0 6px 18px rgba(255,107,107,0.12) }
     .btn-ghost { background:transparent; border:1px solid rgba(15,23,42,0.06); color: #0f172a; padding:.5rem .8rem; border-radius:.8rem; }
     .btn-success { background: linear-gradient(90deg,#34d399,#059669); color:white; padding:.5rem .8rem; border-radius:.8rem; }
     .btn-warning { background: linear-gradient(90deg,#ffb86b,#ff9f43); color:white; padding:.5rem .8rem; border-radius:.8rem; }
@@ -49,44 +51,51 @@
     .game-card { border-radius:1rem; padding:1rem; background:linear-gradient(180deg,#ffffff, #fbfdff); border:1px solid rgba(2,6,23,0.04); }
     .game-actions button{ min-width:110px; }
 
-    input[type="text"], select {
+    input[type="text"], select, .input-answer {
       padding:.55rem .7rem;
       border-radius:.6rem;
       border:1px solid rgba(15,23,42,0.12);
       outline:none;
       transition:box-shadow .12s, transform .08s;
-      background: linear-gradient(180deg,#ffffff,#fbfbff);
+      background: linear-gradient(180deg,#ffffff,#fafaff);
+      min-width:110px;
     }
-    input[type="text"]:focus, select:focus { box-shadow:0 6px 20px rgba(96,165,250,0.12); transform: translateY(-1px); border-color: rgba(59,130,246,0.6); }
+    input[type="text"]:focus, select:focus, .input-answer:focus { box-shadow:0 6px 20px rgba(96,165,250,0.18); transform: translateY(-1px); border-color: rgba(59,130,246,0.6); }
 
     ::-webkit-scrollbar { width:8px; }
     ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#ff6b6b,#ff9ff3); border-radius: 10px; }
 
-    /* Enhanced visuals for grammar sections */
-    .section-grammar { border-radius:1rem; padding:1rem; box-shadow: 0 12px 40px rgba(2,6,23,0.06); background: linear-gradient(180deg,#ffffff,#fbfdff); border:1px solid rgba(15,23,42,0.04); }
+    /* header like original: translucent, sticky */
+    header.sticky-header {
+      position: sticky;
+      top:0;
+      z-index:40;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(229,231,235,0.8);
+    }
 
+    /* stronger colors for sections */
+    .section-grammar { border-radius:1rem; padding:1rem; box-shadow: 0 12px 40px rgba(2,6,23,0.06); background: linear-gradient(180deg,#ffffff,#fbfdff); border:1px solid rgba(15,23,42,0.04); }
     .vocab-card { border-radius:1rem; padding:1rem; color:#0f172a; box-shadow: 0 10px 30px rgba(2,6,23,0.06); cursor:pointer; transition:transform .18s, box-shadow .18s; }
     .vocab-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(2,6,23,0.12); }
 
     .exercise-row { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; background: linear-gradient(180deg,#fff,#fff7fb); padding:.7rem; border-radius:.8rem; border:1px solid rgba(0,0,0,0.04); margin-bottom:.5rem; }
     .exercise-feedback { font-weight:700; min-width:6.5rem; }
 
-    /* Sidebar style similar to original */
     .sidebar-gradient {
       background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 20%, #6366f1 40%, #8b5cf6 60%, #a78bfa 80%, #60a5fa 100%);
       background-size: 400% 400%;
-      animation: gradient-shift 15s ease infinite;
+      animation: gradient-shift 12s ease infinite;
       color:white;
     }
     @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-    /* Make verify/reset more visible */
     .verify-btn { background: linear-gradient(90deg,#60a5fa,#06b6d4); color:white; padding:.45rem .7rem; border-radius:.6rem; border:none; font-weight:700; cursor:pointer; }
     .reset-btn { background: linear-gradient(90deg,#ff9ff3,#ff6b6b); color:white; padding:.45rem .7rem; border-radius:.6rem; border:none; font-weight:700; cursor:pointer; }
 
-    /* Improve readability for long class text */
-    .class-text { line-height:1.5; color:#1f2937; }
+    .class-text { line-height:1.6; color:#1f2937; }
 
     @media (max-width:768px){
       .desktop-only { display:none; }
@@ -100,7 +109,7 @@
     <!-- Sidebar overlay -->
     <div id="sidebar-overlay" class="fixed inset-0 z-40 hidden" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar (original-like structure) -->
+    <!-- Sidebar (original-like) -->
     <nav id="sidebar" class="fixed top-0 left-0 h-full w-72 sidebar-gradient shadow-2xl z-50 -translate-x-full transition-transform duration-300 overflow-y-auto">
       <div class="p-6">
         <div class="flex items-center justify-between mb-8">
@@ -114,44 +123,41 @@
         </div>
 
         <ul class="space-y-3">
-          <li><button onclick="navigateTo('home')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🏠</span><span>Inicio</span></button></li>
-          <li><button onclick="navigateTo('verbtobe')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">📖</span><span>Verbo To Be</span></button></li>
-          <li><button onclick="navigateTo('modals')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔐</span><span>Verbos Modales</span></button></li>
-          <li><button onclick="navigateTo('gerund')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔁</span><span>Gerundio (ING)</span></button></li>
-          <li><button onclick="navigateTo('possessives')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">👥</span><span>Pronombres Posesivos</span></button></li>
-          <li><button onclick="navigateTo('vocabulary')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🧬</span><span>Vocabulario</span></button></li>
-          <li><button onclick="navigateTo('lab')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔬</span><span>Laboratorio</span></button></li>
-          <li><button onclick="navigateTo('exercises')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">✏️</span><span>Ejercicios</span></button></li>
-          <li><button onclick="navigateTo('games')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🎮</span><span>Juegos</span></button></li>
-          <li><button onclick="navigateTo('videos')" class="nav-item-styled w-full flex items-center gap-3 p-4 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🎬</span><span>Videos</span></button></li>
+          <li><button onclick="navigateTo('home')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🏠</span><span>Inicio</span></button></li>
+          <li><button onclick="navigateTo('verbtobe')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">📖</span><span>Verbo To Be</span></button></li>
+          <li><button onclick="navigateTo('modals')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔐</span><span>Verbos Modales</span></button></li>
+          <li><button onclick="navigateTo('gerund')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔁</span><span>Gerundio (ING)</span></button></li>
+          <li><button onclick="navigateTo('possessives')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">👥</span><span>Pronombres Posesivos</span></button></li>
+          <li><button onclick="navigateTo('vocabulary')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🧬</span><span>Vocabulario</span></button></li>
+          <li><button onclick="navigateTo('lab')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🔬</span><span>Laboratorio</span></button></li>
+          <li><button onclick="navigateTo('exercises')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">✏️</span><span>Ejercicios</span></button></li>
+          <li><button onclick="navigateTo('games')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🎮</span><span>Juegos</span></button></li>
+          <li><button onclick="navigateTo('videos')" class="nav-item-styled w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/20 text-left transition-all text-white font-semibold"><span class="text-2xl">🎬</span><span>Videos</span></button></li>
         </ul>
       </div>
     </nav>
 
-    <!-- Header (not sticky, professional) -->
-    <header class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-b-2xl shadow-lg">
-      <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Header: restored to original style (sticky, translucent) -->
+    <header class="sticky-header">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center gap-4">
-          <button onclick="toggleSidebar()" class="p-3 bg-white/20 rounded-2xl hover:bg-white/30">
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <div style="width:26px;height:4px;background:#fff;border-radius:4px"></div>
-              <div style="width:26px;height:4px;background:#fff;border-radius:4px"></div>
-              <div style="width:18px;height:4px;background:#fff;border-radius:4px"></div>
-            </div>
+          <button id="menu-btn" onclick="toggleSidebar()" class="p-2 rounded-lg bg-white shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/></svg>
           </button>
-
           <div class="flex items-center gap-3">
-            <span class="text-3xl">⚗️</span>
+            <div class="rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 p-3 text-white shadow-md">
+              <span style="font-size:1.4rem">⚗️</span>
+            </div>
             <div>
-              <h1 class="text-xl font-bold">Laboratorio de Inglés Químico</h1>
-              <p class="text-sm opacity-90">Inglés técnico aplicado a química industrial</p>
+              <h1 class="text-lg font-extrabold leading-tight">Laboratorio de Inglés Químico</h1>
+              <p class="text-xs text-gray-500">Inglés técnico aplicado a química industrial</p>
             </div>
           </div>
         </div>
 
         <div class="flex items-center gap-3">
-          <div id="score-display" class="hidden md:flex items-center gap-2 bg-white/20 rounded-full px-3 py-1">
-            <span class="text-yellow-300">⭐</span>
+          <div id="score-display" class="hidden md:flex items-center gap-2 bg-white rounded-full px-3 py-1 border border-gray-100">
+            <span class="text-yellow-500">⭐</span>
             <strong id="score-text">0</strong>
           </div>
           <button class="btn btn-ghost" onclick="navigateTo('home')">Inicio</button>
@@ -159,155 +165,102 @@
       </div>
     </header>
 
-    <!-- Main -->
-    <main class="max-w-7xl mx-auto px-4 py-6">
+    <!-- Main content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
 
-      <!-- HOME (restored video de bienvenida + buttons) -->
-      <section id="section-home" class="space-y-8">
-        <div class="bg-white rounded-3xl shadow-xl p-8 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#ff6b6b]/20 to-transparent rounded-bl-full"></div>
-          <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-[#48dbfb]/20 to-transparent rounded-tr-full"></div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div>
-              <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#ff6b6b] via-[#a55eea] to-[#48dbfb] mb-4">¡Aprende Inglés para Química Industrial!</h2>
-              <p class="text-gray-600 comic-font mb-6">Bienvenido al laboratorio virtual. Aquí encontrarás lecciones en español, vocabulario, ejercicios interactivos y prácticas de laboratorio aplicadas a la industria.</p>
-
-              <div class="flex flex-wrap gap-3">
-                <button class="btn btn-accent" onclick="navigateTo('verbtobe')">Empezar: Verbo To Be</button>
-                <button class="btn btn-primary" onclick="navigateTo('games')">Ir a Juegos</button>
-                <button class="btn btn-ghost" onclick="navigateTo('lab')">Laboratorio Virtual</button>
-              </div>
-            </div>
-
-            <div class="rounded-2xl overflow-hidden">
-              <iframe class="w-full h-56 rounded-2xl" src="https://www.youtube.com/embed/LY0N59T0zFk" title="Video de Bienvenida - Laboratorio de Inglés Químico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- HOME (intro) — video de bienvenida y botones restaurados) -->
+      <section id="section-home" class="mb-8">
+        <div class="card p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h2 class="text-3xl font-extrabold">Bienvenido al Laboratorio de Inglés Químico</h2>
+            <p class="mt-3 text-gray-600">Aprende gramática, vocabulario y procedimientos en inglés aplicados a la química industrial con ejercicios interactivos y prácticas de laboratorio virtual.</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <button class="btn btn-accent" onclick="navigateTo('verbtobe')">Empezar: Verbo To Be</button>
+              <button class="btn btn-primary" onclick="navigateTo('games')">Ir a Juegos</button>
+              <button class="btn btn-ghost" onclick="navigateTo('lab')">Laboratorio Virtual</button>
             </div>
           </div>
-        </div>
-
-        <!-- Quick cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="card p-6 rounded-2xl">
-            <h3 class="font-bold text-lg">🎬 Video de Bienvenida</h3>
-            <p class="text-sm text-gray-600 mt-2">Mira cómo usar la plataforma y sus secciones principales.</p>
-          </div>
-          <div class="card p-6 rounded-2xl">
-            <h3 class="font-bold text-lg">📘 Clases en Español</h3>
-            <p class="text-sm text-gray-600 mt-2">Lecciones explicadas en español para facilitar el aprendizaje.</p>
-          </div>
-          <div class="card p-6 rounded-2xl">
-            <h3 class="font-bold text-lg">🔬 Laboratorio</h3>
-            <p class="text-sm text-gray-600 mt-2">Simulaciones y prácticas seguras para estudiantes.</p>
+          <div class="rounded-xl overflow-hidden">
+            <iframe class="w-full h-56 rounded-xl" src="https://www.youtube.com/embed/LY0N59T0zFk" title="Intro" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
       </section>
 
-      <!-- VERBO TO BE (detailed Spanish class + exercises) -->
+      <!-- VERBO TO BE (clase en español + ejercicios) -->
       <section id="section-verbtobe" class="hidden space-y-6">
-        <div class="section-grammar p-6">
-          <h2 class="text-3xl font-bold text-[#ff6b6b] mb-2">Verbo "To Be" — Clase (en español)</h2>
-
-          <div class="class-text mb-4">
-            <p><strong>Introducción:</strong> El verbo <em>to be</em> (am / is / are / was / were) es fundamental en inglés. Se usa para:</p>
-            <ul class="list-disc pl-6">
-              <li><strong>Identificar o definir</strong>: I am a technician. → Yo soy un técnico.</li>
-              <li><strong>Describir estados</strong>: The solution is hot. → La solución está caliente.</li>
-              <li><strong>Ubicar</strong>: They are in the lab. → Ellos están en el laboratorio.</li>
-            </ul>
-
-            <p class="mt-3"><strong>Formas:</strong></p>
-            <ul class="list-disc pl-6">
-              <li><strong>Presente afirmativo:</strong> I am, You are, He/She/It is, We/They are.</li>
-              <li><strong>Presente negativo:</strong> I am not, You are not (aren't), He is not (isn't).</li>
-              <li><strong>Pasado afirmativo:</strong> I was, You were, He/She/It was, We/They were.</li>
-              <li><strong>Pasado negativo:</strong> I was not (wasn't), You were not (weren't), etc.</li>
-            </ul>
-
-            <p class="mt-3"><strong>Consejos para responder ejercicios:</strong> Observa el sujeto (singular/plural) y el tiempo que pide la frase; elige am/is/are para presente, was/were para pasado; usa "not" o las contracciones para negar.</p>
+        <div class="card p-6 section-grammar">
+          <h2 class="text-2xl font-bold text-[#ff6b6b]">El verbo "To Be" — Clase en español</h2>
+          <div class="class-text mt-3 mb-4">
+            <p><strong>Resumen:</strong> El verbo to be (am / is / are / was / were) se usa para identificar, describir estados y ubicar. Aprende a distinguir sujeto (singular/plural) y tiempo (presente/pasado) para elegir la forma correcta.</p>
+            <p><strong>Presente:</strong> I am, You are, He/She/It is, We/They are.</p>
+            <p><strong>Pasado:</strong> I/He/She/It was, You/We/They were.</p>
+            <p><strong>Negación:</strong> añade "not" o usa contracción: isn't, aren't, wasn't, weren't.</p>
+            <p class="mt-2">Consejo práctico: marca primero si la frase necesita presente o pasado, luego decide singular/plural.</p>
           </div>
 
-          <!-- Present Affirmative -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 rounded-2xl bg-gradient-to-br from-green-50 to-[#d1fae5] border-2 border-green-200">
-              <h3 class="font-bold text-green-700">Presente — Afirmativo (ejemplos)</h3>
-              <p class="text-sm text-gray-700 mb-3">Estructura: sujeto + am/is/are. Ejemplos: "I am a chemist." → "Yo soy químico". "The sample is ready." → "La muestra está lista".</p>
-              <div id="tobe-present-affirm-practice"></div>
-              <div class="mt-3 flex gap-2">
-                <button class="btn-success" onclick="generateToBePresAff()">Generar 10</button>
+          <div class="mt-4 space-y-4">
+            <div>
+              <h3 class="font-semibold">Presente — Afirmativo</h3>
+              <div id="tobe-present-affirm-practice" class="mt-3"></div>
+              <div class="mt-2 flex gap-2">
+                <button class="btn-success" onclick="generateToBePresAff()">Generar</button>
                 <button class="btn-primary" onclick="verifyToBePresAffAll()">Verificar todo</button>
                 <button class="btn-accent" onclick="resetToBePresAff()">Resetear</button>
               </div>
-              <div id="tobe-pres-aff-summary" class="mt-2 text-sm"></div>
             </div>
 
-            <!-- Present Negative -->
-            <div class="p-4 rounded-2xl bg-gradient-to-br from-red-50 to-[#ffe4e6] border-2 border-red-200">
-              <h3 class="font-bold text-red-600">Presente — Negativo (ejemplos)</h3>
-              <p class="text-sm text-gray-700 mb-3">Estructura: sujeto + am/is/are + not. Ej.: "The reactor isn't ready." → "El reactor no está listo".</p>
-              <div id="tobe-present-neg-practice"></div>
-              <div class="mt-3 flex gap-2">
-                <button class="btn-success" onclick="generateToBePresNeg()">Generar 10</button>
+            <div>
+              <h3 class="font-semibold">Presente — Negativo</h3>
+              <div id="tobe-present-neg-practice" class="mt-3"></div>
+              <div class="mt-2 flex gap-2">
+                <button class="btn-success" onclick="generateToBePresNeg()">Generar</button>
                 <button class="btn-primary" onclick="verifyToBePresNegAll()">Verificar todo</button>
                 <button class="btn-accent" onclick="resetToBePresNeg()">Resetear</button>
               </div>
-              <div id="tobe-pres-neg-summary" class="mt-2 text-sm"></div>
-            </div>
-          </div>
-
-          <!-- Past -->
-          <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-[#e0f2fe] border-2 border-blue-200">
-              <h3 class="font-bold text-blue-700">Pasado — Afirmativo</h3>
-              <p class="text-sm text-gray-700 mb-3">Sujeto + was/were — Ej.: "They were on duty yesterday." → "Ellos estuvieron de turno ayer".</p>
-              <div id="tobe-past-aff-practice"></div>
-              <div class="mt-3 flex gap-2">
-                <button class="btn-success" onclick="generateToBePastAff()">Generar 10</button>
-                <button class="btn-primary" onclick="verifyToBePastAffAll()">Verificar todo</button>
-                <button class="btn-accent" onclick="resetToBePastAff()">Resetear</button>
-              </div>
-              <div id="tobe-past-aff-summary" class="mt-2 text-sm"></div>
             </div>
 
-            <div class="p-4 rounded-2xl bg-gradient-to-br from-purple-50 to-[#f5f3ff] border-2 border-purple-200">
-              <h3 class="font-bold text-purple-700">Pasado — Negativo</h3>
-              <p class="text-sm text-gray-700 mb-3">Sujeto + was/were + not — Ej.: "The machine wasn't calibrated." → "La máquina no estaba calibrada".</p>
-              <div id="tobe-past-neg-practice"></div>
-              <div class="mt-3 flex gap-2">
-                <button class="btn-success" onclick="generateToBePastNeg()">Generar 10</button>
-                <button class="btn-primary" onclick="verifyToBePastNegAll()">Verificar todo</button>
-                <button class="btn-accent" onclick="resetToBePastNeg()">Resetear</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <h3 class="font-semibold">Pasado — Afirmativo</h3>
+                <div id="tobe-past-aff-practice" class="mt-3"></div>
+                <div class="mt-2 flex gap-2">
+                  <button class="btn-success" onclick="generateToBePastAff()">Generar</button>
+                  <button class="btn-primary" onclick="verifyToBePastAffAll()">Verificar todo</button>
+                  <button class="btn-accent" onclick="resetToBePastAff()">Resetear</button>
+                </div>
               </div>
-              <div id="tobe-past-neg-summary" class="mt-2 text-sm"></div>
+              <div>
+                <h3 class="font-semibold">Pasado — Negativo</h3>
+                <div id="tobe-past-neg-practice" class="mt-3"></div>
+                <div class="mt-2 flex gap-2">
+                  <button class="btn-success" onclick="generateToBePastNeg()">Generar</button>
+                  <button class="btn-primary" onclick="verifyToBePastNegAll()">Verificar todo</button>
+                  <button class="btn-accent" onclick="resetToBePastNeg()">Resetear</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- VERBOS MODALES (clase extensa en español) -->
+      <!-- VERBOS MODALES (clase en español y ejercicios) -->
       <section id="section-modals" class="hidden space-y-6">
-        <div class="section-grammar p-6">
-          <h2 class="text-3xl font-bold mb-2">Verbos Modales — Clase en español</h2>
-
-          <div class="class-text mb-4">
-            <p><strong>¿Qué son?</strong> Los verbos modales (can, could, may, might, must, should, will, would) son verbos auxiliares que expresan capacidad, permiso, posibilidad, obligación o consejo.</p>
-
-            <h4 class="mt-3 font-semibold">Principales usos</h4>
+        <div class="card p-6 section-grammar">
+          <h2 class="text-2xl font-bold">Verbos Modales — Clase en español</h2>
+          <div class="class-text mt-3 mb-4">
+            <p><strong>¿Para qué sirven?</strong> Expresan permiso, capacidad, obligación, consejo y posibilidad.</p>
             <ul class="list-disc pl-6">
-              <li><strong>Capacidad / habilidad:</strong> can / could. Ej.: "Technicians can operate the pump." → "Los técnicos pueden operar la bomba".</li>
-              <li><strong>Permiso:</strong> can / may. Ej.: "You may enter" → "Puedes entrar".</li>
-              <li><strong>Obligación / necesidad:</strong> must, have to. Ej.: "You must wear PPE" → "Debes usar EPP".</li>
-              <li><strong>Consejo / recomendación:</strong> should. Ej.: "You should clean the spill" → "Deberías limpiar el derrame".</li>
-              <li><strong>Posibilidad / probabilidad:</strong> might, may. Ej.: "This might be hazardous" → "Esto podría ser peligroso".</li>
+              <li><strong>Can / Could:</strong> habilidad o permiso. Ej.: "You can use the hood" → "Puedes usar la campana".</li>
+              <li><strong>May / Might:</strong> posibilidad. Ej.: "This might be hazardous" → "Esto podría ser peligroso".</li>
+              <li><strong>Must / Have to:</strong> obligación. Ej.: "You must wear PPE" → "Debes usar EPP".</li>
+              <li><strong>Should:</strong> recomendación. Ej.: "You should record the data" → "Deberías registrar los datos".</li>
             </ul>
-
-            <p class="mt-3">En los ejercicios verás frases del contexto industrial; fija la intención (permiso/obligación/posibilidad) para escoger el modal correcto.</p>
           </div>
 
           <div id="modals-exercises" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
 
-          <div class="mt-3 flex gap-2">
-            <button class="btn-accent" onclick="generateModalExercises()">Generar 20 ejercicios</button>
+          <div class="mt-3 flex gap-3">
+            <button class="btn-accent" onclick="generateModalExercises()">Generar 20</button>
             <button class="btn-primary" onclick="verifyModalExercises()">Verificar todo</button>
             <button class="btn-success" onclick="resetModalExercises()">Resetear</button>
           </div>
@@ -315,29 +268,20 @@
         </div>
       </section>
 
-      <!-- GERUNDIO (clase extensa en español) -->
+      <!-- GERUNDIO -->
       <section id="section-gerund" class="hidden space-y-6">
-        <div class="section-grammar p-6">
-          <h2 class="text-3xl font-bold mb-2">Gerundio (-ING) — Clase en español</h2>
-
-          <div class="class-text mb-4">
-            <p><strong>¿Qué es el gerundio?</strong> Es la forma del verbo que termina en -ing y actúa como sustantivo o describe acciones en progreso. En inglés se usa muy frecuentemente en la comunicación técnica para describir procesos, procedimientos y actividades continuas.</p>
-
-            <h4 class="mt-3 font-semibold">Usos principales</h4>
-            <ul class="list-disc pl-6">
-              <li><strong>Acción en progreso:</strong> "He is mixing the solution" → "Él está mezclando la solucíon".</li>
-              <li><strong>Como sustantivo (subject):</strong> "Mixing reagents is important" → "Mezclar reactivos es importante".</li>
-              <li><strong>Después de preposiciones:</strong> "Before adding the acid..." → "Antes de añadir el ácido...".</li>
-              <li><strong>Después de algunos verbos:</strong> enjoy, avoid, suggest, recommend (ej.: "We recommend testing").</li>
-            </ul>
-
-            <p class="mt-3">En los ejercicios deberás completar con la forma en -ing adecuada según el contexto de laboratorio.</p>
+        <div class="card p-6 section-grammar">
+          <h2 class="text-2xl font-bold">Gerundio (-ING) — Clase en español</h2>
+          <div class="class-text mt-3 mb-4">
+            <p><strong>¿Qué es?</strong> El gerundio es la forma del verbo con -ing que describe acciones en progreso o actúa como sustantivo.</p>
+            <p><strong>Usos:</strong> 1) Acción en progreso (He is mixing). 2) Después de preposiciones (before adding). 3) Como sujeto (Mixing reagents is important).</p>
+            <p>En la industria, la forma -ing aparece frecuentemente en procedimientos y protocolos: "Before adding, check the label".</p>
           </div>
 
           <div id="gerund-exercises" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
 
-          <div class="mt-3 flex gap-2">
-            <button class="btn-accent" onclick="generateGerundExercises()">Generar 20 ejercicios</button>
+          <div class="mt-3 flex gap-3">
+            <button class="btn-accent" onclick="generateGerundExercises()">Generar 20</button>
             <button class="btn-primary" onclick="verifyGerundExercises()">Verificar todo</button>
             <button class="btn-success" onclick="resetGerundExercises()">Resetear</button>
           </div>
@@ -345,25 +289,18 @@
         </div>
       </section>
 
-      <!-- PRONOMBRES POSESIVOS (clase extensa en español) -->
+      <!-- PRONOMBRES POSESIVOS -->
       <section id="section-possessives" class="hidden space-y-6">
-        <div class="section-grammar p-6">
-          <h2 class="text-3xl font-bold mb-2">Pronombres Posesivos — Clase en español</h2>
-
-          <div class="class-text mb-4">
-            <p><strong>Resumen:</strong> Los pronombres posesivos indican posesión o pertenencia. Hay dos formas principales:</p>
-            <ul class="list-disc pl-6">
-              <li><strong>Determinantes posesivos (antes del sustantivo):</strong> my, your, his, her, its, our, their — "my lab", "their sample".</li>
-              <li><strong>Pronombres posesivos (reemplazan al sustantivo):</strong> mine, yours, his, hers, ours, theirs — "The report is mine", "The tools are theirs".</li>
-            </ul>
-
-            <p class="mt-3">En contexto industrial: identifica el propietario del equipo, documentación o muestras para usar la forma correcta.</p>
+        <div class="card p-6 section-grammar">
+          <h2 class="text-2xl font-bold">Pronombres Posesivos — Clase en español</h2>
+          <div class="class-text mt-3 mb-4">
+            <p><strong>Resumen:</strong> Diferencia entre determinantes (my/your/our) y pronombres (mine/yours/ours). Ej.: "this is our lab" vs "the lab is ours". En la industria es importante identificar responsabilidad y propiedad correctamente.</p>
           </div>
 
           <div id="possessives-exercises" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
 
-          <div class="mt-3 flex gap-2">
-            <button class="btn-accent" onclick="generatePossessiveExercises()">Generar 20 ejercicios</button>
+          <div class="mt-3 flex gap-3">
+            <button class="btn-accent" onclick="generatePossessiveExercises()">Generar 20</button>
             <button class="btn-primary" onclick="verifyPossessiveExercises()">Verificar todo</button>
             <button class="btn-success" onclick="resetPossessiveExercises()">Resetear</button>
           </div>
@@ -371,58 +308,43 @@
         </div>
       </section>
 
-      <!-- VOCABULARIO (20 tarjetas coloridas) -->
+      <!-- VOCABULARIO -->
       <section id="section-vocabulary" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-[#00d2a0] mb-2">Vocabulario — Química Industrial</h2>
-          <p class="text-gray-600 comic-font mb-4">Haz clic en una tarjeta para escuchar la pronunciación. Palabras útiles en planta y laboratorio.</p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="vocab-grid">
-            <!-- Cards generadas por JS con colores -->
-          </div>
-
-          <div class="mt-4 flex gap-2">
-            <button class="btn-primary" onclick="populateVocab()">Regenerar tarjetas (20)</button>
+        <div class="card p-6">
+          <h2 class="text-2xl font-bold text-[#00d2a0]">Vocabulario — Química Industrial (20)</h2>
+          <p class="text-gray-600 mt-2 mb-4">Tarjetas coloridas: haz clic para escuchar pronunciación. Palabras útiles para planta y laboratorio.</p>
+          <div id="vocab-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+          <div class="mt-3">
+            <button class="btn-primary" onclick="populateVocab()">Regenerar tarjetas</button>
           </div>
         </div>
       </section>
 
-      <!-- LABORATORIO (mejorado) -->
+      <!-- LABORATORIO -->
       <section id="section-lab" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-purple mb-2">Laboratorio Virtual — Prácticas mejoradas</h2>
-          <p class="text-gray-600 comic-font mb-4">Prácticas interactivas orientadas a química industrial: pH, mezclas, titulación simple y control de temperatura. Cada práctica presenta instrucciones en español e inglés, resultado visual y retroalimentación.</p>
+        <div class="card p-6">
+          <h2 class="text-2xl font-bold text-purple-600">Laboratorio Virtual — Mejorado</h2>
+          <p class="text-gray-600 mt-2 mb-4">Prácticas interactivas: pH, mezclas, titulación simple y temperatura. Resultados en inglés/español y feedback visual.</p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <!-- pH improved -->
-            <div class="rounded-2xl p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="rounded-2xl p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200">
               <h3 class="font-bold">🧪 Prueba de pH</h3>
-              <p class="text-sm text-gray-700 mb-3">Selecciona una sustancia, observa pH, color y una breve explicación técnica en español e inglés.</p>
-              <div class="flex flex-wrap gap-2">
-                <button class="btn-accent" onclick="testPH('lemon',2,'El jugo de limón es ácido / Lemon juice is acidic')">🍋 Limón (pH 2)</button>
-                <button class="btn-primary" onclick="testPH('vinegar',3,'El vinagre es ácido / Vinegar is acidic')">🍶 Vinagre (pH 3)</button>
-                <button class="btn-success" onclick="testPH('water',7,'El agua es neutra / Water is neutral')">💧 Agua (pH 7)</button>
-                <button class="btn-warning" onclick="testPH('soap',13,'El jabón es básico / Soap is basic')">🧼 Jabón (pH 13)</button>
-                <button class="btn-accent" onclick="testPH('bleach',12,'La lejía es básica / Bleach is basic')">🧴 Lejía (pH 12)</button>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <button class="btn-accent" onclick="testPH('lemon',2,'El jugo de limón es ácido / Lemon juice is acidic')">🍋 Limón</button>
+                <button class="btn-primary" onclick="testPH('vinegar',3,'El vinagre es ácido / Vinegar is acidic')">🍶 Vinagre</button>
+                <button class="btn-success" onclick="testPH('water',7,'El agua es neutra / Water is neutral')">💧 Agua</button>
+                <button class="btn-warning" onclick="testPH('soap',13,'El jabón es básico / Soap is basic')">🧼 Jabón</button>
               </div>
-
-              <div id="ph-result" class="mt-4 bg-white rounded-xl p-4 border-2 border-gray-200 min-h-[100px] flex items-center justify-center"></div>
-
+              <div id="ph-result" class="mt-4 bg-white rounded-xl p-4 border-2 border-gray-200 min-h-[100px]"></div>
               <div class="mt-4">
-                <div class="h-3 rounded-full bg-gray-200 overflow-hidden">
-                  <div id="ph-bar" style="width:0%;" class="h-full bg-gradient-to-r from-red-500 to-green-500 transition-all"></div>
-                </div>
+                <div class="h-3 rounded-full bg-gray-200 overflow-hidden"><div id="ph-bar" style="width:0%;" class="h-full transition-all"></div></div>
                 <div class="flex justify-between mt-1 text-xs text-gray-500"><span>Ácido</span><span>Neutro</span><span>Base</span></div>
               </div>
             </div>
 
-            <!-- Mixing -->
-            <div class="rounded-2xl p-6 bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-200">
+            <div class="rounded-2xl p-4 bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-200">
               <h3 class="font-bold">⚗️ Mezcla de Sustancias</h3>
-              <p class="text-sm text-gray-700 mb-3">Elige dos sustancias y observa la descripción de la reacción en inglés y español. Precaución: solo simulación educativa.</p>
-
-              <div class="grid grid-cols-1 gap-3">
+              <div class="mt-2">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                   <select id="substanceA" class="input-answer">
                     <option value="">-- Sustancia A --</option>
@@ -445,40 +367,31 @@
                   </select>
                 </div>
 
-                <div class="flex gap-2">
+                <div class="mt-3 flex gap-2">
                   <button class="btn-primary" onclick="mixSubstances()">🔬 Mezclar</button>
                   <button class="btn-accent" onclick="resetMix()">Reset</button>
                 </div>
 
-                <div id="mix-result" class="mt-2"></div>
+                <div id="mix-result" class="mt-3"></div>
               </div>
             </div>
 
-            <!-- Titration simulation -->
-            <div class="rounded-2xl p-6 bg-gradient-to-br from-pink-50 to-purple-50 border-2 border-pink-200">
-              <h3 class="font-bold">🧫 Simulación de Titulación</h3>
-              <p class="text-sm text-gray-700 mb-3">Añade gotas (simuladas) hasta alcanzar el punto final. Aprende el concepto y la interpretación del indicador.</p>
-
-              <div class="flex items-center gap-2">
+            <div class="rounded-2xl p-4 bg-gradient-to-br from-pink-50 to-purple-50 border-2 border-pink-200">
+              <h3 class="font-bold">🧫 Titulación (simulada)</h3>
+              <div class="mt-2 flex items-center gap-2">
                 <button class="btn-primary" onclick="addDrop()">➕ Añadir gota</button>
                 <button class="btn-accent" onclick="resetTitration()">Reset</button>
                 <div id="drop-count" class="ml-3 font-bold">Gotas: 0</div>
               </div>
-
               <div id="titration-result" class="mt-3 p-3 rounded border-2 border-gray-100 bg-white"></div>
-              <p class="text-xs text-gray-500 mt-2">Objetivo: observa el cambio de color del indicador (simulado) y encuentra el punto final.</p>
             </div>
 
-            <!-- Temperature -->
-            <div class="rounded-2xl p-6 bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200">
-              <h3 class="font-bold">🌡️ Medición de Temperatura</h3>
-              <p class="text-sm text-gray-700 mb-3">Genera una temperatura y clasifícala (frío/ambient/alto). Aprenderás a interpretar rangos.</p>
-
-              <div class="flex items-center gap-2">
+            <div class="rounded-2xl p-4 bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200">
+              <h3 class="font-bold">🌡️ Medición de temperatura</h3>
+              <div class="mt-2 flex items-center gap-2">
                 <button class="btn-primary" onclick="generateTemp()">Generar temperatura</button>
                 <div id="temp-display" class="font-bold ml-2">-- °C</div>
               </div>
-
               <div class="mt-3 flex gap-2">
                 <button class="btn-accent" onclick="classifyTemp('low')">Frío</button>
                 <button class="btn-success" onclick="classifyTemp('ok')">Ambiental</button>
@@ -486,19 +399,20 @@
               </div>
               <div id="temp-feedback" class="mt-2 font-bold"></div>
             </div>
+
           </div>
         </div>
       </section>
 
       <!-- JUEGOS -->
       <section id="section-games" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-pink-600 mb-2">Juegos Educativos</h2>
-          <p class="text-gray-600 mb-4">Practica vocabulario y gramática de forma lúdica. Verifica por fila o con el botón global.</p>
+        <div class="card p-6">
+          <h2 class="text-2xl font-bold text-pink-600">Juegos Educativos</h2>
+          <p class="text-gray-600 mt-2 mb-4">Actividades con verificación por fila y global.</p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="game-card">
-              <h3 class="font-bold mb-2">🎯 Empareja palabras</h3>
+              <h3 class="font-bold mb-2">🎯 Emparejar palabras</h3>
               <div id="matching-game" class="space-y-2"></div>
               <div class="mt-3 flex gap-2">
                 <button class="btn-primary" onclick="verifyMatchingAll()">Verificar todo</button>
@@ -529,7 +443,7 @@
 
             <div class="game-card">
               <h3 class="font-bold mb-2">🧪 Traduce elementos</h3>
-              <div id="translation-game" class="space-y-2" style="max-height:420px; overflow:auto"></div>
+              <div id="translation-game" class="space-y-2" style="max-height:420px;overflow:auto"></div>
               <div class="mt-3 flex gap-2">
                 <button class="btn-primary" onclick="verifyTranslationAll()">Verificar</button>
                 <button class="btn-accent" onclick="resetTranslation()">Resetear</button>
@@ -542,33 +456,29 @@
 
       <!-- EJERCICIOS -->
       <section id="section-exercises" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-orange-500 mb-2">Ejercicios de práctica</h2>
-          <p class="text-gray-600 mb-4">Genera un quiz con preguntas sobre vocabulario y gramática. Feedback inmediato y barra de progreso.</p>
+        <div class="card p-6">
+          <h2 class="text-2xl font-bold text-orange-500">Ejercicios</h2>
+          <p class="text-gray-600 mt-2 mb-4">Genera un quiz con feedback y barra de progreso.</p>
 
-          <div class="mb-6">
+          <div class="mb-4">
             <div class="flex items-center gap-3">
-              <label class="font-semibold">Número de preguntas:</label>
-              <select id="quiz-size" class="input-answer">
-                <option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option>
-              </select>
+              <label class="font-semibold">Número preguntas:</label>
+              <select id="quiz-size" class="input-answer"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option></select>
               <button class="btn-warning" onclick="startQuiz()">Generar Quiz</button>
             </div>
-
             <div class="flex justify-between mt-3 mb-2"><span class="font-bold">Progreso</span><span id="quiz-progress" class="font-bold text-orange-500">0/0</span></div>
             <div class="w-full bg-gray-200 rounded-full h-4"><div id="quiz-bar" class="h-4 rounded-full bg-gradient-to-r from-orange-400 to-amber-400" style="width:0%"></div></div>
           </div>
 
-          <div id="quiz-container" class="space-y-4"></div>
+          <div id="quiz-container" class="space-y-3"></div>
         </div>
       </section>
 
       <!-- VIDEOS -->
       <section id="section-videos" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-pink-500 mb-2">Clases en Video</h2>
-          <p class="text-gray-600 mb-4">Haz clic para abrir el reproductor.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card p-6">
+          <h2 class="text-2xl font-bold text-pink-500">Videos</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-pink-200 cursor-pointer" onclick="playVideoModal('LY0N59T0zFk')">
               <div class="aspect-video bg-gradient-to-br from-pink-400 to-rose-400 flex items-center justify-center text-white"><span class="text-5xl">▶️</span></div>
               <div class="p-3 bg-pink-50"><strong>Bienvenida</strong></div>
@@ -579,7 +489,7 @@
             </div>
             <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-green-200 cursor-pointer" onclick="playVideoModal('RrTuHzTz3nk')">
               <div class="aspect-video bg-gradient-to-br from-green-400 to-emerald-400 flex items-center justify-center text-white"><span class="text-5xl">▶️</span></div>
-              <div class="p-3 bg-green-50"><strong>Equipo de Laboratorio</strong></div>
+              <div class="p-3 bg-green-50"><strong>Equipo de laboratorio</strong></div>
             </div>
             <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-purple-200 cursor-pointer" onclick="playVideoModal('sWOvK5pxY5E')">
               <div class="aspect-video bg-gradient-to-br from-purple-400 to-violet-400 flex items-center justify-center text-white"><span class="text-5xl">▶️</span></div>
@@ -597,9 +507,9 @@
               <div class="aspect-video w-full"><iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
             </div>
           </div>
-
         </div>
       </section>
+
     </main>
 
     <!-- Footer -->
@@ -607,13 +517,25 @@
       <p class="text-gray-500 text-sm comic-font">🧪 Laboratorio de Inglés para Química © 2026 | Hecho con ❤️ para estudiantes</p>
     </footer>
 
-    <!-- Elfsight AI Chatbot (restored) -->
+    <!-- Chat AI (Elfsight) -->
     <div class="elfsight-app-908ce0c0-00bf-476d-8199-6a7b2042bd42" data-elfsight-app-lazy></div>
   </div>
 
-  <!-- Scripts: lógica de ejercicios, vocabulario, laboratorio, juegos -->
+  <!-- Scripts (lógica ya integrada: ejercicios, vocab, games, lab) -->
   <script>
-    // Basic UI helpers
+    // (El mismo conjunto de funciones interactivas que ya hemos venido usando)
+    // Para evitar extender demasiado este bloque aquí, el navegador usará las funciones definidas
+    // a continuación (son las mismas que en la versión anterior): toggleSidebar, navigateTo,
+    // generateToBePresAff, verifyToBePresAffAll, generateModalExercises, generateGerundExercises,
+    // generatePossessiveExercises, populateVocab, generateMatching, generateScramble,
+    // generateSentence, generateTranslation, generateNumberGame, testPH, mixSubstances, addDrop,
+    // generateTemp, classifyTemp, startQuiz, renderQuiz, etc.
+
+    // Implementación combinada (copiar las funciones interactivas completas):
+    // Para mantener el mensaje claro aquí, incluyo todas las funciones interactivas en bloque a continuación.
+
+    /* ------------------------------ Interactividad completa ------------------------------ */
+
     function toggleSidebar(){
       const s=document.getElementById('sidebar'), o=document.getElementById('sidebar-overlay');
       s.classList.toggle('-translate-x-full'); o.classList.toggle('hidden');
@@ -629,144 +551,76 @@
       const id = map[key] || ('section-'+key);
       const el = document.getElementById(id);
       if(el) el.classList.remove('hidden');
-      // close sidebar on mobile
       const s=document.getElementById('sidebar'); if(!s.classList.contains('-translate-x-full')) toggleSidebar();
-      // populate dynamic content when needed
-      if(key === 'vocabulary') populateVocab();
-      if(key === 'games') populateAllGames();
-      if(key === 'exercises') { /* nothing immediate */ }
+      if(key==='vocabulary') populateVocab();
+      if(key==='games') populateAllGames();
+      if(key==='exercises') { /* nothing immediate */ }
     }
 
-    // Speech
     function speakWord(word){
       if('speechSynthesis' in window){
-        const u = new SpeechSynthesisUtterance(word);
-        u.lang = 'en-US'; u.rate = 0.9;
-        speechSynthesis.speak(u);
+        const u=new SpeechSynthesisUtterance(word);
+        u.lang='en-US'; u.rate = 0.9; speechSynthesis.speak(u);
       }
     }
 
-    // VERIFY helper
     function verifySingle(inputId, expected){
-      const inp = document.getElementById(inputId), fb = document.getElementById(inputId+'-fb');
+      const inp=document.getElementById(inputId), fb=document.getElementById(inputId+'-fb');
       if(!inp) return;
-      const val = (inp.value||'').trim().toLowerCase();
-      const exp = (expected||'').toLowerCase();
-      const alt = exp.replace(' not',"n't");
-      if(val === exp || val === alt){
-        fb.textContent = '✅ Correct';
-        fb.style.color = 'var(--success)';
-        inp.classList.add('border-green-400','bg-green-50');
-      } else {
-        fb.textContent = `❌ ${expected}`;
-        fb.style.color = 'var(--danger)';
-        inp.classList.add('border-red-400','bg-red-50');
-      }
-      inp.disabled = true;
+      const val=(inp.value||'').trim().toLowerCase();
+      const exp=(expected||'').toLowerCase();
+      const alt=exp.replace(' not',"n't");
+      if(val===exp||val===alt){ fb.textContent='✅ Correct'; fb.style.color='var(--success)'; inp.classList.add('border-green-400','bg-green-50'); }
+      else { fb.textContent=`❌ ${expected}`; fb.style.color='var(--danger)'; inp.classList.add('border-red-400','bg-red-50'); }
+      inp.disabled=true;
     }
 
-    /* ----------- To Be banks and functions (10 items per generate to give more practice) ----------- */
-    const toBePresAff = [
-      {q:'I ___ a chemistry student.', a:'am'},
-      {q:'You ___ part of the team.', a:'are'},
-      {q:'He ___ the lead engineer.', a:'is'},
-      {q:'We ___ ready for the test.', a:'are'},
-      {q:'They ___ in the control room.', a:'are'},
-      {q:'It ___ a hazardous substance.', a:'is'},
-      {q:'She ___ the lead operator.', a:'is'},
-      {q:'This ___ a sample.', a:'is'},
-      {q:'You ___ responsible.', a:'are'},
-      {q:'I ___ the operator.', a:'am'}
-    ];
-    const toBePresNeg = [
-      {q:'I ___ not the supervisor.', a:'am not'},
-      {q:'You ___ not on duty.', a:'are not'},
-      {q:'He ___ not available.', a:'is not'},
-      {q:'We ___ not finished.', a:'are not'},
-      {q:'They ___ not present.', a:'are not'},
-      {q:'It ___ not stable.', a:'is not'},
-      {q:'This ___ not a base.', a:'is not'},
-      {q:'These samples ___ not ready.', a:'are not'},
-      {q:'The equipment ___ not working.', a:'is not'},
-      {q:'You ___ not trained.', a:'are not'}
-    ];
-    const toBePastAff = [
-      {q:'I ___ in the lab yesterday.', a:'was'},
-      {q:'You ___ assigned last month.', a:'were'},
-      {q:'He ___ the lead chemist.', a:'was'},
-      {q:'We ___ on shift earlier.', a:'were'},
-      {q:'They ___ at the inspection.', a:'were'},
-      {q:'It ___ the correct temperature.', a:'was'},
-      {q:'The equipment ___ calibrated.', a:'was'},
-      {q:'The technicians ___ busy.', a:'were'},
-      {q:'She ___ the operator.', a:'was'},
-      {q:'We ___ analyzing the sample.', a:'were'}
-    ];
-    const toBePastNeg = [
-      {q:'I ___ not present during the test.', a:'was not'},
-      {q:'You ___ not on schedule.', a:'were not'},
-      {q:'He ___ not available.', a:'was not'},
-      {q:'We ___ not ready.', a:'were not'},
-      {q:'They ___ not allowed.', a:'were not'},
-      {q:'It ___ not inspected.', a:'was not'},
-      {q:'The instruments ___ not calibrated.', a:'were not'},
-      {q:'She ___ not trained.', a:'was not'},
-      {q:'We ___ not informed.', a:'were not'},
-      {q:'It ___ not validated.', a:'was not'}
-    ];
+    // To Be banks (10 each)
+    const toBePresAff = [{q:'I ___ a chemistry student.',a:'am'},{q:'You ___ part of the team.',a:'are'},{q:'He ___ the lead engineer.',a:'is'},{q:'We ___ ready for the test.',a:'are'},{q:'They ___ in the control room.',a:'are'},{q:'It ___ a hazardous substance.',a:'is'},{q:'She ___ the lead operator.',a:'is'},{q:'This ___ a sample.',a:'is'},{q:'You ___ responsible.',a:'are'},{q:'I ___ the operator.',a:'am'}];
+    const toBePresNeg = [{q:'I ___ not the supervisor.',a:'am not'},{q:'You ___ not on duty.',a:'are not'},{q:'He ___ not available.',a:'is not'},{q:'We ___ not finished.',a:'are not'},{q:'They ___ not present.',a:'are not'},{q:'It ___ not stable.',a:'is not'},{q:'This ___ not a base.',a:'is not'},{q:'These samples ___ not ready.',a:'are not'},{q:'The equipment ___ not working.',a:'is not'},{q:'You ___ not trained.',a:'are not'}];
+    const toBePastAff = [{q:'I ___ in the lab yesterday.',a:'was'},{q:'You ___ assigned last month.',a:'were'},{q:'He ___ the lead chemist.',a:'was'},{q:'We ___ on shift earlier.',a:'were'},{q:'They ___ at the inspection.',a:'were'},{q:'It ___ the correct temperature.',a:'was'},{q:'The equipment ___ calibrated.',a:'was'},{q:'The technicians ___ busy.',a:'were'},{q:'She ___ the operator.',a:'was'},{q:'We ___ analyzing the sample.',a:'were'}];
+    const toBePastNeg = [{q:'I ___ not present during the test.',a:'was not'},{q:'You ___ not on schedule.',a:'were not'},{q:'He ___ not available.',a:'was not'},{q:'We ___ not ready.',a:'were not'},{q:'They ___ not allowed.',a:'were not'},{q:'It ___ not inspected.',a:'was not'},{q:'The instruments ___ not calibrated.',a:'were not'},{q:'She ___ not trained.',a:'was not'},{q:'We ___ not informed.',a:'were not'},{q:'It ___ not validated.',a:'was not'}];
 
     function makeRows(containerId, bank, prefix){
-      const cont = document.getElementById(containerId);
-      cont.innerHTML = '';
-      bank.forEach((it,i) => {
-        const id = `${prefix}-${i}`;
-        const div = document.createElement('div'); div.className = 'exercise-row';
-        div.innerHTML = `<div style="flex:1">${it.q.replace('___', `<input id="${id}" class="input-answer" type="text" />`)}</div>
-          <div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div>
-          <div id="${id}-fb" class="exercise-feedback" aria-live="polite"></div>`;
+      const cont=document.getElementById(containerId); cont.innerHTML='';
+      bank.forEach((it,i)=>{
+        const id=`${prefix}-${i}`;
+        const div=document.createElement('div'); div.className='exercise-row';
+        div.innerHTML = `<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`;
         cont.appendChild(div);
       });
     }
 
     function generateToBePresAff(){ makeRows('tobe-present-affirm-practice', toBePresAff, 'tba'); }
     function verifyToBePresAffAll(){ verifyAll('tobe-present-affirm-practice', toBePresAff); }
-    function resetToBePresAff(){ document.getElementById('tobe-present-affirm-practice').innerHTML = ''; if(document.getElementById('tobe-pres-aff-summary')) document.getElementById('tobe-pres-aff-summary').textContent=''; }
+    function resetToBePresAff(){ document.getElementById('tobe-present-affirm-practice').innerHTML=''; if(document.getElementById('tobe-pres-aff-summary')) document.getElementById('tobe-pres-aff-summary').textContent=''; }
 
     function generateToBePresNeg(){ makeRows('tobe-present-neg-practice', toBePresNeg, 'tbn'); }
     function verifyToBePresNegAll(){ verifyAll('tobe-present-neg-practice', toBePresNeg); }
-    function resetToBePresNeg(){ document.getElementById('tobe-present-neg-practice').innerHTML = ''; if(document.getElementById('tobe-pres-neg-summary')) document.getElementById('tobe-pres-neg-summary').textContent=''; }
+    function resetToBePresNeg(){ document.getElementById('tobe-present-neg-practice').innerHTML=''; if(document.getElementById('tobe-pres-neg-summary')) document.getElementById('tobe-pres-neg-summary').textContent=''; }
 
     function generateToBePastAff(){ makeRows('tobe-past-aff-practice', toBePastAff, 'tpaf'); }
     function verifyToBePastAffAll(){ verifyAll('tobe-past-aff-practice', toBePastAff); }
-    function resetToBePastAff(){ document.getElementById('tobe-past-aff-practice').innerHTML = ''; if(document.getElementById('tobe-past-aff-summary')) document.getElementById('tobe-past-aff-summary').textContent=''; }
+    function resetToBePastAff(){ document.getElementById('tobe-past-aff-practice').innerHTML=''; if(document.getElementById('tobe-past-aff-summary')) document.getElementById('tobe-past-aff-summary').textContent=''; }
 
     function generateToBePastNeg(){ makeRows('tobe-past-neg-practice', toBePastNeg, 'tpneg'); }
     function verifyToBePastNegAll(){ verifyAll('tobe-past-neg-practice', toBePastNeg); }
-    function resetToBePastNeg(){ document.getElementById('tobe-past-neg-practice').innerHTML = ''; if(document.getElementById('tobe-past-neg-summary')) document.getElementById('tobe-past-neg-summary').textContent=''; }
+    function resetToBePastNeg(){ document.getElementById('tobe-past-neg-practice').innerHTML=''; if(document.getElementById('tobe-past-neg-summary')) document.getElementById('tobe-past-neg-summary').textContent=''; }
 
     function verifyAll(containerId, bank){
-      const cont = document.getElementById(containerId);
-      if(!cont) return;
-      const inputs = cont.querySelectorAll('input');
-      let tot=0, corr=0;
-      inputs.forEach(inp => {
-        tot++;
-        const idx = parseInt(inp.id.split('-')[1],10);
-        const expected = bank[idx] && bank[idx].a || '';
-        const val = (inp.value||'').trim().toLowerCase();
-        const alt = expected.replace(' not',"n't").toLowerCase();
-        if(val === expected.toLowerCase() || val === alt){ document.getElementById(inp.id+'-fb').textContent = '✅'; document.getElementById(inp.id+'-fb').style.color = 'var(--success)'; corr++; }
-        else { document.getElementById(inp.id+'-fb').textContent = `❌ ${expected}`; document.getElementById(inp.id+'-fb').style.color = 'var(--danger)'; }
-        inp.disabled = true;
+      const cont=document.getElementById(containerId); if(!cont) return;
+      const inputs = cont.querySelectorAll('input'); let tot=0,corr=0;
+      inputs.forEach(inp=>{
+        tot++; const idx=parseInt(inp.id.split('-')[1],10); const expected=bank[idx] && bank[idx].a || ''; const val=(inp.value||'').trim().toLowerCase(); const alt=expected.replace(' not',"n't").toLowerCase();
+        if(val===expected.toLowerCase()||val===alt){ document.getElementById(inp.id+'-fb').textContent='✅'; document.getElementById(inp.id+'-fb').style.color='var(--success)'; corr++; }
+        else { document.getElementById(inp.id+'-fb').textContent=`❌ ${expected}`; document.getElementById(inp.id+'-fb').style.color='var(--danger)'; }
+        inp.disabled=true;
       });
-      // summary handling
       const summaryId = containerId.replace('practice','summary');
-      const summaryEl = document.getElementById(summaryId) || document.getElementById(containerId+'-summary');
-      if(summaryEl) summaryEl.textContent = `Resultado: ${corr}/${tot}`;
+      if(document.getElementById(summaryId)) document.getElementById(summaryId).textContent = `Resultado: ${corr}/${tot}`;
     }
 
-    /* ---------- Modal, Gerund, Possessive banks & functions (20 each) ---------- */
-
+    // Modal / Gerund / Possessive banks & generators (20 each)...
     const modalBank = [
       {q:'You ___ wear goggles in the lab.', a:'must'},{q:'Operators ___ adjust the flow if needed.', a:'can'},{q:'You ___ not smoke near solvents.', a:'must'},{q:'Scientists ___ repeat the measurement.', a:'should'},
       {q:'This reaction ___ be dangerous.', a:'can'},{q:'You ___ ask permission before entering the area.', a:'must'},{q:'Technicians ___ check valves regularly.', a:'must'},{q:'You ___ use the emergency stop in case of hazard.', a:'must'},
@@ -774,7 +628,7 @@
       {q:'Engineers ___ be on call tonight.', a:'may'},{q:'You ___ be careful when heating solvent.', a:'should'},{q:'Use approved containers; you ___ not use others.', a:'must'},{q:'The team ___ consult the supervisor.', a:'should'},
       {q:'You ___ handle acids with gloves.', a:'must'},{q:'You ___ use a fume hood when needed.', a:'should'},{q:'Operators ___ shut down if leak detected.', a:'must'},{q:'You ___ carry small samples to the lab.', a:'may'}
     ];
-    function generateModalExercises(){ const c=document.getElementById('modals-exercises'); c.innerHTML=''; modalBank.forEach((it,i)=>{ const id='modal-'+i; const div=document.createElement('div'); div.className='exercise-row'; div.innerHTML = `<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); document.getElementById('modals-summary').textContent=''; }
+    function generateModalExercises(){ const c=document.getElementById('modals-exercises'); c.innerHTML=''; modalBank.forEach((it,i)=>{ const id='modal-'+i; const div=document.createElement('div'); div.className='exercise-row'; div.innerHTML=`<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); document.getElementById('modals-summary').textContent=''; }
     function verifyModalExercises(){ const c=document.getElementById('modals-exercises'); if(!c) return; const inputs=c.querySelectorAll('input'); let tot=0,corr=0; inputs.forEach(inp=>{ tot++; const idx=parseInt(inp.id.split('-')[1],10); const expected=modalBank[idx].a; const val=(inp.value||'').trim().toLowerCase(); if(val===expected){ document.getElementById(inp.id+'-fb').textContent='✅'; document.getElementById(inp.id+'-fb').style.color='var(--success)'; corr++; } else { document.getElementById(inp.id+'-fb').textContent=`❌ ${expected}`; document.getElementById(inp.id+'-fb').style.color='var(--danger)'; } inp.disabled=true; }); document.getElementById('modals-summary').textContent=`Resultado: ${corr}/${tot}`; }
     function resetModalExercises(){ document.getElementById('modals-exercises').innerHTML=''; document.getElementById('modals-summary').textContent=''; }
 
@@ -787,7 +641,7 @@
       {q:'We practice ___ the protocol.', a:'following'},{q:'The team discussed ___ the results.', a:'analyzing'},{q:'They suggested ___ the pressure slowly.', a:'reducing'},
       {q:'She mentioned ___ the standard daily.', a:'monitoring'},{q:'They enjoy ___ laboratory work.', a:'doing'}
     ];
-    function generateGerundExercises(){ const c=document.getElementById('gerund-exercises'); c.innerHTML=''; gerundBank.forEach((it,i)=>{ const id='ger-'+i; const div=document.createElement('div'); div.className='exercise-row'; div.innerHTML = `<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); document.getElementById('gerund-summary').textContent=''; }
+    function generateGerundExercises(){ const c=document.getElementById('gerund-exercises'); c.innerHTML=''; gerundBank.forEach((it,i)=>{ const id='ger-'+i; const div=document.createElement('div'); div.className='exercise-row'; div.innerHTML=`<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); document.getElementById('gerund-summary').textContent=''; }
     function verifyGerundExercises(){ const c=document.getElementById('gerund-exercises'); if(!c) return; const inputs=c.querySelectorAll('input'); let tot=0,corr=0; inputs.forEach(inp=>{ tot++; const idx=parseInt(inp.id.split('-')[1],10); const expected=gerundBank[idx].a; const val=(inp.value||'').trim().toLowerCase(); if(val===expected){ document.getElementById(inp.id+'-fb').textContent='✅'; document.getElementById(inp.id+'-fb').style.color='var(--success)'; corr++; } else { document.getElementById(inp.id+'-fb').textContent=`❌ ${expected}`; document.getElementById(inp.id+'-fb').style.color='var(--danger)'; } inp.disabled=true; }); document.getElementById('gerund-summary').textContent=`Resultado: ${corr}/${tot}`; }
     function resetGerundExercises(){ document.getElementById('gerund-exercises').innerHTML=''; document.getElementById('gerund-summary').textContent=''; }
 
@@ -798,20 +652,14 @@
       {q:'They checked ___ (sus) results.', a:'their'},{q:'This ladder is not mine; it is ___.', a:'yours'},{q:'Please bring ___ (tu) ID.', a:'your'},{q:'The sample label is ___ responsibility.', a:'his'},
       {q:'We confirmed ___ (nuestro) schedule.', a:'our'},{q:'The broken filter is ___. (de ellos)', a:'theirs'},{q:'Is this meter ___ (tu)?', a:'yours'},{q:'The supervisor reviewed ___ (su) notes.', a:'her'},{q:'All devices must be in ___ place (de ellos).', a:'their'},{q:'The toolbox is ___. (de mí)', a:'mine'}
     ];
-    function generatePossessiveExercises(){ const c=document.getElementById('possessives-exercises'); c.innerHTML=''; possessiveBank.forEach((it,i)=>{ const id='pos-'+i; const div=document.createElement('div'); div.className='exercise-row'; div.innerHTML = `<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); document.getElementById('possessives-summary').textContent=''; }
+    function generatePossessiveExercises(){ const c=document.getElementById('possessives-exercises'); c.innerHTML=''; possessiveBank.forEach((it,i)=>{ const id='pos-'+i; const div=document.createElement('div'); div.className='exercise-row'; div.innerHTML=`<div style="flex:1">${it.q.replace('___',`<input id="${id}" class="input-answer" type="text" />`)}</div><div><button class="verify-btn" onclick="verifySingle('${id}','${it.a.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); document.getElementById('possessives-summary').textContent=''; }
     function verifyPossessiveExercises(){ const c=document.getElementById('possessives-exercises'); if(!c) return; const inputs=c.querySelectorAll('input'); let tot=0,corr=0; inputs.forEach(inp=>{ tot++; const idx=parseInt(inp.id.split('-')[1],10); const expected=possessiveBank[idx].a; const val=(inp.value||'').trim().toLowerCase(); if(val===expected){ document.getElementById(inp.id+'-fb').textContent='✅'; document.getElementById(inp.id+'-fb').style.color='var(--success)'; corr++; } else { document.getElementById(inp.id+'-fb').textContent=`❌ ${expected}`; document.getElementById(inp.id+'-fb').style.color='var(--danger)'; } inp.disabled=true; }); document.getElementById('possessives-summary').textContent=`Resultado: ${corr}/${tot}`; }
     function resetPossessiveExercises(){ document.getElementById('possessives-exercises').innerHTML=''; document.getElementById('possessives-summary').textContent=''; }
 
-    /* ---------- Games (matching, scramble, sentence, translation) ---------- */
+    // Games: matching, scramble, sentence, translation (as previous)
     const matchingPairs = [
-      {eng:'Acid', esp:'Sustancia con pH < 7'},
-      {eng:'Base', esp:'Sustancia con pH > 7'},
-      {eng:'Molecule', esp:'Dos o más átomos unidos'},
-      {eng:'Reaction', esp:'Transformación de sustancias'},
-      {eng:'pH', esp:'Medida de acidez/alcalinidad'},
-      {eng:'Catalyst', esp:'Acelera una reacción'},
-      {eng:'Solvent', esp:'Sustancia que disuelve'},
-      {eng:'Filtration', esp:'Separación sólido-líquido'}
+      {eng:'Acid', esp:'Sustancia con pH < 7'},{eng:'Base', esp:'Sustancia con pH > 7'},{eng:'Molecule', esp:'Dos o más átomos unidos'},{eng:'Reaction', esp:'Transformación de sustancias'},
+      {eng:'pH', esp:'Medida de acidez/alcalinidad'},{eng:'Catalyst', esp:'Acelera una reacción'},{eng:'Solvent', esp:'Sustancia que disuelve'},{eng:'Filtration', esp:'Separación sólido-líquido'}
     ];
     function generateMatching(){
       const c=document.getElementById('matching-game'); c.innerHTML='';
@@ -819,165 +667,38 @@
       const right = matchingPairs.map(p=>p.esp).sort(()=>Math.random()-0.5);
       left.forEach((eng,i)=>{
         const row=document.createElement('div'); row.className='bg-white rounded-xl p-3 flex items-center justify-between shadow-sm';
-        row.innerHTML = `<span class="font-bold text-blue-600">${eng}</span>
-          <select id="match-${i}" class="input-answer"><option value="">Selecciona...</option>${right.map(r=>`<option value="${r}">${r}</option>`).join('')}</select>
-          <div><button class="verify-btn" onclick="verifyMatchRow(${i})">Verificar</button></div>
-          <div id="match-${i}-fb" class="exercise-feedback"></div>`;
+        row.innerHTML = `<span class="font-bold text-blue-600">${eng}</span><select id="match-${i}" class="input-answer"><option value="">Selecciona...</option>${right.map(r=>`<option value="${r}">${r}</option>`).join('')}</select><div><button class="verify-btn" onclick="verifyMatchRow(${i})">Verificar</button></div><div id="match-${i}-fb" class="exercise-feedback"></div>`;
         c.appendChild(row);
       });
       c.dataset.expected = JSON.stringify(left.map(l=>matchingPairs.find(p=>p.eng===l).esp));
     }
-    function verifyMatchRow(i){
-      const sel=document.getElementById('match-'+i), fb=document.getElementById('match-'+i+'-fb');
-      if(!sel) return;
-      const expected = JSON.parse(document.getElementById('matching-game').dataset.expected)[i];
-      if(sel.value === expected){ fb.textContent='✅'; fb.style.color='var(--success)'; sel.parentElement.classList.add('bg-green-50'); }
-      else { fb.textContent=`❌ ${expected}`; fb.style.color='var(--danger)'; sel.parentElement.classList.add('bg-red-50'); }
-      sel.disabled = true;
-    }
-    function verifyMatchingAll(){
-      const c=document.getElementById('matching-game'); if(!c||!c.dataset.expected) return;
-      const expected = JSON.parse(c.dataset.expected); let corr=0;
-      expected.forEach((exp,i)=>{
-        const sel=document.getElementById('match-'+i), fb=document.getElementById('match-'+i+'-fb');
-        if(!sel) return;
-        if(sel.value===exp){ fb.textContent='✅'; fb.style.color='var(--success)'; corr++; sel.parentElement.classList.add('bg-green-50'); } else { fb.textContent=`❌ ${exp}`; fb.style.color='var(--danger)'; sel.parentElement.classList.add('bg-red-50'); }
-        sel.disabled=true;
-      });
-      document.getElementById('matching-summary').textContent = `Resultado: ${corr}/${expected.length}`;
-    }
+    function verifyMatchRow(i){ const sel=document.getElementById('match-'+i), fb=document.getElementById('match-'+i+'-fb'); if(!sel) return; const expected = JSON.parse(document.getElementById('matching-game').dataset.expected)[i]; if(sel.value===expected){ fb.textContent='✅'; fb.style.color='var(--success)'; sel.parentElement.classList.add('bg-green-50'); } else { fb.textContent=`❌ ${expected}`; fb.style.color='var(--danger)'; sel.parentElement.classList.add('bg-red-50'); } sel.disabled=true; }
+    function verifyMatchingAll(){ const c=document.getElementById('matching-game'); if(!c||!c.dataset.expected) return; const expected = JSON.parse(c.dataset.expected); let corr=0; expected.forEach((exp,i)=>{ const sel=document.getElementById('match-'+i), fb=document.getElementById('match-'+i+'-fb'); if(!sel) return; if(sel.value===exp){ fb.textContent='✅'; fb.style.color='var(--success)'; corr++; sel.parentElement.classList.add('bg-green-50'); } else { fb.textContent=`❌ ${exp}`; fb.style.color='var(--danger)'; sel.parentElement.classList.add('bg-red-50'); } sel.disabled=true; }); document.getElementById('matching-summary').textContent=`Resultado: ${corr}/${expected.length}`; }
     function resetMatching(){ document.getElementById('matching-game').innerHTML=''; document.getElementById('matching-summary').textContent=''; delete document.getElementById('matching-game').dataset.expected; }
 
     // Scramble
     const scrambleWords = ['ACID','WATER','MOLECULE','REACTION','CHEMISTRY','SOLVENT','CATALYST','DISTILLATION','FILTRATION','REACTOR'];
-    function generateScramble(){
-      const c=document.getElementById('scramble-game'); c.innerHTML=''; const selected = scrambleWords.sort(()=>Math.random()-0.5).slice(0,6);
-      c.dataset.expected = JSON.stringify(selected);
-      selected.forEach((word,i)=>{
-        const scrambled = word.split('').sort(()=>Math.random()-0.5).join('');
-        const div=document.createElement('div'); div.className='bg-white rounded-xl p-3 shadow-sm';
-        div.innerHTML = `<p class="font-bold text-lg text-purple mb-2">${scrambled}</p>
-          <input id="scr-${i}" class="input-answer" type="text" placeholder="Escribe la palabra" />
-          <div class="mt-2"><button class="verify-btn" onclick="checkScrambleSingle(${i},'${word}')">Verificar</button></div>
-          <div id="scr-${i}-fb" class="exercise-feedback mt-2"></div>`;
-        c.appendChild(div);
-      });
-      document.getElementById('scramble-summary').textContent='';
-    }
-    function checkScrambleSingle(i, correct){
-      const inp=document.getElementById('scr-'+i), fb=document.getElementById('scr-'+i+'-fb');
-      if(!inp) return;
-      const val=(inp.value||'').trim().toUpperCase();
-      if(val === correct){ fb.textContent='✅ Correct'; fb.style.color='var(--success)'; inp.classList.add('border-green-400','bg-green-50'); } else { fb.textContent=`❌ ${correct}`; fb.style.color='var(--danger)'; inp.classList.add('border-red-400','bg-red-50'); }
-      inp.disabled = true;
-    }
-    function verifyScrambleAll(){
-      const c=document.getElementById('scramble-game'); if(!c||!c.dataset.expected) return;
-      const expected = JSON.parse(c.dataset.expected); let corr=0;
-      expected.forEach((w,i)=>{
-        const inp=document.getElementById('scr-'+i), fb=document.getElementById('scr-'+i+'-fb');
-        if(!inp) return;
-        const val=(inp.value||'').trim().toUpperCase();
-        if(val===w){ fb.textContent='✅ Correct'; fb.style.color='var(--success)'; corr++; inp.classList.add('border-green-400','bg-green-50'); } else { fb.textContent=`❌ ${w}`; fb.style.color='var(--danger)'; inp.classList.add('border-red-400','bg-red-50'); }
-        inp.disabled=true;
-      });
-      document.getElementById('scramble-summary').textContent = `Resultado: ${corr}/${expected.length}`;
-    }
+    function generateScramble(){ const c=document.getElementById('scramble-game'); c.innerHTML=''; const selected=scrambleWords.sort(()=>Math.random()-0.5).slice(0,6); c.dataset.expected=JSON.stringify(selected); selected.forEach((w,i)=>{ const scrambled=w.split('').sort(()=>Math.random()-0.5).join(''); const div=document.createElement('div'); div.className='bg-white rounded-xl p-3 shadow-sm'; div.innerHTML=`<p class="font-bold text-lg text-purple mb-2">${scrambled}</p><input id="scr-${i}" class="input-answer" type="text" placeholder="Escribe la palabra" /><div class="mt-2"><button class="verify-btn" onclick="checkScrambleSingle(${i},'${w}')">Verificar</button></div><div id="scr-${i}-fb" class="exercise-feedback mt-2"></div>`; c.appendChild(div); }); document.getElementById('scramble-summary').textContent=''; }
+    function checkScrambleSingle(i,correct){ const inp=document.getElementById('scr-'+i), fb=document.getElementById('scr-'+i+'-fb'); if(!inp) return; const val=(inp.value||'').trim().toUpperCase(); if(val===correct){ fb.textContent='✅ Correct'; fb.style.color='var(--success)'; inp.classList.add('border-green-400','bg-green-50'); } else { fb.textContent=`❌ ${correct}`; fb.style.color='var(--danger)'; inp.classList.add('border-red-400','bg-red-50'); } inp.disabled=true; }
+    function verifyScrambleAll(){ const c=document.getElementById('scramble-game'); if(!c||!c.dataset.expected) return; const expected=JSON.parse(c.dataset.expected); let corr=0; expected.forEach((w,i)=>{ const inp=document.getElementById('scr-'+i), fb=document.getElementById('scr-'+i+'-fb'); if(!inp) return; const val=(inp.value||'').trim().toUpperCase(); if(val===w){ fb.textContent='✅ Correct'; fb.style.color='var(--success)'; corr++; inp.classList.add('border-green-400','bg-green-50'); } else { fb.textContent=`❌ ${w}`; fb.style.color='var(--danger)'; inp.classList.add('border-red-400','bg-red-50'); } inp.disabled=true; }); document.getElementById('scramble-summary').textContent=`Resultado: ${corr}/${expected.length}`; }
     function resetScramble(){ document.getElementById('scramble-game').innerHTML=''; document.getElementById('scramble-summary').textContent=''; delete document.getElementById('scramble-game').dataset.expected; }
 
-    // Sentence complete
-    function generateSentence(){
-      const sentences = [
-        {s:'Water ___ a compound.', a:'is', opts:['is','are','am']},
-        {s:'Acids ___ dangerous.', a:'are', opts:['are','is','am']},
-        {s:'Chemistry ___ interesting.', a:'is', opts:['is','are','am']},
-        {s:'We ___ mixing reagents.', a:'are', opts:['is','are','am']},
-        {s:'I ___ the operator.', a:'am', opts:['am','is','are']},
-        {s:'They ___ on shift.', a:'are', opts:['is','are','am']}
-      ];
-      const c=document.getElementById('sentence-game'); c.innerHTML='';
-      sentences.forEach((it,i)=>{
-        const div=document.createElement('div'); div.className='bg-white rounded-xl p-3 shadow-sm';
-        div.innerHTML = `<p class="mb-2 text-gray-700">${it.s}</p><div id="sent-${i}" class="space-x-2">${it.opts.map(o=>`<button class="btn-ghost" onclick="selectSentenceOption(${i},'${o}', this)">${o}</button>`).join('')}</div><div id="sent-${i}-fb" class="mt-2 exercise-feedback"></div>`;
-        c.appendChild(div);
-      });
-      c.dataset.answers = JSON.stringify(sentences.map(x=>x.a));
-      window.sentenceSelections = {};
-      document.getElementById('sentence-summary').textContent='';
-    }
-    function selectSentenceOption(i, val, btn){
-      window.sentenceSelections = window.sentenceSelections || {};
-      window.sentenceSelections[i] = val;
-      const parent = document.getElementById('sent-'+i);
-      Array.from(parent.querySelectorAll('button')).forEach(b=>b.classList.remove('bg-green-200'));
-      btn.classList.add('bg-green-200');
-    }
-    function verifySentenceAll(){
-      const c=document.getElementById('sentence-game'); if(!c) return;
-      const answers = JSON.parse(c.dataset.answers || '[]'); let corr=0;
-      answers.forEach((ans,i)=>{
-        const sel = window.sentenceSelections && window.sentenceSelections[i];
-        const fb = document.getElementById('sent-'+i+'-fb');
-        if(sel === ans){ fb.textContent='✅'; fb.style.color='var(--success)'; corr++; } else { fb.textContent=`❌ ${ans}`; fb.style.color='var(--danger)'; }
-        const parent = document.getElementById('sent-'+i); parent && parent.querySelectorAll('button').forEach(b=>b.disabled=true);
-      });
-      document.getElementById('sentence-summary').textContent = `Resultado: ${corr}/${answers.length}`;
-    }
-    function resetSentence(){ document.getElementById('sentence-game').innerHTML=''; document.getElementById('sentence-summary').textContent=''; window.sentenceSelections = {}; }
+    // Sentence
+    function generateSentence(){ const sentences=[{s:'Water ___ a compound.',a:'is',opts:['is','are','am']},{s:'Acids ___ dangerous.',a:'are',opts:['are','is','am']},{s:'Chemistry ___ interesting.',a:'is',opts:['is','are','am']},{s:'We ___ mixing reagents.',a:'are',opts:['is','are','am']},{s:'I ___ the operator.',a:'am',opts:['am','is','are']},{s:'They ___ on shift.',a:'are',opts:['is','are','am']}]; const c=document.getElementById('sentence-game'); c.innerHTML=''; sentences.forEach((it,i)=>{ const div=document.createElement('div'); div.className='bg-white rounded-xl p-3 shadow-sm'; div.innerHTML=`<p class="mb-2 text-gray-700">${it.s}</p><div id="sent-${i}" class="space-x-2">${it.opts.map(o=>`<button class="btn-ghost" onclick="selectSentenceOption(${i},'${o}', this)">${o}</button>`).join('')}</div><div id="sent-${i}-fb" class="mt-2 exercise-feedback"></div>`; c.appendChild(div); }); c.dataset.answers=JSON.stringify(sentences.map(x=>x.a)); window.sentenceSelections={}; document.getElementById('sentence-summary').textContent=''; }
+    function selectSentenceOption(i,val,btn){ window.sentenceSelections=window.sentenceSelections||{}; window.sentenceSelections[i]=val; const parent=document.getElementById('sent-'+i); Array.from(parent.querySelectorAll('button')).forEach(b=>b.classList.remove('bg-green-200')); btn.classList.add('bg-green-200'); }
+    function verifySentenceAll(){ const c=document.getElementById('sentence-game'); if(!c) return; const answers=JSON.parse(c.dataset.answers||'[]'); let corr=0; answers.forEach((ans,i)=>{ const sel=window.sentenceSelections&&window.sentenceSelections[i]; const fb=document.getElementById('sent-'+i+'-fb'); if(sel===ans){ fb.textContent='✅'; fb.style.color='var(--success)'; corr++; } else { fb.textContent=`❌ ${ans}`; fb.style.color='var(--danger)'; } const parent=document.getElementById('sent-'+i); parent && parent.querySelectorAll('button').forEach(b=>b.disabled=true); }); document.getElementById('sentence-summary').textContent=`Resultado: ${corr}/${answers.length}`; }
+    function resetSentence(){ document.getElementById('sentence-game').innerHTML=''; document.getElementById('sentence-summary').textContent=''; window.sentenceSelections={}; }
 
-    // Translation (fills box)
-    function generateTranslation(){
-      const translations = [
-        {esp:'Oxígeno', eng:'Oxygen'},{esp:'Hidrógeno', eng:'Hydrogen'},{esp:'Carbono', eng:'Carbon'},{esp:'Nitrógeno', eng:'Nitrogen'},{esp:'Azufre', eng:'Sulfur'},
-        {esp:'Cloro', eng:'Chlorine'},{esp:'Sodio', eng:'Sodium'},{esp:'Potasio', eng:'Potassium'},{esp:'Calcio', eng:'Calcium'},{esp:'Magnesio', eng:'Magnesium'},
-        {esp:'Ácido sulfúrico', eng:'Sulfuric acid'},{esp:'Agua', eng:'Water'},{esp:'Aceite', eng:'Oil'},{esp:'Catalizador', eng:'Catalyst'},{esp:'Solvente', eng:'Solvent'},
-        {esp:'Mezcla', eng:'Mixture'},{esp:'Destilación', eng:'Distillation'},{esp:'Filtración', eng:'Filtration'},{esp:'Reacción', eng:'Reaction'},{esp:'Molécula', eng:'Molecule'}
-      ];
-      const c=document.getElementById('translation-game'); c.innerHTML='';
-      translations.forEach((t,i)=>{
-        const id = 'trans-'+i;
-        const div=document.createElement('div'); div.className='bg-white rounded-xl p-3 shadow-sm flex items-center gap-3';
-        div.innerHTML = `<span class="font-bold text-green-600 w-32">${t.esp}</span><input id="${id}" class="input-answer" type="text" placeholder="Traduce..." /><div><button class="verify-btn" onclick="verifySingle('${id}','${t.eng.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`;
-        c.appendChild(div);
-      });
-      c.dataset.answers = JSON.stringify(translations.map(x=>x.eng));
-      document.getElementById('translation-summary').textContent='';
-    }
-    function verifyTranslationAll(){
-      const c=document.getElementById('translation-game'); if(!c) return;
-      const answers = JSON.parse(c.dataset.answers||'[]'); let corr=0;
-      answers.forEach((ans,i)=>{
-        const id='trans-'+i, inp=document.getElementById(id), fb=document.getElementById(id+'-fb');
-        if(!inp) return;
-        const val=(inp.value||'').trim().toLowerCase();
-        if(val === ans.toLowerCase()){ fb.textContent='✅'; fb.style.color='var(--success)'; corr++; } else { fb.textContent=`❌ ${ans}`; fb.style.color='var(--danger)'; }
-        inp.disabled = true;
-      });
-      document.getElementById('translation-summary').textContent = `Resultado: ${corr}/${answers.length}`;
-    }
+    // Translation
+    function generateTranslation(){ const translations=[{esp:'Oxígeno',eng:'Oxygen'},{esp:'Hidrógeno',eng:'Hydrogen'},{esp:'Carbono',eng:'Carbon'},{esp:'Nitrógeno',eng:'Nitrogen'},{esp:'Azufre',eng:'Sulfur'},{esp:'Cloro',eng:'Chlorine'},{esp:'Sodio',eng:'Sodium'},{esp:'Potasio',eng:'Potassium'},{esp:'Calcio',eng:'Calcium'},{esp:'Magnesio',eng:'Magnesium'},{esp:'Ácido sulfúrico',eng:'Sulfuric acid'},{esp:'Agua',eng:'Water'},{esp:'Aceite',eng:'Oil'},{esp:'Catalizador',eng:'Catalyst'},{esp:'Solvente',eng:'Solvent'},{esp:'Mezcla',eng:'Mixture'},{esp:'Destilación',eng:'Distillation'},{esp:'Filtración',eng:'Filtration'},{esp:'Reacción',eng:'Reaction'},{esp:'Molécula',eng:'Molecule'}]; const c=document.getElementById('translation-game'); c.innerHTML=''; translations.forEach((t,i)=>{ const id='trans-'+i; const div=document.createElement('div'); div.className='bg-white rounded-xl p-3 shadow-sm flex items-center gap-3'; div.innerHTML=`<span class="font-bold text-green-600 w-32">${t.esp}</span><input id="${id}" class="input-answer" type="text" placeholder="Traduce..." /><div><button class="verify-btn" onclick="verifySingle('${id}','${t.eng.replace(/'/g,"\\'")}')">Verificar</button></div><div id="${id}-fb" class="exercise-feedback"></div>`; c.appendChild(div); }); c.dataset.answers=JSON.stringify(translations.map(x=>x.eng)); document.getElementById('translation-summary').textContent=''; }
+    function verifyTranslationAll(){ const c=document.getElementById('translation-game'); if(!c) return; const answers=JSON.parse(c.dataset.answers||'[]'); let corr=0; answers.forEach((ans,i)=>{ const id='trans-'+i; const inp=document.getElementById(id); const fb=document.getElementById(id+'-fb'); if(!inp) return; const val=(inp.value||'').trim().toLowerCase(); if(val===ans.toLowerCase()){ fb.textContent='✅'; fb.style.color='var(--success)'; corr++; } else { fb.textContent=`❌ ${ans}`; fb.style.color='var(--danger)'; } inp.disabled=true; }); document.getElementById('translation-summary').textContent=`Resultado: ${corr}/${answers.length}`; }
     function resetTranslation(){ document.getElementById('translation-game').innerHTML=''; document.getElementById('translation-summary').textContent=''; }
 
-    /* Number game (kept) */
-    function generateNumberGame(){
-      const nums=[{num:1,word:'one'},{num:2,word:'two'},{num:3,word:'three'},{num:4,word:'four'},{num:5,word:'five'},{num:6,word:'six'},{num:7,word:'seven'},{num:8,word:'eight'},{num:9,word:'nine'},{num:10,word:'ten'},{num:20,word:'twenty'},{num:50,word:'fifty'},{num:100,word:'one hundred'}];
-      const selected = nums.sort(()=>Math.random()-0.5).slice(0,4);
-      const container = document.getElementById('number-game');
-      if(!container) return;
-      container.innerHTML = '';
-      selected.forEach(q => {
-        const options = [q.word, ...nums.filter(n => n.word !== q.word).sort(()=>Math.random()-0.5).slice(0,2).map(n=>n.word)].sort(()=>Math.random()-0.5);
-        const div = document.createElement('div'); div.className='bg-white rounded-xl p-4 shadow-sm flex items-center gap-3';
-        div.innerHTML = `<span class="text-3xl font-bold text-orange-500 w-20">${q.num}</span><div class="flex gap-2">${options.map(o => `<button class="btn-primary" onclick="checkNumber(this,'${o}','${q.word}')">${o}</button>`).join('')}</div>`;
-        container.appendChild(div);
-      });
-    }
-    function checkNumber(btn, selected, correct){
-      const parent = btn.parentElement; parent.querySelectorAll('button').forEach(b=>b.disabled=true);
-      if(selected === correct){ btn.classList.add('bg-green-500','text-white'); addScore(5); }
-      else { btn.classList.add('bg-red-500','text-white'); parent.querySelectorAll('button').forEach(b=>{ if(b.textContent === correct) b.classList.add('bg-green-500','text-white'); }); }
-    }
+    // Number game (kept)
+    function generateNumberGame(){ const nums=[{num:1,word:'one'},{num:2,word:'two'},{num:3,word:'three'},{num:4,word:'four'},{num:5,word:'five'},{num:6,word:'six'},{num:7,word:'seven'},{num:8,word:'eight'},{num:9,word:'nine'},{num:10,word:'ten'},{num:20,word:'twenty'},{num:50,word:'fifty'},{num:100,word:'one hundred'}]; const selected = nums.sort(()=>Math.random()-0.5).slice(0,4); const container=document.getElementById('number-game'); if(!container) return; container.innerHTML=''; selected.forEach(q=>{ const options=[q.word, ...nums.filter(n=>n.word!==q.word).sort(()=>Math.random()-0.5).slice(0,2).map(n=>n.word)].sort(()=>Math.random()-0.5); const div=document.createElement('div'); div.className='bg-white rounded-xl p-4 shadow-sm flex items-center gap-3'; div.innerHTML=`<span class="text-3xl font-bold text-orange-500 w-20">${q.num}</span><div class="flex gap-2">${options.map(o=>`<button class="btn-primary" onclick="checkNumber(this,'${o}','${q.word}')">${o}</button>`).join('')}</div>`; container.appendChild(div); }); }
+    function checkNumber(btn, selected, correct){ const parent=btn.parentElement; parent.querySelectorAll('button').forEach(b=>b.disabled=true); if(selected===correct){ btn.classList.add('bg-green-500','text-white'); addScore(5); } else { btn.classList.add('bg-red-500','text-white'); parent.querySelectorAll('button').forEach(b=>{ if(b.textContent===correct) b.classList.add('bg-green-500','text-white'); }); } }
 
-    /* Quiz logic (improved UI) */
+    // Quiz logic
     const quizBank = [
       {q:'What is the English word for "ácido"?', options:['Acid','Base','Salt','Water'], correct:0},
       {q:'Complete: "The solution ___ ready."', options:['am','is','are','be'], correct:1},
@@ -1000,150 +721,54 @@
       {q:'Which is an acid indicator?', options:['Litmus','Salt','Sugar','Oil'], correct:0},
       {q:'What does "boiling point" measure?', options:['Temperature','Pressure','Volume','Mass'], correct:0}
     ];
-    let quizQ = [], quizIndex = 0, quizScore = 0, quizTotal = 5;
-    function startQuiz(){
-      const size = parseInt(document.getElementById('quiz-size').value||'20', 10);
-      quizTotal = Math.min(size, quizBank.length);
-      quizIndex = 0; quizScore = 0;
-      quizQ = [...quizBank].sort(()=>Math.random()-0.5).slice(0, quizTotal);
-      renderQuiz();
-    }
-    function renderQuiz(){
-      const cont = document.getElementById('quiz-container');
-      if(quizIndex >= quizTotal){
-        cont.innerHTML = `<div class="text-center p-8"><span class="text-6xl block mb-4">🎉</span><h3 class="text-2xl font-bold text-green-600">¡Quiz completado!</h3><p class="comic-font text-gray-600">Puntos: <strong class="text-orange-500">${quizScore}</strong></p></div>`;
-        document.getElementById('quiz-progress').textContent = `${quizIndex}/${quizTotal}`;
-        document.getElementById('quiz-bar').style.width = '100%';
-        return;
-      }
-      const q = quizQ[quizIndex];
-      document.getElementById('quiz-progress').textContent = `${quizIndex}/${quizTotal}`;
-      document.getElementById('quiz-bar').style.width = `${(quizIndex/quizTotal)*100}%`;
-      cont.innerHTML = `<div class="bg-white rounded-xl p-6 border-2 border-gray-100">
-        <p class="text-sm text-orange-500 font-bold mb-2">Pregunta ${quizIndex+1} de ${quizTotal}</p>
-        <h3 class="font-bold mb-4">${q.q}</h3>
-        <div class="space-y-2">${q.options.map((o,i)=>`<button class="btn-ghost w-full text-left px-4 py-3 rounded-xl" onclick="answerQuiz(${i})">${o}</button>`).join('')}</div>
-      </div>`;
-    }
-    function answerQuiz(selected){
-      const buttons = document.querySelectorAll('#quiz-container button');
-      buttons.forEach(b=>b.disabled=true);
-      const q = quizQ[quizIndex];
-      if(selected === q.correct){
-        buttons[selected].classList.remove('btn-ghost'); buttons[selected].classList.add('btn-success');
-        quizScore += 10;
-      } else {
-        buttons[selected].classList.remove('btn-ghost'); buttons[selected].classList.add('btn-accent');
-        buttons[q.correct].classList.remove('btn-ghost'); buttons[q.correct].classList.add('btn-success');
-      }
-      quizIndex++; setTimeout(renderQuiz,900);
-    }
+    let quizQ=[], quizIndex=0, quizScore=0, quizTotal=5;
+    function startQuiz(){ const size=parseInt(document.getElementById('quiz-size').value||'20',10); quizTotal=Math.min(size,quizBank.length); quizIndex=0; quizScore=0; quizQ=[...quizBank].sort(()=>Math.random()-0.5).slice(0,quizTotal); renderQuiz(); }
+    function renderQuiz(){ const cont=document.getElementById('quiz-container'); if(quizIndex>=quizTotal){ cont.innerHTML=`<div class="text-center p-8"><span class="text-6xl block mb-4">🎉</span><h3 class="text-2xl font-bold text-green-600">¡Quiz completado!</h3><p class="comic-font text-gray-600">Puntos: <strong class="text-orange-500">${quizScore}</strong></p></div>`; document.getElementById('quiz-progress').textContent=`${quizIndex}/${quizTotal}`; document.getElementById('quiz-bar').style.width='100%'; return; } const q=quizQ[quizIndex]; document.getElementById('quiz-progress').textContent=`${quizIndex}/${quizTotal}`; document.getElementById('quiz-bar').style.width=`${(quizIndex/quizTotal)*100}%`; cont.innerHTML=`<div class="bg-white rounded-xl p-6 border-2 border-gray-100"><p class="text-sm text-orange-500 font-bold mb-2">Pregunta ${quizIndex+1} de ${quizTotal}</p><h3 class="font-bold mb-4">${q.q}</h3><div class="space-y-2">${q.options.map((o,i)=>`<button class="btn-ghost w-full text-left px-4 py-3 rounded-xl" onclick="answerQuiz(${i})">${o}</button>`).join('')}</div></div>`; }
+    function answerQuiz(selected){ const buttons=document.querySelectorAll('#quiz-container button'); buttons.forEach(b=>b.disabled=true); const q=quizQ[quizIndex]; if(selected===q.correct){ buttons[selected].classList.remove('btn-ghost'); buttons[selected].classList.add('btn-success'); quizScore+=10; } else { buttons[selected].classList.remove('btn-ghost'); buttons[selected].classList.add('btn-accent'); buttons[q.correct].classList.remove('btn-ghost'); buttons[q.correct].classList.add('btn-success'); } quizIndex++; setTimeout(renderQuiz,900); }
 
-    /* ----- LAB functions ----- */
+    // Lab functions
     function testPH(substance, ph, description){
-      const colors = ['#ff0000','#ff3300','#ff6600','#ff9900','#ffcc00','#ccff00','#00ff00','#00cc66','#009999','#0066cc','#0033cc','#3300cc','#6600cc','#9900cc','#660099'];
-      const result = document.getElementById('ph-result');
-      const bar = document.getElementById('ph-bar');
-      const safePh = Math.max(0, Math.min(14, ph));
-      result.innerHTML = `
-        <div class="text-center w-full">
-          <div class="inline-block w-20 h-20 rounded-full mb-3" style="background:${colors[safePh]};box-shadow:0 0 18px ${colors[safePh]};"></div>
-          <p class="text-xl font-bold" style="color:${colors[safePh]}">pH = ${safePh}</p>
-          <p class="comic-font text-gray-700 mt-2">${description}</p>
-          <p class="text-sm text-gray-500 mt-1">${safePh<7 ? '🔴 ACID' : safePh===7 ? '🟢 NEUTRAL' : '🔵 BASE'}</p>
-        </div>`;
-      const pct = (safePh/14)*100; bar.style.width = pct + '%';
-      if(safePh < 7) bar.style.background = 'linear-gradient(90deg,#ff6b6b,#ff7b7b)';
-      else if(safePh === 7) bar.style.background = 'linear-gradient(90deg,#f6f7b6,#34d399)';
-      else bar.style.background = 'linear-gradient(90deg,#34d399,#059669)';
-      addScore(2);
+      const colors=['#ff0000','#ff3300','#ff6600','#ff9900','#ffcc00','#ccff00','#00ff00','#00cc66','#009999','#0066cc','#0033cc','#3300cc','#6600cc','#9900cc','#660099'];
+      const result=document.getElementById('ph-result'), bar=document.getElementById('ph-bar'); const safePh=Math.max(0,Math.min(14,ph));
+      result.innerHTML=`<div class="text-center w-full"><div class="inline-block w-20 h-20 rounded-full mb-3" style="background:${colors[safePh]};box-shadow:0 0 18px ${colors[safePh]};"></div><p class="text-xl font-bold" style="color:${colors[safePh]}">pH = ${safePh}</p><p class="comic-font text-gray-700 mt-2">${description}</p><p class="text-sm text-gray-500 mt-1">${safePh<7 ? '🔴 ACID' : safePh===7 ? '🟢 NEUTRAL' : '🔵 BASE'}</p></div>`;
+      const pct=(safePh/14)*100; bar.style.width=pct+'%'; if(safePh<7) bar.style.background='linear-gradient(90deg,#ff6b6b,#ff7b7b)'; else if(safePh===7) bar.style.background='linear-gradient(90deg,#f6f7b6,#34d399)'; else bar.style.background='linear-gradient(90deg,#34d399,#059669)'; addScore(2);
     }
 
-    function mixSubstances(){
-      const a = document.getElementById('substanceA').value;
-      const b = document.getElementById('substanceB').value;
-      const reactions = {
-        'acid+base': {result: '💧 Salt + Water (NaCl + H₂O)', descEN: 'Neutralization: acid + base → salt + water', descES:'Neutralización: ácido + base → sal + agua', color:'linear-gradient(90deg,#bbf7d0,#86efac)'},
-        'acid+water': {result: '🧪 Diluted Acid', descEN:'Diluted acid — add acid to water slowly', descES:'Ácido diluido — añade ácido al agua lentamente', color:'linear-gradient(90deg,#bfdbfe,#93c5fd)'},
-        'sodium+water': {result: '💥 Sodium Hydroxide + Hydrogen', descEN:'Exothermic reaction producing hydrogen gas', descES:'Reacción exotérmica que produce hidrógeno', color:'linear-gradient(90deg,#fecaca,#fca5a5)'},
-        'iron+oxygen': {result: '🟤 Iron Oxide (Rust)', descEN:'Oxidation forming iron oxide', descES:'Oxidación formando óxido de hierro', color:'linear-gradient(90deg,#ffd6a5,#fca5a5)'}
-      };
-      const key = (a+'+'+b).toLowerCase(), rev = (b+'+'+a).toLowerCase();
-      const reaction = reactions[key] || reactions[rev] || {result:'🔬 No visible reaction', descEN:'No observable reaction under normal conditions', descES:'Sin reacción visible', color:'linear-gradient(90deg,#e2e8f0,#f1f5f9)'};
-      const out = document.getElementById('mix-result');
-      out.innerHTML = `<div class="rounded-xl p-4" style="background:${reaction.color};"><p class="font-bold text-lg">${reaction.result}</p><p class="comic-font text-gray-700 mt-2">${reaction.descEN}</p><p class="text-sm text-gray-600 mt-1">${reaction.descES}</p></div>`;
-      addScore(4);
-    }
+    function mixSubstances(){ const a=document.getElementById('substanceA').value, b=document.getElementById('substanceB').value; const reactions={ 'acid+base':{result:'💧 Salt + Water (NaCl + H₂O)',descEN:'Neutralization: acid + base → salt + water',descES:'Neutralización: ácido + base → sal + agua',color:'linear-gradient(90deg,#bbf7d0,#86efac)'}, 'acid+water':{result:'🧪 Diluted Acid',descEN:'Diluted acid — add acid to water slowly',descES:'Ácido diluido — añade ácido al agua lentamente',color:'linear-gradient(90deg,#bfdbfe,#93c5fd)'}, 'sodium+water':{result:'💥 Sodium Hydroxide + Hydrogen',descEN:'Exothermic reaction producing hydrogen gas',descES:'Reacción exotérmica que produce hidrógeno',color:'linear-gradient(90deg,#fecaca,#fca5a5)'}, 'iron+oxygen':{result:'🟤 Iron Oxide (Rust)',descEN:'Oxidation forming iron oxide',descES:'Oxidación formando óxido de hierro',color:'linear-gradient(90deg,#ffd6a5,#fca5a5)'} }; const key=(a+'+'+b).toLowerCase(), rev=(b+'+'+a).toLowerCase(); const reaction=reactions[key]||reactions[rev]||{result:'🔬 No visible reaction',descEN:'No observable reaction under normal conditions',descES:'Sin reacción visible',color:'linear-gradient(90deg,#e2e8f0,#f1f5f9)'}; document.getElementById('mix-result').innerHTML=`<div class="rounded-xl p-4" style="background:${reaction.color};"><p class="font-bold text-lg">${reaction.result}</p><p class="comic-font text-gray-700 mt-2">${reaction.descEN}</p><p class="text-sm text-gray-600 mt-1">${reaction.descES}</p></div>`; addScore(4); }
     function resetMix(){ document.getElementById('mix-result').innerHTML=''; document.getElementById('substanceA').value=''; document.getElementById('substanceB').value=''; }
 
-    // Titration sim
-    let dropCount = 0;
-    function addDrop(){ dropCount++; document.getElementById('drop-count').textContent = 'Gotas: '+dropCount; const res = document.getElementById('titration-result'); if(dropCount < 6) res.innerHTML = '<span class="font-bold">Color:</span> pale (no endpoint)'; else if(dropCount < 9) res.innerHTML = '<span class="font-bold">Color:</span> pink (endpoint)'; else res.innerHTML = '<span class="font-bold">Color:</span> deep pink (excess)'; if(dropCount === 8) addScore(5); }
-    function resetTitration(){ dropCount = 0; document.getElementById('drop-count').textContent = 'Gotas: 0'; document.getElementById('titration-result').innerHTML = ''; }
+    let dropCount=0;
+    function addDrop(){ dropCount++; document.getElementById('drop-count').textContent='Gotas: '+dropCount; const res=document.getElementById('titration-result'); if(dropCount<6) res.innerHTML='<span class="font-bold">Color:</span> pale (no endpoint)'; else if(dropCount<9) res.innerHTML='<span class="font-bold">Color:</span> pink (endpoint)'; else res.innerHTML='<span class="font-bold">Color:</span> deep pink (excess)'; if(dropCount===8) addScore(5); }
+    function resetTitration(){ dropCount=0; document.getElementById('drop-count').textContent='Gotas: 0'; document.getElementById('titration-result').innerHTML=''; }
 
-    // Temperature practice
-    let currentTemp = null;
-    function generateTemp(){ const t = Math.floor(Math.random()*100)-10; currentTemp = t; document.getElementById('temp-display').textContent = t + ' °C'; document.getElementById('temp-feedback').textContent=''; }
-    function classifyTemp(cat){ if(currentTemp === null){ document.getElementById('temp-feedback').textContent='Genera primero una temperatura'; return; } let correct = ''; if(currentTemp < 10) correct = 'low'; else if(currentTemp < 30) correct = 'ok'; else correct = 'high'; if(cat === correct){ document.getElementById('temp-feedback').textContent='✅ Correct'; document.getElementById('temp-feedback').style.color='var(--success)'; addScore(3); } else { document.getElementById('temp-feedback').textContent=`❌ Incorrect (temperatura ${currentTemp}°C)`; document.getElementById('temp-feedback').style.color='var(--danger)'; } }
+    let currentTemp=null;
+    function generateTemp(){ const t=Math.floor(Math.random()*100)-10; currentTemp=t; document.getElementById('temp-display').textContent=t+' °C'; document.getElementById('temp-feedback').textContent=''; }
+    function classifyTemp(cat){ if(currentTemp===null){ document.getElementById('temp-feedback').textContent='Genera primero una temperatura'; return; } let correct=''; if(currentTemp<10) correct='low'; else if(currentTemp<30) correct='ok'; else correct='high'; if(cat===correct){ document.getElementById('temp-feedback').textContent='✅ Correct'; document.getElementById('temp-feedback').style.color='var(--success)'; addScore(3); } else { document.getElementById('temp-feedback').textContent=`❌ Incorrect (temperatura ${currentTemp}°C)`; document.getElementById('temp-feedback').style.color='var(--danger)'; } }
 
-    // Video modal
-    function playVideoModal(videoId){ const modal = document.getElementById('video-modal'), frame = document.getElementById('video-frame'); frame.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1'; modal.classList.remove('hidden'); }
-    function closeVideoModal(){ const modal = document.getElementById('video-modal'); modal.classList.add('hidden'); document.getElementById('video-frame').src = ''; }
-
-    // Vocab populate (20 colorful cards)
+    // Vocab populate
     function populateVocab(){
-      const container = document.getElementById('vocab-grid');
-      container.innerHTML = '';
-      const words = [
+      const container=document.getElementById('vocab-grid'); container.innerHTML='';
+      const words=[
         {k:'Acid',d:'Sustancia con pH < 7'}, {k:'Base',d:'Sustancia con pH > 7'}, {k:'Solution',d:'Mezcla homogénea'}, {k:'Catalyst',d:'Acelera reacciones'}, {k:'Distillation',d:'Separación por ebullición'},
         {k:'Molecule',d:'Conjunto de átomos'}, {k:'Reaction',d:'Transformación de sustancias'}, {k:'Laboratory',d:'Sala para experimentos'}, {k:'Filtration',d:'Separación sólido-líquido'}, {k:'Solvent',d:'Sustancia que disuelve otra'},
         {k:'Oxidation',d:'Pérdida de electrones'}, {k:'Reagent',d:'Sustancia usada en reacciones'}, {k:'Catalysis',d:'Proceso con catalizador'}, {k:'Vacuum',d:'Baja presión'}, {k:'Distillate',d:'Producto de destilación'},
         {k:'Safety',d:'Medidas de seguridad'}, {k:'pH',d:'Medida de acidez/alcalinidad'}, {k:'Emulsion',d:'Mezcla de líquidos inmiscibles'}, {k:'Polymer',d:'Macromolécula'}, {k:'Reactor',d:'Equipo de reacción'}
       ];
-      const gradients = [
-        'linear-gradient(135deg,#fff1f2,#ffd6e0)',
-        'linear-gradient(135deg,#ebf8ff,#dbeafe)',
-        'linear-gradient(135deg,#ecfccb,#bbf7d0)',
-        'linear-gradient(135deg,#fff7ed,#ffedd5)',
-        'linear-gradient(135deg,#f5f3ff,#ede9fe)',
-        'linear-gradient(135deg,#fff7f0,#fff1e6)',
-        'linear-gradient(135deg,#fff1f2,#ffe6f0)',
-        'linear-gradient(135deg,#e6fffa,#cffafe)'
-      ];
-      words.forEach((w,i)=>{
-        const g = gradients[i % gradients.length];
-        const card = document.createElement('div'); card.className = 'vocab-card';
-        card.style.background = g;
-        card.innerHTML = `<div class="flex items-center gap-3 mb-2">
-          <div style="width:44px;height:44px;border-radius:10px;background:rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font-weight:700">${w.k[0]}</div>
-          <div>
-            <h4 class="font-bold text-lg">${w.k}</h4>
-            <p class="text-sm text-gray-700">${w.d}</p>
-          </div>
-        </div>
-        <div class="mt-3"><button class="btn-primary" onclick="speakWord('${w.k}')">🔊 Escuchar</button></div>`;
-        card.onclick = () => speakWord(w.k);
-        container.appendChild(card);
-      });
+      const gradients=['linear-gradient(135deg,#fff1f2,#ffd6e0)','linear-gradient(135deg,#ebf8ff,#dbeafe)','linear-gradient(135deg,#ecfccb,#bbf7d0)','linear-gradient(135deg,#fff7ed,#ffedd5)','linear-gradient(135deg,#f5f3ff,#ede9fe)','linear-gradient(135deg,#fff7f0,#fff1e6)','linear-gradient(135deg,#fff1f2,#ffe6f0)','linear-gradient(135deg,#e6fffa,#cffafe)'];
+      words.forEach((w,i)=>{ const g=gradients[i%gradients.length]; const card=document.createElement('div'); card.className='vocab-card'; card.style.background=g; card.innerHTML=`<div class="flex items-center gap-3 mb-2"><div style="width:44px;height:44px;border-radius:10px;background:rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font-weight:700">${w.k[0]}</div><div><h4 class="font-bold text-lg">${w.k}</h4><p class="text-sm text-gray-700">${w.d}</p></div></div><div class="mt-3"><button class="btn-primary" onclick="speakWord('${w.k}')">🔊 Escuchar</button></div>`; card.onclick=()=>speakWord(w.k); container.appendChild(card); });
     }
 
-    /* Populate games/exercises on load */
-    function populateAllGames(){
-      generateMatching(); generateScramble(); generateSentence(); generateTranslation(); generateNumberGame();
-    }
-    function populateAllExercises(){
-      generateToBePresAff(); generateToBePresNeg(); generateToBePastAff(); generateToBePastNeg();
-      generateModalExercises(); generateGerundExercises(); generatePossessiveExercises();
-    }
+    // Helpers to populate games/exercises on load
+    function populateAllGames(){ generateMatching(); generateScramble(); generateSentence(); generateTranslation(); generateNumberGame(); }
+    function populateAllExercises(){ generateToBePresAff(); generateToBePresNeg(); generateToBePastAff(); generateToBePastNeg(); generateModalExercises(); generateGerundExercises(); generatePossessiveExercises(); }
 
-    // Score helper
-    function addScore(points){
-      const el = document.getElementById('score-text');
-      el.textContent = (parseInt(el.textContent||'0',10) + (points||0));
-    }
+    function addScore(points){ const el=document.getElementById('score-text'); el.textContent = (parseInt(el.textContent||'0',10) + (points||0)); }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
+    function playVideoModal(videoId){ const modal=document.getElementById('video-modal'), frame=document.getElementById('video-frame'); frame.src='https://www.youtube.com/embed/'+videoId+'?autoplay=1'; modal.classList.remove('hidden'); }
+    function closeVideoModal(){ const modal=document.getElementById('video-modal'); modal.classList.add('hidden'); document.getElementById('video-frame').src=''; }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', ()=>{
       navigateTo('home');
       populateVocab();
       populateAllGames();
