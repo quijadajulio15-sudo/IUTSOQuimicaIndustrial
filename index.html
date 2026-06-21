@@ -781,7 +781,7 @@
     document.getElementById('section-' + section).classList.remove('hidden');
     document.getElementById('section-' + section).classList.add('slide-in');
     currentSection = section;
-    toggleSidebar();
+    
     window.scrollTo({top: 0, behavior: 'smooth'});
     
     if (section === 'exercises') startQuiz();
