@@ -168,29 +168,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
-<button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-orange-500 text-white p-4 rounded-full shadow-xl z-50 hover:bg-orange-600 transition-all">
-  🤖 Ayuda
-</button>
 
-<div id="chat-panel" class="hidden fixed bottom-24 right-6 w-80 h-96 bg-white border-2 border-orange-200 rounded-2xl shadow-2xl z-50 p-4 flex flex-col">
-  <div class="flex justify-between items-center mb-4">
-    <h3 class="font-bold text-orange-600">Asistente Químico</h3>
-    <button onclick="toggleChat()" class="text-gray-400">✕</button>
-  </div>
-  <div class="flex-1 overflow-y-auto mb-4 text-sm text-gray-600">
-    ¡Hola! Soy tu asistente. Como no puedo procesar respuestas directamente aquí sin pagar créditos, haz clic abajo para llevar tu duda a Gemini.
-  </div>
-  <a href="https://gemini.google.com/" target="_blank" class="block text-center bg-orange-500 text-white py-2 rounded-xl font-bold hover:bg-orange-600">
-    Abrir chat externo
-  </a>
-</div>
-
-<script>
-  function toggleChat() {
-    const panel = document.getElementById('chat-panel');
-    panel.classList.toggle('hidden');
-  }
-</script>
  <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
    <div class="bubble bg-primary w-32 h-32 top-20 left-10"></div>
