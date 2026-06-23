@@ -168,20 +168,45 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
-<!-- Estilos del Chatbot -->
+
+ <!-- Estilos Profesionales: Glassmorphism -->
 <style>
-  #naruto-chat { position: fixed; bottom: 20px; right: 20px; width: 320px; background: #ff9900; border-radius: 15px; padding: 15px; color: white; font-family: sans-serif; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; }
-  #chat-messages { height: 200px; overflow-y: auto; background: white; color: #333; padding: 10px; margin-bottom: 10px; border-radius: 10px; font-size: 13px; }
-  #user-input { width: 65%; padding: 5px; border-radius: 5px; border: none; }
-  #naruto-chat button { padding: 5px 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  #naruto-chat { 
+    position: fixed; bottom: 30px; right: 30px; width: 350px; 
+    background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 153, 0, 0.3); border-radius: 20px; 
+    padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    z-index: 9999; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #chat-messages { 
+    height: 250px; overflow-y: auto; background: #f9f9f9; 
+    color: #333; padding: 15px; margin: 15px 0; border-radius: 12px; 
+    border: 1px solid #eee; font-size: 14px; line-height: 1.5;
+  }
+  #user-input { 
+    width: 70%; padding: 10px; border-radius: 8px; 
+    border: 1px solid #ccc; outline: none;
+  }
+  #naruto-chat button { 
+    padding: 10px 15px; background: #ff9900; color: white; 
+    border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+    transition: background 0.3s;
+  }
+  #naruto-chat button:hover { background: #e68a00; }
+  .msg-tú { color: #555; margin-bottom: 8px; }
+  .msg-naruto { color: #ff9900; font-weight: 600; margin-bottom: 8px; }
 </style>
 
 <!-- Estructura del Chatbot -->
 <div id="naruto-chat">
-  <strong>Naruto:</strong> ¡Dattebayo! ¿Necesitas ayuda con las secciones?
-  <div id="chat-messages"></div>
-  <input type="text" id="user-input" placeholder="Pregúntame...">
-  <button onclick="responder()">Enviar</button>
+  <h3 style="margin: 0 0 10px 0; color: #333; font-size: 18px;">Naruto Assistant</h3>
+  <div id="chat-messages">
+    <p class="msg-naruto">¡Hola! Soy tu asistente virtual. ¿En qué sección necesitas ayuda hoy?</p>
+  </div>
+  <div style="display: flex; gap: 5px;">
+    <input type="text" id="user-input" placeholder="Pregunta sobre la web...">
+    <button onclick="responder()">Enviar</button>
+  </div>
 </div>
 
 <!-- Lógica del Chatbot -->
@@ -189,25 +214,22 @@
   function responder() {
     const input = document.getElementById('user-input');
     const msgDiv = document.getElementById('chat-messages');
+    if(input.value.trim() === "") return;
+    
+    msgDiv.innerHTML += `<p class="msg-tú"><b>Tú:</b> ${input.value}</p>`;
     const userText = input.value.toLowerCase();
     
-    if(input.value.trim() === "") return;
-    msgDiv.innerHTML += `<p><b>Tú:</b> ${input.value}</p>`;
-    
-    let respuesta = "¡Pregúntame sobre Gramática, el Laboratorio, Vocabulario o Juegos y te enseñaré cómo usarlos!";
-    
-    if(userText.includes("gramática")) respuesta = "¡Usa esta sección para estudiar las reglas del inglés! Solo haz clic en los temas (To Be, Pasado, Gerundio) para ver las explicaciones teóricas y ejemplos claros.";
-    if(userText.includes("laboratorio")) respuesta = "¡Es mi parte favorita! Para la prueba de pH, selecciona una sustancia de la lista y mira qué sucede. Para la mezcla, combina componentes químicos y verás los resultados explicados.";
-    if(userText.includes("juego")) respuesta = "¡A entrenar! En la sección de juegos, solo sigue las instrucciones en pantalla para resolver las palabras desordenadas o completar oraciones y sumar puntos.";
-    if(userText.includes("vocabulario")) respuesta = "¡Aquí verás términos como 'acid' o 'catalyst'! Haz clic en los botones de audio para escuchar la pronunciación correcta y perfeccionar tu técnica.";
-    if(userText.includes("hola")) respuesta = "¡Hola! Estoy aquí para guiarte. ¿Quieres saber cómo usar el Laboratorio Virtual o practicar tu gramática?";
+    let respuesta = "¡Eso es interesante! ¿Te refieres a la Gramática, el Laboratorio, el Vocabulario o los Juegos de la web?";
+    if(userText.includes("gramática")) respuesta = "Para la gramática, navega por el menú lateral y elige el tema (To Be, Pasado, Gerundio). ¡Lee los ejemplos y practica la estructura!";
+    if(userText.includes("laboratorio")) respuesta = "En el laboratorio, elige tu sustancia en los selectores para ver el pH o combina elementos para ver reacciones químicas en pantalla.";
+    if(userText.includes("juego")) respuesta = "¡Los juegos son excelentes! Sigue las instrucciones de cada nivel para resolver los desafíos y acumular puntos en tu tablero.";
+    if(userText.includes("vocabulario")) respuesta = "En la sección de vocabulario, verás términos técnicos. Haz clic en el botón de audio para escuchar la pronunciación correcta[cite: 3].";
 
-    msgDiv.innerHTML += `<p><b>Naruto:</b> ${respuesta}</p>`;
+    msgDiv.innerHTML += `<p class="msg-naruto"><b>Naruto:</b> ${respuesta}</p>`;
     input.value = "";
     msgDiv.scrollTop = msgDiv.scrollHeight;
   }
 </script>
- 
 
  <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
