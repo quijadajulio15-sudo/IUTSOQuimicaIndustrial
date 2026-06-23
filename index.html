@@ -169,67 +169,7 @@
   <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
 
- <!-- Estilos Profesionales: Glassmorphism -->
-<style>
-  #naruto-chat { 
-    position: fixed; bottom: 30px; right: 30px; width: 350px; 
-    background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 153, 0, 0.3); border-radius: 20px; 
-    padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-    z-index: 9999; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  #chat-messages { 
-    height: 250px; overflow-y: auto; background: #f9f9f9; 
-    color: #333; padding: 15px; margin: 15px 0; border-radius: 12px; 
-    border: 1px solid #eee; font-size: 14px; line-height: 1.5;
-  }
-  #user-input { 
-    width: 70%; padding: 10px; border-radius: 8px; 
-    border: 1px solid #ccc; outline: none;
-  }
-  #naruto-chat button { 
-    padding: 10px 15px; background: #ff9900; color: white; 
-    border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
-    transition: background 0.3s;
-  }
-  #naruto-chat button:hover { background: #e68a00; }
-  .msg-tú { color: #555; margin-bottom: 8px; }
-  .msg-naruto { color: #ff9900; font-weight: 600; margin-bottom: 8px; }
-</style>
 
-<!-- Estructura del Chatbot -->
-<div id="naruto-chat">
-  <h3 style="margin: 0 0 10px 0; color: #333; font-size: 18px;">Naruto Assistant</h3>
-  <div id="chat-messages">
-    <p class="msg-naruto">¡Hola! Soy tu asistente virtual. ¿En qué sección necesitas ayuda hoy?</p>
-  </div>
-  <div style="display: flex; gap: 5px;">
-    <input type="text" id="user-input" placeholder="Pregunta sobre la web...">
-    <button onclick="responder()">Enviar</button>
-  </div>
-</div>
-
-<!-- Lógica del Chatbot -->
-<script>
-  function responder() {
-    const input = document.getElementById('user-input');
-    const msgDiv = document.getElementById('chat-messages');
-    if(input.value.trim() === "") return;
-    
-    msgDiv.innerHTML += `<p class="msg-tú"><b>Tú:</b> ${input.value}</p>`;
-    const userText = input.value.toLowerCase();
-    
-    let respuesta = "¡Eso es interesante! ¿Te refieres a la Gramática, el Laboratorio, el Vocabulario o los Juegos de la web?";
-    if(userText.includes("gramática")) respuesta = "Para la gramática, navega por el menú lateral y elige el tema (To Be, Pasado, Gerundio). ¡Lee los ejemplos y practica la estructura!";
-    if(userText.includes("laboratorio")) respuesta = "En el laboratorio, elige tu sustancia en los selectores para ver el pH o combina elementos para ver reacciones químicas en pantalla.";
-    if(userText.includes("juego")) respuesta = "¡Los juegos son excelentes! Sigue las instrucciones de cada nivel para resolver los desafíos y acumular puntos en tu tablero.";
-    if(userText.includes("vocabulario")) respuesta = "En la sección de vocabulario, verás términos técnicos. Haz clic en el botón de audio para escuchar la pronunciación correcta[cite: 3].";
-
-    msgDiv.innerHTML += `<p class="msg-naruto"><b>Naruto:</b> ${respuesta}</p>`;
-    input.value = "";
-    msgDiv.scrollTop = msgDiv.scrollHeight;
-  }
-</script>
 
  <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
