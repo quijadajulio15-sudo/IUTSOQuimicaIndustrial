@@ -169,44 +169,7 @@
   <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
 
- <style>
-  #naturo-chat { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-  #chat-box { display: none; width: 300px; height: 400px; background: white; border: 2px solid #ff6b6b; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; }
-  #chat-messages { flex: 1; padding: 10px; overflow-y: auto; font-size: 14px; }
-  #chat-input { border-top: 1px solid #eee; padding: 10px; display: flex; }
-</style>
-
-<div id="naturo-chat">
-  <button onclick="toggleChat()" class="bg-orange-500 p-4 rounded-full text-white shadow-lg">Naturo</button>
-  <div id="chat-box" class="hidden shadow-2xl">
-    <div class="bg-orange-500 text-white p-3 font-bold">Naturo - Tutor Químico</div>
-    <div id="chat-messages"></div>
-    <div id="chat-input">
-      <input type="text" id="user-input" placeholder="Pregúntale algo..." class="flex-1 outline-none">
-      <button onclick="enviarMensaje()">Enviar</button>
-    </div>
-  </div>
-</div>
-
-<script type="module">
-  import { GoogleGenerativeAI } from "https://cdn.jsdelivr.net/npm/@google/generative-ai@0.1.0/+esm";
-  
-  const genAI = new GoogleGenerativeAI("AQ.Ab8RN6IketxGofH5Rl2AeLmvaxED6OTy7cjcFcPPbPtTqOWJww");
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", systemInstruction: "Eres Naturo, un asistente amigable experto en Inglés y Química Industrial." });
-
-  window.toggleChat = () => document.getElementById('chat-box').classList.toggle('hidden');
-
-  window.enviarMensaje = async () => {
-    const input = document.getElementById('user-input');
-    const msg = input.value;
-    const chat = document.getElementById('chat-messages');
-    chat.innerHTML += `<div><b>Tú:</b> ${msg}</div>`;
-    input.value = '';
-    
-    const result = await model.generateContent(msg);
-    chat.innerHTML += `<div><b>Naturo:</b> ${result.response.text()}</div>`;
-  };
-</script>
+ 
 
  <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
