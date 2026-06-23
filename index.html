@@ -168,7 +168,45 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://elfsightcdn.com/platform.js" async></script>
  </head>
+<!-- Estilos del Chatbot -->
+<style>
+  #naruto-chat { position: fixed; bottom: 20px; right: 20px; width: 320px; background: #ff9900; border-radius: 15px; padding: 15px; color: white; font-family: sans-serif; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; }
+  #chat-messages { height: 200px; overflow-y: auto; background: white; color: #333; padding: 10px; margin-bottom: 10px; border-radius: 10px; font-size: 13px; }
+  #user-input { width: 65%; padding: 5px; border-radius: 5px; border: none; }
+  #naruto-chat button { padding: 5px 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer; }
+</style>
 
+<!-- Estructura del Chatbot -->
+<div id="naruto-chat">
+  <strong>Naruto:</strong> ¡Dattebayo! ¿Necesitas ayuda con las secciones?
+  <div id="chat-messages"></div>
+  <input type="text" id="user-input" placeholder="Pregúntame...">
+  <button onclick="responder()">Enviar</button>
+</div>
+
+<!-- Lógica del Chatbot -->
+<script>
+  function responder() {
+    const input = document.getElementById('user-input');
+    const msgDiv = document.getElementById('chat-messages');
+    const userText = input.value.toLowerCase();
+    
+    if(input.value.trim() === "") return;
+    msgDiv.innerHTML += `<p><b>Tú:</b> ${input.value}</p>`;
+    
+    let respuesta = "¡Pregúntame sobre Gramática, el Laboratorio, Vocabulario o Juegos y te enseñaré cómo usarlos!";
+    
+    if(userText.includes("gramática")) respuesta = "¡Usa esta sección para estudiar las reglas del inglés! Solo haz clic en los temas (To Be, Pasado, Gerundio) para ver las explicaciones teóricas y ejemplos claros.";
+    if(userText.includes("laboratorio")) respuesta = "¡Es mi parte favorita! Para la prueba de pH, selecciona una sustancia de la lista y mira qué sucede. Para la mezcla, combina componentes químicos y verás los resultados explicados.";
+    if(userText.includes("juego")) respuesta = "¡A entrenar! En la sección de juegos, solo sigue las instrucciones en pantalla para resolver las palabras desordenadas o completar oraciones y sumar puntos.";
+    if(userText.includes("vocabulario")) respuesta = "¡Aquí verás términos como 'acid' o 'catalyst'! Haz clic en los botones de audio para escuchar la pronunciación correcta y perfeccionar tu técnica.";
+    if(userText.includes("hola")) respuesta = "¡Hola! Estoy aquí para guiarte. ¿Quieres saber cómo usar el Laboratorio Virtual o practicar tu gramática?";
+
+    msgDiv.innerHTML += `<p><b>Naruto:</b> ${respuesta}</p>`;
+    input.value = "";
+    msgDiv.scrollTop = msgDiv.scrollHeight;
+  }
+</script>
  
 
  <body class="h-full">
