@@ -1537,3 +1537,54 @@
   </script>
  </body>
 </html>
+
+php<?php
+// naruto-api.php - Conector permanente y seguro con Gemini
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST");
+header("Content-Type: application/json");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    exit(0);
+}
+
+// Leer el mensaje que envía el usuario desde la web
+$input = json_decode(file_get_contents("php://input"), true);
+$userMessage = $input['message'] ?? '';
+
+if (empty($userMessage)) {
+    echo json_encode(["error" => "Mensaje vacío"]);
+    exit;
+}
+
+// Tu clave de API real (Protegida en el servidor, nadie la puede ver)
+$apiKey = "AQ.Ab8RN6ItBIAiFJ_iH2Wu4StJWMPGOWqUxmWlFZ6Wl9He8zfD5g";
+$url = "https://googleapis.com" . $apiKey;
+
+// Instrucciones para que la IA actúe como Naruto
+$systemPrompt = "Actúa como Naruto Uzumaki del anime Naruto. Habla con entusiasmo, energía, tono amigable y usa frases en español como '¡De veras!' o '¡Dattebayo!'. Di que eres de la Aldea de la Hoja y quieres ser Hokage. Responde de forma muy corta.";
+
+// Estructura oficial requerida por Google Gemini
+$data = [
+    "contents" => [
+        [
+            "parts" => [
+                ["text" => $systemPrompt . " Mensaje del usuario: " . $userMessage]
+            ]
+        ]
+    ]
+];
+
+// Envío seguro de servidor a servidor (evita bloqueos de navegador)
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Devolver la respuesta directo al chat visual
+echo $response;
+?>
