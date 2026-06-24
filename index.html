@@ -1332,7 +1332,7 @@
         if(!texto) return;
         mensajes.innerHTML += `<p><b>Tú:</b> ${texto}</p>`;
         input.value = '';
-        const API_KEY = 'AQ.Ab8RN6LPpLfYO5H7zVL1h9O9MjUC0gjyt6rS3kIqGA8gBClplw'; // <--- REEMPLAZA AQUÍ
+        const API_KEY = 'AAIzaQ.Ab8RN6LPpLfYO5H7zVL1h9O9MjUC0gjyt6rS3kIqGA8gBClplw'; // <--- REEMPLAZA AQUÍ
         const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
         try {
             const respuesta = await fetch(URL, {
