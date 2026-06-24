@@ -1298,57 +1298,6 @@
     generateNumberGame();
   });
   </script>
-  <!-- COMIENZO DEL CÓDIGO A INTEGRAR -->
-
-<!-- 1. Estilos (Colócalo en la sección <head> de tu página) -->
-<style>
-    .chat-container-fixed { position: fixed; bottom: 20px; right: 20px; width: 320px; z-index: 9999; }
-    .chat-box-body { height: 300px; overflow-y: auto; background: white; border: 2px solid #ff6b6b; border-radius: 1rem; }
-    .hidden { display: none; }
-</style>
-
-<!-- 2. Estructura HTML (Colócalo antes del cierre de </body> o dentro del contenedor principal) -->
-<div class="chat-container-fixed">
-    <button onclick="document.getElementById('naruto-chat-window').classList.toggle('hidden')" 
-            style="background-color: #f97316; color: white; padding: 15px; border-radius: 50%; border: none; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        🍥 Naruto
-    </button>
-    <div id="naruto-chat-window" class="hidden" style="background: white; border: 2px solid #f97316; border-radius: 15px; padding: 10px; width: 300px; margin-top: 10px;">
-        <div style="font-weight: bold; text-align: center; margin-bottom: 10px;">Naruto Uzumaki</div>
-        <div id="mensajes-naruto" class="chat-box-body" style="padding: 10px;"></div>
-        <div style="display: flex; margin-top: 10px;">
-            <input type="text" id="userInputNaruto" style="flex-grow: 1; padding: 5px;" placeholder="¡Dattebayo!">
-            <button onclick="enviarMensajeNaruto()" style="background-color: #f97316; color: white; border: none; padding: 5px 10px; cursor: pointer;">Enviar</button>
-        </div>
-    </div>
-</div>
-
-<!-- 3. Lógica JavaScript (Colócalo antes del cierre de </body> o dentro de un <script>) -->
-<script>
-    async function enviarMensajeNaruto() {
-        const input = document.getElementById('userInputNaruto');
-        const mensajes = document.getElementById('mensajes-naruto');
-        const texto = input.value;
-        if(!texto) return;
-        mensajes.innerHTML += `<p><b>Tú:</b> ${texto}</p>`;
-        input.value = '';
-        const API_KEY = 'AAIzaQ.Ab8RN6LPpLfYO5H7zVL1h9O9MjUC0gjyt6rS3kIqGA8gBClplw'; // <--- REEMPLAZA AQUÍ
-        const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-        try {
-            const respuesta = await fetch(URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Eres Naruto Uzumaki. Habla con energía y usa '¡Dattebayo!'. Usuario: " + texto }] }] })
-            });
-            const data = await respuesta.json();
-            const textoNaruto = data.candidates[0].content.parts[0].text;
-            mensajes.innerHTML += `<p><b>Naruto:</b> ${textoNaruto}</p>`;
-        } catch (e) {
-            mensajes.innerHTML += `<p style="color:red;">Error de conexión.</p>`;
-        }
-    }
-</script>
-
-<!-- FIN DEL CÓDIGO -->
+ 
  </body>
 </html>
